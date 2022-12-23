@@ -9,8 +9,9 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
 import "../styles/globals.css";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
+import { trpc } from "../utils/trpc";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
   const { toasts } = useToasterStore();
@@ -39,4 +40,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </SessionContextProvider>
     </>
   );
-}
+};
+
+export default trpc.withTRPC(App);
