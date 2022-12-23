@@ -29,7 +29,7 @@ export default function SignUp() {
     if (session) {
       router.push("/");
     } else {
-      router.push("/verify");
+      router.push("/auth/verify");
     }
   };
 
