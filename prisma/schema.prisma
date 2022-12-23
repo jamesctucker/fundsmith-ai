@@ -10,11 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int      @default(autoincrement()) @id
+model Users {
+  userId    String    @id @unique
   email     String   @unique
   name      String?
   avatar    String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }

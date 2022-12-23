@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SignUpForm from "../../components/forms/SignUpForm";
+import { useSessionContext } from "@supabase/auth-helpers-react";
 
 type FormData = {
   email: string;
@@ -8,8 +9,19 @@ type FormData = {
 };
 
 export default function SignUp() {
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
+  const { supabaseClient } = useSessionContext();
+
+  const onSubmit = async (formData: FormData) => {
+    console.log(formData);
+
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      console.log(error);
+    }
   };
 
   return (
