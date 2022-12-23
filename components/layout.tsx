@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-const Header = dynamic(() => import("./header"), { ssr: false });
+const Header = dynamic(() => import("./Header"), { ssr: false });
 
 type Props = {
   children: React.ReactNode;
