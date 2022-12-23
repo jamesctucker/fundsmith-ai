@@ -1,4 +1,4 @@
-import SignInForm from "../../components/forms/signin_form";
+import SignInForm from "../../components/forms/SignInForm";
 import Link from "next/link";
 
 type FormData = {

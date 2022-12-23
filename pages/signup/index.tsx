@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SignUpForm from "../../components/forms/signup_form";
+import SignUpForm from "../../components/forms/SignUpForm";
 
 type FormData = {
   email: string;
