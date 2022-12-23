@@ -1,6 +1,7 @@
-import SignInForm from "../../components/forms/SignInForm";
+import SignInForm from "@/components/forms/SignInForm";
 import Link from "next/link";
 import { useSessionContext } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 
 type FormData = {
   email: string;
@@ -9,6 +10,7 @@ type FormData = {
 
 export default function SignIn() {
   const { supabaseClient } = useSessionContext();
+  const router = useRouter();
 
   const onSubmit = async (formData: FormData) => {
     let { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -19,6 +21,8 @@ export default function SignIn() {
     if (error) {
       console.log(error);
     }
+
+    if (data) router.push("/");
   };
 
   return (
@@ -27,7 +31,7 @@ export default function SignIn() {
         <div className="card-body">
           <h1 className="card-title">
             Sign In or
-            <Link className="btn-link btn" href="/signup">
+            <Link className="btn-link btn" href="/auth/signup">
               Sign Up
             </Link>
           </h1>

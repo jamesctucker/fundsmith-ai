@@ -1,6 +1,7 @@
 import Link from "next/link";
-import SignUpForm from "../../components/forms/SignUpForm";
+import SignUpForm from "@/components/forms/SignUpForm";
 import { useSessionContext } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 
 type FormData = {
   email: string;
@@ -10,17 +11,25 @@ type FormData = {
 
 export default function SignUp() {
   const { supabaseClient } = useSessionContext();
+  const router = useRouter();
 
   const onSubmit = async (formData: FormData) => {
-    console.log(formData);
-
-    const { data, error } = await supabaseClient.auth.signUp({
+    const {
+      data: { session },
+      error,
+    } = await supabaseClient.auth.signUp({
       email: formData.email,
       password: formData.password,
     });
 
     if (error) {
       console.log(error);
+    }
+
+    if (session) {
+      router.push("/");
+    } else {
+      router.push("/verify");
     }
   };
 
@@ -34,7 +43,7 @@ export default function SignUp() {
             <SignUpForm onSubmit={onSubmit} />
             <p>
               Already have an account?{" "}
-              <Link className="btn-link btn" href="/signin">
+              <Link className="btn-link btn" href="/auth/signin">
                 Sign In
               </Link>
             </p>

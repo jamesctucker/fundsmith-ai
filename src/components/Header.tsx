@@ -12,7 +12,7 @@ export default function Header() {
 
     // if (error) return toast.error(t('signOutError'));
 
-    router.push("/signin");
+    router.push("/auth/signin");
   };
 
   return (
@@ -74,7 +74,7 @@ export default function Header() {
         </div>
       )}
       {!user && (
-        <Link className="btn btn-primary" href="/signin">
+        <Link className="btn btn-primary" href="/auth/signin">
           Login
         </Link>
       )}
