@@ -11,10 +11,22 @@ datasource db {
 }
 
 model Users {
-  userId    String    @id @unique
-  email     String   @unique
-  name      String?
-  avatar    String?
+  userId     String       @id @unique
+  email      String       @unique
+  name       String?
+  avatar     String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+  workspaces Workspaces[]
+  ownerOf    Workspaces[] @relation("OwnedWorkspaces")
+}
+
+model Workspaces {
+  id        Int      @id @default(autoincrement())
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  users     Users[]
+  owner     Users    @relation("OwnedWorkspaces", fields: [ownerId], references: [userId])
+  ownerId   String
 }
