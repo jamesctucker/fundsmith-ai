@@ -33,6 +33,7 @@
     "react-hook-form": "^7.41.0",
     "react-hot-toast": "^2.4.0",
     "superjson": "^1.12.1",
+    "trpc-openapi": "^1.0.0",
     "typescript": "4.9.4",
     "zod": "^3.20.2"
   },
