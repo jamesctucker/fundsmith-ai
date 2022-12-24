@@ -29,4 +29,31 @@ model Workspaces {
   users     Users[]
   owner     Users    @relation("OwnedWorkspaces", fields: [ownerId], references: [userId])
   ownerId   String
+  projects  Projects[]
 }
+
+model Projects {
+  id        Int      @id @default(autoincrement())
+  name      String
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  workspace Workspaces @relation(fields: [workspaceId], references: [id])
+  workspaceId Int
+  documents Documents[]
+}
+
+model Documents {
+  id        Int      @id @default(autoincrement())
+  name      String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  project   Projects @relation(fields: [projectId], references: [id])
+  projectId Int
+}
+
+// TODO figure out relationship between:
+// - ContentTypes <-----> Documents <-----> Fields
+
+
