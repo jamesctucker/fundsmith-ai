@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { useSessionContext, useUser } from "@supabase/auth-helpers-react";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 
 export default function Header() {
-  const { supabaseClient } = useSessionContext();
-  const user = useUser();
+  const { getToken, isLoaded, isSignedIn, signOut } = useAuth();
+  const { user } = useUser();
+
   const router = useRouter();
 
-  const signOut = async () => {
-    const { error } = await supabaseClient.auth.signOut();
+  const handleSignOut = async () => {
+    await signOut();
 
     // if (error) return toast.error(t('signOutError'));
 
@@ -67,7 +68,7 @@ export default function Header() {
                 <Link href="/user/billing">Billing</Link>
               </li>
               <li>
-                <a onClick={signOut}>Logout</a>
+                <a onClick={handleSignOut}>Logout</a>
               </li>
             </ul>
           </div>

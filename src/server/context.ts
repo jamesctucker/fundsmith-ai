@@ -1,20 +1,33 @@
-import type { inferAsyncReturnType } from "@trpc/server";
-import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import * as trpc from "@trpc/server";
+import { getAuth, clerkClient } from "@clerk/nextjs/server";
+import { User } from "@clerk/nextjs/dist/api";
+global.atob = require("atob");
 
 import { prisma } from "@/server/db/client";
-import { getUserFromContext } from "@/utils/serverUser";
 
-export const createContext = async (opts: CreateNextContextOptions) => {
-  const user = await getUserFromContext(opts);
+interface contextData {
+  user: User | null;
+  req: any;
+  res: any;
+}
 
-  const { req, res } = opts;
-
-  return {
-    req,
-    res,
-    prisma,
-    user,
-  };
+export const createContextInner = async ({ user, req, res }: contextData) => {
+  return { user, req, res, prisma };
 };
 
-export type Context = inferAsyncReturnType<typeof createContext>;
+export const createContext = async (opts: CreateNextContextOptions) => {
+  const { req, res } = opts;
+  const getUser = async () => {
+    const { userId } = await getAuth(req);
+    const user = userId ? await clerkClient.users.getUser(userId) : null;
+
+    return user;
+  };
+
+  const user = await getUser();
+
+  return await createContextInner({ user, req, res });
+};
+
+export type Context = trpc.inferAsyncReturnType<typeof createContext>;

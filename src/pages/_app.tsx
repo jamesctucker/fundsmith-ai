@@ -1,19 +1,13 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "../components/Layout";
-import {
-  createBrowserSupabaseClient,
-  type Session,
-} from "@supabase/auth-helpers-nextjs";
-import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { ClerkProvider } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import "../styles/globals.css";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { trpc } from "../utils/trpc";
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
-
   const { toasts } = useToasterStore();
   const TOAST_LIMIT = 3;
 
@@ -29,15 +23,24 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SessionContextProvider
-        supabaseClient={supabaseClient}
-        initialSession={pageProps.initialSession}
+      <ClerkProvider
+        {...pageProps}
+        appearance={{
+          variables: {
+            colorPrimary: "#2B7C5F",
+            colorDanger: "#FF7D00",
+            colorSuccess: "#2B7C5F",
+            colorBackground: "#F5F1ED",
+            fontFamily: "Poppins, sans-serif",
+            borderRadius: "0.5rem",
+          },
+        }}
       >
         <Layout>
           <Component {...pageProps} />
           <Toaster />
         </Layout>
-      </SessionContextProvider>
+      </ClerkProvider>
     </>
   );
 };

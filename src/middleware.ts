@@ -1,30 +1,49 @@
-import { createMiddlewareSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { withClerkMiddleware, getAuth } from "@clerk/nextjs/server";
 
-export async function middleware(req: NextRequest) {
-  // We need to create a response and hand it to the supabase client to be able to modify the response headers.
-  const res = NextResponse.next();
+const publicPaths = [
+  "/",
+  "/auth/signin*",
+  "/auth/signup*",
+  "/auth/signout*",
+  "/auth/verify*",
+  "/auth/forgot-password*",
+  "/auth/reset-password*",
+];
 
-  // Create authenticated Supabase Client.
-  const supabase = createMiddlewareSupabaseClient({ req, res });
+const isPublic = (path: string) => {
+  return publicPaths.find((x) =>
+    path.match(new RegExp(`^${x}$`.replace("*$", "($|/)")))
+  );
+};
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  // redirect to protected route if a session exists
-  if (session) {
-    return res;
+export default withClerkMiddleware((req: NextRequest) => {
+  if (isPublic(req.nextUrl.pathname)) {
+    return NextResponse.next();
   }
 
-  // if there is no session, redirect to signin page
-  const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = "/signin";
-  redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname);
-  return NextResponse.redirect(redirectUrl);
-}
+  // if the user is not signed in redirect them to the sign in page.
+  const { userId } = getAuth(req);
+
+  if (!userId) {
+    // redirect the users to /pages/sign-in/[[...index]].ts
+
+    const signInUrl = new URL("/auth/signin", req.url);
+    signInUrl.searchParams.set("redirect_url", req.url);
+    return NextResponse.redirect(signInUrl);
+  }
+  return NextResponse.next();
+});
 
 export const config = {
-  matcher: ["/"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next
+     * - static (static files)
+     * - favicon.ico (favicon file)
+     */
+    "/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)",
+  ],
 };
