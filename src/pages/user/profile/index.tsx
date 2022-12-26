@@ -7,9 +7,18 @@ import {
 
 const ProfilePage = () => {
   return (
-    <div>
+    <div className="flex justify-center p-4">
       <SignedIn>
-        <UserProfile />
+        <UserProfile
+        // appearance={{
+        //   variables: {
+        //     borderRadius: "0",
+        //   },
+        //   elements: {
+        //     card: "shadow-none border-none",
+        //   },
+        // }}
+        />
       </SignedIn>
       <SignedOut>
         <RedirectToSignIn />
