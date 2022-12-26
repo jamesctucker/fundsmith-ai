@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 
@@ -49,7 +50,16 @@ export default function Header() {
           <div className="dropdown-end dropdown">
             <label tabIndex={1} className="btn-ghost btn-circle avatar btn">
               <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
+                {user.profileImageUrl ? (
+                  <Image
+                    src={user.profileImageUrl}
+                    width={80}
+                    height={80}
+                    alt="profile picture"
+                  />
+                ) : (
+                  <img src="https://placeimg.com/80/80/people" />
+                )}
               </div>
             </label>
             <ul
