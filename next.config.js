@@ -5,4 +5,12 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.clerk.dev",
+      },
+    ],
+  },
 };
