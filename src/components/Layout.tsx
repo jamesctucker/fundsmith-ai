@@ -9,7 +9,7 @@ export default function Layout({ children }: Props) {
   return (
     <div className="min-h-screen">
       <Header />
-      <main>{children}</main>
+      <main className="p-4">{children}</main>
     </div>
   );
 }

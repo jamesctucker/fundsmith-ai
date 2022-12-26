@@ -1,17 +1,12 @@
 import { SignUp } from "@clerk/nextjs";
 import { useSignUp } from "@clerk/clerk-react";
+import { trpc } from "../../../utils/trpc";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
   const { isLoaded, signUp } = useSignUp();
 
-  if (!isLoaded) {
-    // handle loading state
-    return null;
-  }
-
-  if (signUp.status === "complete") {
-    console.log("creating a default workspace for the user");
-  }
+  const mutation = trpc.workspaces.createWorkspace.useMutation();
 
   return (
     <div className="mx-auto max-w-md">
