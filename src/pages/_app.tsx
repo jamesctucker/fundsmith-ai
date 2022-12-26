@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { ClerkProvider } from "@clerk/nextjs";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "../styles/globals.css";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { trpc } from "../utils/trpc";

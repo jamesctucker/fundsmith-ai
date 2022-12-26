@@ -1,7 +1,8 @@
-import Link from "next/link";
-import SignUpForm from "@/components/forms/SignUpForm";
-import { useRouter } from "next/router";
+// import Link from "next/link";
+// import SignUpForm from "@/components/forms/SignUpForm";
 import { SignUp } from "@clerk/nextjs";
+import { useSignUp } from "@clerk/clerk-react";
+import { useEffect } from "react";
 
 type FormData = {
   email: string;
@@ -10,43 +11,19 @@ type FormData = {
 };
 
 export default function SignUpPage() {
-  const router = useRouter();
+  const { isLoaded, signUp } = useSignUp();
 
-  // const onSubmit = async (formData: FormData) => {
-  //   const {
-  //     data: { session },
-  //     error,
-  //   } = await supabaseClient.auth.signUp({
-  //     email: formData.email,
-  //     password: formData.password,
-  //   });
+  if (!isLoaded) {
+    // handle loading state
+    return null;
+  }
 
-  //   if (error) {
-  //     console.log(error);
-  //   }
-
-  //   if (session) {
-  //     router.push("/");
-  //   } else {
-  //     router.push("/auth/verify");
-  //   }
-  // };
+  if (signUp.status === "complete") {
+    console.log("creating a default workspace for the user");
+  }
 
   return (
     <div className="mx-auto max-w-md">
-      {/* <div className="card w-96 bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h1 className="card-title">Join Fundsmith.</h1>
-            <p className="text-md">Lorem ipsum, ipsum dipsum.</p>
-            <SignUpForm onSubmit={onSubmit} />
-            <p>
-              Already have an account?{" "}
-              <Link className="btn-link btn" href="/auth/signin">
-                Sign In
-              </Link>
-            </p>
-          </div>
-        </div> */}
       <SignUp />
     </div>
   );
