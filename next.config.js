@@ -15,6 +15,11 @@ module.exports = {
         protocol: "https",
         hostname: "www.gravatar.com",
       },
+      {
+        // allow any hostname
+        protocol: "https",
+        hostname: "*",
+      },
     ],
   },
 };
