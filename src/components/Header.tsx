@@ -4,7 +4,7 @@ import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 
 export default function Header() {
-  const { getToken, isLoaded, isSignedIn, signOut } = useAuth();
+  const { signOut } = useAuth();
   const { user } = useUser();
 
   const router = useRouter();
@@ -58,6 +58,7 @@ export default function Header() {
                     alt="profile picture"
                   />
                 ) : (
+                  // TODO: update this to use a placeholder with a solid background that shows the user's initials
                   <img src="https://placeimg.com/80/80/people" />
                 )}
               </div>
