@@ -10,6 +10,7 @@ const publicPaths = [
   "/auth/verify*",
   "/auth/forgot-password*",
   "/auth/reset-password*",
+  "/api/webhooks/user*",
 ];
 
 const isPublic = (path: string) => {

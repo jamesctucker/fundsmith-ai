@@ -10,6 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  // unique Id
+  userId    String   @id @unique
+  firstName String
+  lastName  String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
 model Workspaces {
   id        Int      @id @default(autoincrement())
   name      String
@@ -17,5 +27,3 @@ model Workspaces {
   updatedAt DateTime @default(now())
   ownerId   String
 }
-
-

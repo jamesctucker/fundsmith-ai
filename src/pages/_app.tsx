@@ -11,12 +11,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   const { toasts } = useToasterStore();
   const TOAST_LIMIT = 3;
 
-  useEffect(() => {
-    toasts
-      .filter((t) => t.visible)
-      .filter((_, i) => i >= TOAST_LIMIT)
-      .forEach((t) => toast.dismiss(t.id));
-  }, [toasts]);
+  // useEffect(() => {
+  //   toasts
+  //     .filter((t) => t.visible)
+  //     .filter((_, i) => i >= TOAST_LIMIT)
+  //     .forEach((t) => toast.dismiss(t.id));
+  // }, [toasts]);
 
   return (
     <>
