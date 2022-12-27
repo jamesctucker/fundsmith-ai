@@ -31,7 +31,6 @@ export default async function handler(
   }
 
   // Handle the webhook
-  console.log(evt.data);
   if (evt.type === "user.created") {
     if (evt.data.id) {
       await upsertNewUser({

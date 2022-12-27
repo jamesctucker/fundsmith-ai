@@ -26,6 +26,7 @@ export const createDefaultWorkspace = async (
     data: {
       name: `${firstName}'s Default Workspace`,
       ownerId: userId,
+      isDefault: true,
     },
   });
 };
