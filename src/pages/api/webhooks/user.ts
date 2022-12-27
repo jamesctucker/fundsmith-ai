@@ -2,8 +2,7 @@ import { IncomingHttpHeaders } from "http";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Webhook, WebhookRequiredHeaders } from "svix";
 import { buffer } from "micro";
-import { trpc } from "@/utils/trpc";
-import { prisma } from "@/server/db/client";
+import { upsertNewUser } from "@/server/db/webhook";
 
 // Disable the bodyParser so we can access the raw
 // request body for verification.
@@ -34,35 +33,14 @@ export default async function handler(
   // Handle the webhook
   console.log(evt.data);
   if (evt.type === "user.created") {
-    // const mutation = trpc.users.upsertUser.useMutation();
-    // await mutation({
-    //   userId: evt.data.id,
-    //   email: evt.data.email_addresses[0].email_address,
-    //   firstName: evt.data.first_name,
-    //   lastName: evt.data.last_name,
-    // });
-
-    type PrismaUser = {
-      userId: string;
-      email: string;
-      firstName: string;
-      lastName: string;
-    };
-
-    const user: PrismaUser = {
-      userId: evt.data.id,
-      email: evt.data.email_addresses[0].email_address,
-      firstName: evt.data.first_name,
-      lastName: evt.data.last_name,
-    };
-
-    await prisma.user.upsert({
-      where: {
-        userId: user.userId,
-      },
-      update: user,
-      create: user,
-    });
+    if (evt.data.id) {
+      await upsertNewUser({
+        userId: evt.data.id,
+        email: evt.data.email_addresses[0]!.email_address,
+        firstName: evt.data.first_name,
+        lastName: evt.data.last_name,
+      });
+    }
   }
 
   res.json({});
@@ -75,9 +53,18 @@ type NextApiRequestWithSvixRequiredHeaders = NextApiRequest & {
 // Generic (and naive) way for the Clerk event
 // payload type.
 type Event = {
-  data: Record<string, string | number>;
+  data: EventUserData;
   object: "event";
   type: EventType;
+};
+
+type EventUserData = {
+  id: string;
+  email_addresses: {
+    email_address: string;
+  }[];
+  first_name: string;
+  last_name: string;
 };
 
 type EventType = "user.created" | "user.updated" | "*";
