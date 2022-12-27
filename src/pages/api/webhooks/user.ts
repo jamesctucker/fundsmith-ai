@@ -2,7 +2,7 @@ import { IncomingHttpHeaders } from "http";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Webhook, WebhookRequiredHeaders } from "svix";
 import { buffer } from "micro";
-import { upsertNewUser } from "@/server/db/webhook";
+import { upsertNewUser, createDefaultWorkspace } from "@/server/db/webhook";
 
 // Disable the bodyParser so we can access the raw
 // request body for verification.
@@ -40,6 +40,8 @@ export default async function handler(
         firstName: evt.data.first_name,
         lastName: evt.data.last_name,
       });
+
+      await createDefaultWorkspace(evt.data.id, evt.data.first_name);
     }
   }
 

@@ -19,3 +19,11 @@ This app comprises of the following stack:
 6. Fill out the other .env values (You will need access to our Clerk auth API keys)
 7. Set-up your new database using your Prisma schema with `npx prisma migrate dev`
 8. Run the app with `npm run dev`
+
+## Webhooks
+
+TODO: explain why webhooks from Clerk.dev are needed.
+
+- User created webhook
+  - inserts a copy of the Clerk user object into our db
+  - creates a default workspace for the user

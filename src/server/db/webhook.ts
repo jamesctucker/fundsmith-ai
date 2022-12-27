@@ -17,3 +17,15 @@ export const upsertNewUser = async (user: PrismaUser) => {
     create: user,
   });
 };
+
+export const createDefaultWorkspace = async (
+  userId: string,
+  firstName: string
+) => {
+  await prisma.workspaces.create({
+    data: {
+      name: `${firstName}'s Default Workspace`,
+      ownerId: userId,
+    },
+  });
+};
