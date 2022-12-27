@@ -2,6 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
+import {
+  UserCircleIcon,
+  Cog8ToothIcon,
+  CreditCardIcon,
+  ArrowLeftOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 
 export default function Header() {
   const { signOut } = useAuth();
@@ -47,9 +53,9 @@ export default function Header() {
               className="input-bordered input"
             />
           </div>
-          <div className="dropdown-end dropdown">
-            <label tabIndex={1} className="btn-ghost btn-circle avatar btn">
-              <div className="w-10 rounded-full">
+          <div className="dropdown dropdown-end">
+            <label tabIndex={1} className="btn-ghost avatar btn flex flex-row">
+              <div className="w-10 avatar rounded-full">
                 {user.profileImageUrl ? (
                   <Image
                     src={user.profileImageUrl}
@@ -62,24 +68,42 @@ export default function Header() {
                   <img src="https://placeimg.com/80/80/people" />
                 )}
               </div>
+              <span className="ml-2 text-left">
+                <p className="text-sm">
+                  {user?.firstName} {user?.lastName}
+                </p>
+                {/* TODO: stop hardcoding this - get list of workspaces */}
+                <p className="text-xs text-secondary">Default Workspace</p>
+              </span>
             </label>
+            {/* TODO: increase width to match trigger button width */}
             <ul
               tabIndex={0}
-              className="w-75 dropdown-content menu rounded-box menu-compact mt-3 bg-base-100 p-2 shadow"
+              className="dropdown-content menu rounded-box menu-normal mt-3 bg-base-100 p-2 shadow"
             >
               <li>
-                <Link className="justify-between" href="/user/profile">
+                <Link href="/user/profile">
+                  <UserCircleIcon className="w-5 h-5" />
                   Profile
                 </Link>
               </li>
               <li>
-                <Link href="/user/settings">Settings</Link>
+                <Link href="/user/settings">
+                  <Cog8ToothIcon className="w-5 h-5" />
+                  Settings
+                </Link>
               </li>
               <li>
-                <Link href="/user/billing">Billing</Link>
+                <Link href="/user/billing">
+                  <CreditCardIcon className="w-5 h-5" />
+                  Billing
+                </Link>
               </li>
               <li>
-                <a onClick={handleSignOut}>Logout</a>
+                <a onClick={handleSignOut}>
+                  <ArrowLeftOnRectangleIcon className="w-5 h-5" />
+                  Logout
+                </a>
               </li>
             </ul>
           </div>
