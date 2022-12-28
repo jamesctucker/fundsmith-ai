@@ -27,7 +27,7 @@ export default function Header() {
   };
 
   return (
-    <div className="navbar mx-auto flex max-w-7xl justify-between bg-base-100">
+    <header className="navbar mx-auto flex justify-between py-2 px-8 md:py-4 md:px-16 border-2 border-b-accent">
       <div className="flex-none">
         <Link
           className="btn-ghost btn text-xl normal-case text-primary"
@@ -61,13 +61,6 @@ export default function Header() {
       </div>
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input-bordered input"
-            />
-          </div>
           <div className="dropdown dropdown-end">
             <label tabIndex={1} className="btn-ghost avatar btn flex flex-row">
               <div className="w-10 avatar rounded-full">
@@ -129,6 +122,6 @@ export default function Header() {
           Login
         </Link>
       )}
-    </div>
+    </header>
   );
 }

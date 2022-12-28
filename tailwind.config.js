@@ -19,11 +19,11 @@ module.exports = {
           // Raisin Black
           secondary: "#A99985",
           // Bone
-          accent: "#DAD2BC",
+          accent: "#F5F5F5",
           // Raisin Black
           neutral: "#252323",
           // Isabelline
-          "base-100": "#F5F1ED",
+          "base-100": "#FFFFFE",
           // Cornflower Blue
           info: "#7699D4",
           //  Spanish Viridian
