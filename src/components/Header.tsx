@@ -7,6 +7,9 @@ import {
   Cog8ToothIcon,
   CreditCardIcon,
   ArrowLeftOnRectangleIcon,
+  DocumentTextIcon,
+  HomeModernIcon,
+  FolderIcon,
 } from "@heroicons/react/24/outline";
 
 export default function Header() {
@@ -36,11 +39,23 @@ export default function Header() {
 
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link href="/">Home</Link>
+          <li className="mx-1">
+            <Link href="/">
+              <HomeModernIcon className="w-5 h-5" />
+              Dashboard
+            </Link>
           </li>
-          <li>
-            <Link href="/projects">Projects</Link>
+          <li className="mx-1">
+            <Link href="/documents">
+              <DocumentTextIcon className="w-5 h-5" />
+              Documents
+            </Link>
+          </li>
+          <li className="mx-1">
+            <Link href="/projects">
+              <FolderIcon className="w-5 h-5" />
+              Projects
+            </Link>
           </li>
         </ul>
       </div>

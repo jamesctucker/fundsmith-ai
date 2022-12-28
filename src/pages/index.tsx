@@ -7,10 +7,10 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <Wrapper title={"Home"}>
-      <div className="flex justify-center">
+    <Wrapper title={"Dashboard"}>
+      <div className="flex justify-center p-4">
         <div className="flex flex-col">
-          <h1>
+          <h1 className="text-xl">
             👋 Hello, {user?.firstName}! What would you like to create today?
           </h1>
           {/* render list of cards for each content type - should show name and description */}
