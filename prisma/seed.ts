@@ -1,7 +1,21 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "./prisma_client";
+import { contentTypes } from "./seeds/content_type";
 
-async function main() {}
+// promise function that creates content types
+async function createContentTypes() {
+  for (const contentType of contentTypes) {
+    await prisma.contentType.create({
+      data: contentType,
+    });
+  }
+  console.log("🌱 Successfully seeded content types.");
+}
+
+async function main() {
+  createContentTypes();
+
+  console.log("✅ Successfully completed seeding.");
+}
 
 main()
   .then(async () => {

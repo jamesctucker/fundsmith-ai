@@ -37,7 +37,7 @@ model ContentType {
   // default order that the model is displayed in the UI
   position    Int?        @default(0)
   // TODO: update default rules
-  rules       Json        @default("{}")
+  rules       Json?       @default("{}")
   isLive      Boolean     @default(true)
   parameters  Parameter[]
   createdAt   DateTime    @default(now())
@@ -46,13 +46,14 @@ model ContentType {
 
 model Parameter {
   id           Int           @id @default(autoincrement())
-  name         String
+  name         String        @unique
   displayLabel String
   isRequired   Boolean       @default(false)
-  rules        Json          @default("{}")
+  rules        Json?         @default("{}")
   placeholder  String?
+  // displayType cannot be null
   displayType  DisplayType   @default(TEXT)
-  options      Json?         @default("{}")
+  options      Json?         @default("[]")
   position     Int?          @default(0)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @default(now())
