@@ -28,3 +28,41 @@ model Workspaces {
   ownerId   String
   isDefault Boolean  @default(false)
 }
+
+// fine-tuned AI models
+model ContentType {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String
+  // default order that the model is displayed in the UI
+  position    Int?        @default(0)
+  // TODO: update default rules
+  rules       Json        @default("{}")
+  isLive      Boolean     @default(true)
+  parameters  Parameter[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now())
+}
+
+model Parameter {
+  id           Int           @id @default(autoincrement())
+  name         String
+  displayLabel String
+  isRequired   Boolean       @default(false)
+  rules        Json          @default("{}")
+  placeholder  String?
+  displayType  DisplayType   @default(TEXT)
+  options      Json?         @default("{}")
+  position     Int?          @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
+  contentTypes ContentType[]
+}
+
+enum DisplayType {
+  TEXT
+  TEXTAREA
+  SELECT
+  RADIO
+  CHECKBOX
+}
