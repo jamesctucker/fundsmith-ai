@@ -10,11 +10,11 @@ const ContentTypeList = () => {
       {contentTypes.data?.map((contentType) => (
         <li key={contentType.id}>
           <Link
-            className="card card-side basis-1/3 m-2 bg-base-100 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="card basis-1/3 m-2 bg-base-100 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
             href={`/new/${slugify(contentType.name)}`}
           >
             <figure>
-              <img src="https://placeimg.com/120/120/nature" alt="nature" />
+              <img src="https://placeimg.com/300/150/nature" alt="nature" />
             </figure>
             <div className="card-body">
               <h2 className="text-base font-bold">{contentType.name}</h2>

@@ -15,13 +15,20 @@ type Option = {
 type SelectProps = {
   options: Option[];
   label: string;
+  onChange: (value: Option) => void;
 };
 
-export default function Select({ options, label }: SelectProps) {
+export default function Select({ options, label, onChange }: SelectProps) {
   const [selected, setSelected] = useState(options[0]);
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox
+      value={selected}
+      onChange={(value) => {
+        setSelected(value);
+        onChange(value);
+      }}
+    >
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm font-medium text-gray-700">

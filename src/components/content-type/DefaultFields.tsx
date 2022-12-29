@@ -1,18 +1,21 @@
 import { ContentType } from "@prisma/client";
 import Select from "../ui/Select";
+import { variantOptions, toneOptions } from "@/constants/constants";
 
 type ContentTypeProps = {
   data: ContentType;
 };
 
+type Option = {
+  id: number;
+  label: string;
+  value: string | number;
+};
+
 const DefaultFields = ({ data }: ContentTypeProps) => {
-  const variantOptions = [
-    { id: 1, label: "1", value: 1 },
-    { id: 2, label: "2", value: 2 },
-    { id: 3, label: "3", value: 3 },
-    { id: 4, label: "4", value: 4 },
-    { id: 5, label: "5", value: 5 },
-  ];
+  const handleOnChange = (option: Option) => {
+    console.log(option);
+  };
 
   return (
     <>
@@ -26,15 +29,13 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
         placeholder={data.name}
       />
       {/* Number of variants selection */}
-      <Select label="Number of variants" options={variantOptions} />
+      <Select
+        label="Number of variants"
+        options={variantOptions}
+        onChange={handleOnChange}
+      />
       {/* Tone Selection */}
-      <label className="label" htmlFor="tone">
-        Tone
-      </label>
-      <select name="tone" className="select select-bordered w-full max-w-xs">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
+      <Select label="Tone" options={toneOptions} onChange={handleOnChange} />
     </>
   );
 };
