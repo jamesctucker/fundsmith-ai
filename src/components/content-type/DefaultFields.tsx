@@ -1,6 +1,7 @@
 import { ContentType } from "@prisma/client";
 import Select from "../ui/Select";
 import { variantOptions, toneOptions } from "@/constants/constants";
+import { useState } from "react";
 
 type ContentTypeProps = {
   data: ContentType;
@@ -13,8 +14,19 @@ type Option = {
 };
 
 const DefaultFields = ({ data }: ContentTypeProps) => {
+  // only store the option's value
+  const [numberofVariants, setNumberOfVariants] = useState<Option | null>(null);
+  const [tone, setTone] = useState<Option | null>(null);
+
   const handleOnChange = (option: Option) => {
-    console.log(option);
+    //  if option.value is found in variantOptions, set numberofVariants
+    if (variantOptions.find((variant) => variant.value === option.value)) {
+      setNumberOfVariants(option);
+    }
+
+    if (toneOptions.find((tone) => tone.value === option.value)) {
+      setTone(option);
+    }
   };
 
   return (
@@ -25,7 +37,7 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
       <input
         type="text"
         name="name"
-        className="input input-bordered"
+        className="input input-bordered w-full"
         placeholder={data.name}
       />
       {/* Number of variants selection */}

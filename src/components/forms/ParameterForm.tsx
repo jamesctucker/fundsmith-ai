@@ -14,7 +14,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
           </label>
           {parameter.displayType === "TEXTAREA" && (
             <textarea
-              className="textarea textarea-bordered"
+              className="textarea textarea-bordered w-full"
               id={parameter.name}
               name={parameter.name}
               rows={5}
@@ -23,7 +23,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
           )}
           {parameter.displayType === "TEXT" && (
             <input
-              className="input input-bordered"
+              className="input input-bordered w-full"
               id={parameter.name}
               name={parameter.name}
               placeholder={parameter.placeholder!}

@@ -23,6 +23,8 @@ const NewPage = () => {
     <>
       {data && <DefaultFields data={data} />}
       {data && <ParameterForm parameters={data.parameters} />}
+      {/* create variants button */}
+      {/* list of variation results */}
     </>
   );
 };
