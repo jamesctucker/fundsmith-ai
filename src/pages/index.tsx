@@ -1,7 +1,7 @@
 import Wrapper from "@/components/Wrapper";
 import { trpc } from "../utils/trpc";
 import { useUser } from "@clerk/clerk-react";
-import ContentTypeList from "@/components/ContentTypeList";
+import ContentTypeList from "@/components/content-type/ContentTypeList";
 
 export default function Home() {
   const { user } = useUser();

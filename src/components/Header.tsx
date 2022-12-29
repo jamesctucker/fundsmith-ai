@@ -47,7 +47,9 @@ export default function Header() {
           <li className="mx-1">
             <Link
               href="/"
-              className={isCurrentPath("/") ? "text-primary bg-success" : ""}
+              className={
+                isCurrentPath("/") ? "text-primary font-bold bg-success" : ""
+              }
             >
               <HomeModernIcon className="w-5 h-5" />
               Dashboard
@@ -57,7 +59,9 @@ export default function Header() {
             <Link
               href="/documents"
               className={
-                isCurrentPath("/documents") ? "text-primary bg-success" : ""
+                isCurrentPath("/documents")
+                  ? "text-primary font-bold bg-success"
+                  : ""
               }
             >
               <DocumentTextIcon className="w-5 h-5" />
@@ -68,7 +72,9 @@ export default function Header() {
             <Link
               href="/projects"
               className={
-                isCurrentPath("/projects") ? "text-primary bg-success" : ""
+                isCurrentPath("/projects")
+                  ? "text-primary font-bold bg-success"
+                  : ""
               }
             >
               <FolderIcon className="w-5 h-5" />
