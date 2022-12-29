@@ -27,7 +27,7 @@ module.exports = {
           // Cornflower Blue
           info: "#7699D4",
           //  Spanish Viridian
-          success: "#2B7C5F",
+          success: "#f4fbf7",
           // Amber
           warning: "#FF7D00",
           // Amaranth Red

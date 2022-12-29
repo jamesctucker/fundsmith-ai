@@ -32,7 +32,8 @@ model Workspaces {
 // fine-tuned AI models
 model ContentType {
   id          Int         @id @default(autoincrement())
-  name        String
+  name        String 
+  displayName String      @default("New Content Type")
   description String
   // default order that the model is displayed in the UI
   position    Int?        @default(0)

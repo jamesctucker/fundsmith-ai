@@ -4,17 +4,20 @@ import {
   SignedOut,
   RedirectToSignIn,
 } from "@clerk/nextjs";
+import Wrapper from "@/components/Wrapper";
 
 const ProfilePage = () => {
   return (
-    <div className="flex justify-center">
-      <SignedIn>
-        <UserProfile />
-      </SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </div>
+    <Wrapper title="Profile">
+      <div className="flex justify-center">
+        <SignedIn>
+          <UserProfile />
+        </SignedIn>
+        <SignedOut>
+          <RedirectToSignIn />
+        </SignedOut>
+      </div>
+    </Wrapper>
   );
 };
 

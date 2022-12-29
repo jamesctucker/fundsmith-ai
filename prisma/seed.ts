@@ -12,7 +12,7 @@ async function createContentTypes() {
 }
 
 async function main() {
-  createContentTypes();
+  await createContentTypes();
 
   console.log("✅ Successfully completed seeding.");
 }

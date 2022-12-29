@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
+import { useAuth, useUser } from "@clerk/nextjs";
 import {
   UserCircleIcon,
   Cog8ToothIcon,
@@ -11,6 +11,7 @@ import {
   HomeModernIcon,
   FolderIcon,
 } from "@heroicons/react/24/outline";
+import path from "path";
 
 export default function Header() {
   const { signOut } = useAuth();
@@ -24,6 +25,10 @@ export default function Header() {
     // if (error) return toast.error(t('signOutError'));
 
     router.push("/auth/signin");
+  };
+
+  const isCurrentPath = (name: string) => {
+    return router.pathname === name;
   };
 
   return (
@@ -40,19 +45,32 @@ export default function Header() {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li className="mx-1">
-            <Link href="/">
+            <Link
+              href="/"
+              className={isCurrentPath("/") ? "text-primary bg-success" : ""}
+            >
               <HomeModernIcon className="w-5 h-5" />
               Dashboard
             </Link>
           </li>
           <li className="mx-1">
-            <Link href="/documents">
+            <Link
+              href="/documents"
+              className={
+                isCurrentPath("/documents") ? "text-primary bg-success" : ""
+              }
+            >
               <DocumentTextIcon className="w-5 h-5" />
               Documents
             </Link>
           </li>
           <li className="mx-1">
-            <Link href="/projects">
+            <Link
+              href="/projects"
+              className={
+                isCurrentPath("/projects") ? "text-primary bg-success" : ""
+              }
+            >
               <FolderIcon className="w-5 h-5" />
               Projects
             </Link>
