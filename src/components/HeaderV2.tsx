@@ -44,7 +44,7 @@ export default function HeaderV2() {
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                   <span className="sr-only">Open main menu</span>
@@ -55,7 +55,7 @@ export default function HeaderV2() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+              <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <Link
                     className="btn-ghost btn text-xl normal-case text-primary"
@@ -64,7 +64,7 @@ export default function HeaderV2() {
                     fundsmith
                   </Link>
                 </div>
-                <div className="hidden sm:ml-6 sm:flex sm:space-x-6 items-center">
+                <div className="hidden sm:ml-6 md:flex sm:space-x-6 items-center">
                   <Link
                     href="/"
                     className={
@@ -99,7 +99,7 @@ export default function HeaderV2() {
                     Projects
                   </Link>
                 </div>
-                <div className="flex items-center pr-2 absolute right-0 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="flex items-center pr-2 absolute right-0 md:static sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
                   {user ? (
                     <Menu as="div" className="relative ml-3">
@@ -116,7 +116,7 @@ export default function HeaderV2() {
                             // TODO: update this to use a placeholder with a solid background that shows the user's initials
                             <img src="https://placeimg.com/80/80/people" />
                           )}
-                          <p className="text-sm ml-2">
+                          <p className="text-sm ml-2 hidden md:block">
                             {user.firstName} {user.lastName}
                           </p>
                         </Menu.Button>
@@ -210,7 +210,7 @@ export default function HeaderV2() {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 pt-2 pb-4">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
               <Disclosure.Button
