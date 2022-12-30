@@ -6,10 +6,10 @@ type ParameterProps = {
 
 const ParameterForm = ({ parameters }: ParameterProps) => {
   return (
-    <>
+    <div className="space-y-3">
       {parameters.map((parameter) => (
         <div key={parameter.id}>
-          <label className="label" htmlFor={parameter.name}>
+          <label className="label text-sm" htmlFor={parameter.name}>
             {parameter.displayLabel}
           </label>
           {parameter.displayType === "TEXTAREA" && (
@@ -31,7 +31,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

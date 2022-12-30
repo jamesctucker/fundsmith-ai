@@ -30,8 +30,8 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
   };
 
   return (
-    <>
-      <label className="label" htmlFor="name">
+    <div className="space-y-3">
+      <label className="label text-sm" htmlFor="name">
         Document Name
       </label>
       <input
@@ -40,15 +40,17 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
         className="input input-bordered w-full"
         placeholder={data.name}
       />
-      {/* Number of variants selection */}
-      <Select
-        label="Number of variants"
-        options={variantOptions}
-        onChange={handleOnChange}
-      />
-      {/* Tone Selection */}
-      <Select label="Tone" options={toneOptions} onChange={handleOnChange} />
-    </>
+      <div className="flex space-x-4 w-full">
+        {/* Number of variants selection */}
+        <Select
+          label="Number of variants"
+          options={variantOptions}
+          onChange={handleOnChange}
+        />
+        {/* Tone Selection */}
+        <Select label="Tone" options={toneOptions} onChange={handleOnChange} />
+      </div>
+    </div>
   );
 };
 

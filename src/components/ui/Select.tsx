@@ -30,8 +30,8 @@ export default function Select({ options, label, onChange }: SelectProps) {
       }}
     >
       {({ open }) => (
-        <>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">
+        <div className="flex flex-col flex-1">
+          <Listbox.Label className="text-sm font-medium text-gray-700">
             {label}
           </Listbox.Label>
           <div className="relative mt-1">
@@ -92,7 +92,7 @@ export default function Select({ options, label, onChange }: SelectProps) {
               </Listbox.Options>
             </Transition>
           </div>
-        </>
+        </div>
       )}
     </Listbox>
   );
