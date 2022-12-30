@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-const Header = dynamic(() => import("./Header"), { ssr: false });
+const HeaderV2 = dynamic(() => import("./HeaderV2"), { ssr: false });
 const Footer = dynamic(() => import("./Footer"), { ssr: false });
 
 type Props = {
@@ -9,8 +9,8 @@ type Props = {
 export default function Layout({ children }: Props) {
   return (
     <div className="min-h-screen relative">
-      <Header />
-      <main className="p-4">{children}</main>
+      <HeaderV2 />
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
       <Footer />
     </div>
   );

@@ -11,7 +11,6 @@ import {
   HomeModernIcon,
   FolderIcon,
 } from "@heroicons/react/24/outline";
-import path from "path";
 
 export default function Header() {
   const { signOut } = useAuth();

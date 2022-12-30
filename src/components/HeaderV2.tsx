@@ -1,0 +1,243 @@
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useAuth, useUser } from "@clerk/nextjs";
+import {
+  UserCircleIcon,
+  Cog8ToothIcon,
+  CreditCardIcon,
+  ArrowLeftOnRectangleIcon,
+  DocumentTextIcon,
+  HomeModernIcon,
+  FolderIcon,
+} from "@heroicons/react/24/outline";
+// import Select from "./ui/Select";
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export default function HeaderV2() {
+  const { signOut } = useAuth();
+  const { user } = useUser();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut();
+
+    router.push("/auth/signin");
+  };
+
+  const isCurrentPath = (name: string) => {
+    return router.pathname === name;
+  };
+
+  //   const workspaces = [
+  //     { id: 1, label: "Default Workspace", value: "default-workspace" },
+  //   ];
+
+  return (
+    <Disclosure as="nav" className="bg-white shadow">
+      {({ open }) => (
+        <>
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button */}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                <div className="flex flex-shrink-0 items-center">
+                  <Link
+                    className="btn-ghost btn text-xl normal-case text-primary"
+                    href="/"
+                  >
+                    fundsmith
+                  </Link>
+                </div>
+                <div className="hidden sm:ml-6 sm:flex sm:space-x-6 items-center">
+                  <Link
+                    href="/"
+                    className={
+                      isCurrentPath("/")
+                        ? "p-2 inline-flex items-center text-primary font-bold bg-success rounded-md hover:bg-accent"
+                        : "p-2 inline-flex items-center hover:bg-accent"
+                    }
+                  >
+                    <HomeModernIcon className="w-5 h-5 mx-2" />
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/documents"
+                    className={
+                      isCurrentPath("/documents")
+                        ? "p-2 inline-flex items-center text-primary font-bold bg-success rounded-md hover:bg-accent"
+                        : "p-2 inline-flex items-center hover:bg-accent"
+                    }
+                  >
+                    <DocumentTextIcon className="w-5 h-5 mx-2" />
+                    Documents
+                  </Link>
+                  <Link
+                    href="/projects"
+                    className={
+                      isCurrentPath("/projects")
+                        ? "p-2 inline-flex items-center text-primary font-bold bg-success border-1 border-primary rounded-md hover:bg-accent"
+                        : "p-2 inline-flex items-center hover:bg-accent"
+                    }
+                  >
+                    <FolderIcon className="w-5 h-5 mx-2" />
+                    Projects
+                  </Link>
+                </div>
+                <div className="flex items-center pr-2 absolute right-0 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  {/* Profile dropdown */}
+                  {user ? (
+                    <Menu as="div" className="relative ml-3">
+                      <div>
+                        <Menu.Button className="flex items-center p-2 hover:bg-accent rounded-md">
+                          <span className="sr-only">Open user menu</span>
+                          {user.profileImageUrl ? (
+                            <img
+                              className="h-8 w-8 rounded-full"
+                              src={user.profileImageUrl}
+                              alt="profile picture"
+                            />
+                          ) : (
+                            // TODO: update this to use a placeholder with a solid background that shows the user's initials
+                            <img src="https://placeimg.com/80/80/people" />
+                          )}
+                          <p className="text-sm ml-2">
+                            {user.firstName} {user.lastName}
+                          </p>
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Item>
+                            <p className="px-4 py-2 text-sm truncate">
+                              {user!.emailAddresses[0]!.emailAddress}
+                            </p>
+                          </Menu.Item>
+                          {/* TODO: let user change actual current workspace */}
+                          {/* <Menu.Item>
+                            <Select
+                              options={workspaces}
+                              onChange={() => console.log("changed workspace!")}
+                            />
+                          </Menu.Item> */}
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/user/profile"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                )}
+                              >
+                                <UserCircleIcon className="w-5 h-5 mr-2" />
+                                Your Profile
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/user/settings"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                )}
+                              >
+                                <Cog8ToothIcon className="w-5 h-5 mr-2" />
+                                Settings
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/user/billing"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                )}
+                              >
+                                <CreditCardIcon className="w-5 h-5 mr-2" />
+                                Billing
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                onClick={handleSignOut}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                )}
+                              >
+                                <ArrowLeftOnRectangleIcon className="w-5 h-5 mr-2" />
+                                Sign out
+                              </a>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  ) : (
+                    <button className="btn btn-primary">Sign In</button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className="sm:hidden">
+            <div className="space-y-1 pt-2 pb-4">
+              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
+              >
+                Dashboard
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+              >
+                Documents
+              </Disclosure.Button>
+              <Disclosure.Button
+                as="a"
+                href="#"
+                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+              >
+                Projects
+              </Disclosure.Button>
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  );
+}
