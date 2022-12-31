@@ -58,7 +58,7 @@ export default function HeaderV2() {
               <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <Link
-                    className="font-bold text-xl normal-case text-primary hover:bg-secondary rounded-lg py-2 px-4"
+                    className="font-bold text-xl normal-case text-primary hover:bg-secondary rounded-md py-2 px-4"
                     href="/"
                   >
                     fundsmith
@@ -68,9 +68,7 @@ export default function HeaderV2() {
                   <Link
                     href="/"
                     className={
-                      isCurrentPath("/")
-                        ? "p-2 inline-flex items-center font-bold bg-secondary rounded-lg hover:bg-secondary"
-                        : "p-2 inline-flex items-center hover:bg-secondary rounded-lg"
+                      isCurrentPath("/") ? "nav-link-current" : "nav-link"
                     }
                   >
                     <HomeModernIcon className="w-5 h-5 mx-2" />
@@ -80,8 +78,8 @@ export default function HeaderV2() {
                     href="/documents"
                     className={
                       isCurrentPath("/documents")
-                        ? "p-2 inline-flex items-center font-bold bg-secondary rounded-lg hover:bg-secondary"
-                        : "p-2 inline-flex items-center hover:bg-secondary rounded-lg"
+                        ? "nav-link-current"
+                        : "nav-link"
                     }
                   >
                     <DocumentTextIcon className="w-5 h-5 mx-2" />
@@ -91,8 +89,8 @@ export default function HeaderV2() {
                     href="/projects"
                     className={
                       isCurrentPath("/projects")
-                        ? "p-2 inline-flex items-center font-bold bg-secondary border-1 border-primary rounded-lg hover:bg-secondary"
-                        : "p-2 inline-flex items-center hover:bg-secondary rounded-lg"
+                        ? "nav-link-current"
+                        : "nav-link"
                     }
                   >
                     <FolderIcon className="w-5 h-5 mx-2" />
@@ -104,7 +102,7 @@ export default function HeaderV2() {
                   {user ? (
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="flex items-center py-2 px-4 hover:bg-secondary rounded-lg">
+                        <Menu.Button className="flex items-center py-2 px-4 hover:bg-secondary rounded-md">
                           <span className="sr-only">Open user menu</span>
                           <p className="text-base font-bold mr-4 hidden md:block">
                             {user.firstName} {user.lastName}

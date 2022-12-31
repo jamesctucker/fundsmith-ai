@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-link {
+    @apply p-2 inline-flex items-center hover:bg-secondary rounded-md;
+  }
+
+  .nav-link-current {
+    @apply p-2 inline-flex items-center font-bold bg-secondary rounded-md hover:bg-secondary;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary hover:shadow-md;
+  }
+}
