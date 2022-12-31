@@ -38,7 +38,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-accent absolute bottom-0 left-0 w-full py-4 px-8 md:py-8 md:px-16">
+    <footer className="bg-secondary absolute bottom-0 left-0 w-full py-4 px-8 md:py-8 md:px-16">
       <div className="mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigation.map((item) => (

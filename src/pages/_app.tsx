@@ -30,8 +30,8 @@ const App = ({ Component, pageProps }: AppProps) => {
             colorPrimary: "#2B7C5F",
             colorDanger: "#C5283D",
             colorSuccess: "#2B7C5F",
-            colorBackground: "#F5F1ED",
-            fontFamily: "Poppins, sans-serif",
+            colorBackground: "#FFFFFF",
+            fontFamily: "Inter, sans-serif",
             borderRadius: "0.5rem",
           },
         }}

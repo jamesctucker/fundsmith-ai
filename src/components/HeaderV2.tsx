@@ -39,10 +39,10 @@ export default function HeaderV2() {
   //   ];
 
   return (
-    <Disclosure as="nav" className="bg-white shadow">
+    <Disclosure as="nav" className="bg-base-100 shadow-sm">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
             <div className="relative flex h-14 justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button */}
@@ -58,7 +58,7 @@ export default function HeaderV2() {
               <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <Link
-                    className="btn-ghost btn text-xl normal-case text-primary"
+                    className="font-bold text-xl normal-case text-primary hover:bg-secondary rounded-lg py-2 px-4"
                     href="/"
                   >
                     fundsmith
@@ -69,8 +69,8 @@ export default function HeaderV2() {
                     href="/"
                     className={
                       isCurrentPath("/")
-                        ? "p-2 inline-flex items-center text-primary font-bold bg-success rounded-md hover:bg-accent"
-                        : "p-2 inline-flex items-center hover:bg-accent"
+                        ? "p-2 inline-flex items-center font-bold bg-secondary rounded-lg hover:bg-secondary"
+                        : "p-2 inline-flex items-center hover:bg-secondary rounded-lg"
                     }
                   >
                     <HomeModernIcon className="w-5 h-5 mx-2" />
@@ -80,8 +80,8 @@ export default function HeaderV2() {
                     href="/documents"
                     className={
                       isCurrentPath("/documents")
-                        ? "p-2 inline-flex items-center text-primary font-bold bg-success rounded-md hover:bg-accent"
-                        : "p-2 inline-flex items-center hover:bg-accent"
+                        ? "p-2 inline-flex items-center font-bold bg-secondary rounded-lg hover:bg-secondary"
+                        : "p-2 inline-flex items-center hover:bg-secondary rounded-lg"
                     }
                   >
                     <DocumentTextIcon className="w-5 h-5 mx-2" />
@@ -91,8 +91,8 @@ export default function HeaderV2() {
                     href="/projects"
                     className={
                       isCurrentPath("/projects")
-                        ? "p-2 inline-flex items-center text-primary font-bold bg-success border-1 border-primary rounded-md hover:bg-accent"
-                        : "p-2 inline-flex items-center hover:bg-accent"
+                        ? "p-2 inline-flex items-center font-bold bg-secondary border-1 border-primary rounded-lg hover:bg-secondary"
+                        : "p-2 inline-flex items-center hover:bg-secondary rounded-lg"
                     }
                   >
                     <FolderIcon className="w-5 h-5 mx-2" />
@@ -104,11 +104,14 @@ export default function HeaderV2() {
                   {user ? (
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="flex items-center p-2 hover:bg-accent rounded-md">
+                        <Menu.Button className="flex items-center py-2 px-4 hover:bg-secondary rounded-lg">
                           <span className="sr-only">Open user menu</span>
+                          <p className="text-base font-bold mr-4 hidden md:block">
+                            {user.firstName} {user.lastName}
+                          </p>
                           {user.profileImageUrl ? (
                             <img
-                              className="h-8 w-8 rounded-full"
+                              className="h-9 w-9 rounded-full"
                               src={user.profileImageUrl}
                               alt="profile picture"
                             />
@@ -116,9 +119,6 @@ export default function HeaderV2() {
                             // TODO: update this to use a placeholder with a solid background that shows the user's initials
                             <img src="https://placeimg.com/80/80/people" />
                           )}
-                          <p className="text-sm ml-2 hidden md:block">
-                            {user.firstName} {user.lastName}
-                          </p>
                         </Menu.Button>
                       </div>
                       <Transition
@@ -143,7 +143,7 @@ export default function HeaderV2() {
                               onChange={() => console.log("changed workspace!")}
                             />
                           </Menu.Item> */}
-                          <div className="w-full border-t-2 border-accent"></div>
+                          {/* <div className="w-full border-t-2 border-accent"></div> */}
                           <Menu.Item>
                             {({ active }) => (
                               <Link

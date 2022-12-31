@@ -21,7 +21,7 @@ const NewPage = () => {
 
   return (
     <>
-      <div className="overflow-hidden rounded-none bg-accent max-w-3xl mx-auto">
+      <div className="overflow-hidden rounded-none bg-secondary max-w-3xl mx-auto">
         {/* TODO: add document's content-type at the top */}
         <div className="px-4 py-5 sm:p-6">
           {data && <DefaultFields data={data} />}
@@ -30,7 +30,7 @@ const NewPage = () => {
         </div>
       </div>
       {/* list of variation results */}
-      <div className="overflow-hidden rounded-none bg-accent mt-4 max-w-3xl mx-auto">
+      <div className="overflow-hidden rounded-none bg-secondary mt-4 max-w-3xl mx-auto">
         <div className="px-4 py-5 sm:p-6">
           {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
           <p>loading...</p>

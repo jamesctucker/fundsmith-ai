@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ["Poppins", "sans-serif"],
+      sans: ["Inter", "sans-serif"],
       serif: ["Montserrat", "serif"],
       mono: ["Railway", "monospace"],
     },
@@ -16,14 +16,14 @@ module.exports = {
         mytheme: {
           // Spanish Viridian
           primary: "#2B7C5F",
-          // Timberwolf
-          secondary: "#E9E0D8",
-          // Isabeline
-          accent: "#F5F1ED",
+          // Cultured
+          secondary: "#F5F5F5",
+          // Mint Cream
+          accent: "#F4FBF7",
           // Eerie Black
           neutral: "#212121",
-          // Isabelline
-          "base-100": "#F5F1ED",
+          // White
+          "base-100": "#FFFFFF",
           // True Blue
           info: "#4062BB",
           //  Spanish Viridian
