@@ -30,17 +30,17 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
   };
 
   return (
-    <div className="space-y-3">
+    <div>
       <label className="label text-sm" htmlFor="name">
-        Document Name
+        Give your document a name
       </label>
       <input
         type="text"
         name="name"
         className="input input-bordered w-full"
-        placeholder={data.name}
+        placeholder="e.g. 'Thank you letter for Peter Kreft'"
       />
-      <div className="flex space-x-4 w-full">
+      <div className="flex space-x-4 w-full mt-3">
         {/* Number of variants selection */}
         <Select
           label="Number of variants"
