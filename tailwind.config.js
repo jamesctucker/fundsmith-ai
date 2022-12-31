@@ -16,22 +16,22 @@ module.exports = {
         mytheme: {
           // Spanish Viridian
           primary: "#2B7C5F",
-          // Raisin Black
-          secondary: "#A99985",
-          // Bone
-          accent: "#F5F5F5",
-          // Raisin Black
-          neutral: "#252323",
+          // Timberwolf
+          secondary: "#E9E0D8",
+          // Isabeline
+          accent: "#F5F1ED",
+          // Eerie Black
+          neutral: "#212121",
           // Isabelline
-          "base-100": "#FFFFFE",
-          // Cornflower Blue
-          info: "#7699D4",
+          "base-100": "#F5F1ED",
+          // True Blue
+          info: "#4062BB",
           //  Spanish Viridian
-          success: "#f4fbf7",
+          success: "#2B7C5F",
           // Amber
           warning: "#FF7D00",
-          // Amaranth Red
-          error: "#D90429",
+          // Cardinal
+          error: "#C5283D",
         },
       },
     ],
