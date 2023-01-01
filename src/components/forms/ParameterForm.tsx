@@ -1,12 +1,12 @@
 import { Parameter } from "@prisma/client";
-import { useContentTypeFormData } from "@/hooks/useContentTypeFormData";
+import { useFormContext } from "react-hook-form";
 
 type ParameterProps = {
   parameters: Parameter[];
 };
 
 const ParameterForm = ({ parameters }: ParameterProps) => {
-  const { handleUpdateFormData } = useContentTypeFormData();
+  const { register } = useFormContext();
 
   return (
     <div className="space-y-3">
@@ -19,19 +19,17 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
             <textarea
               className="textarea textarea-bordered w-full"
               id={parameter.name}
-              name={parameter.name}
               rows={5}
               placeholder={parameter.placeholder!}
-              onChange={handleUpdateFormData}
+              {...register(parameter.name)}
             />
           )}
           {parameter.displayType === "TEXT" && (
             <input
               className="input input-bordered w-full"
               id={parameter.name}
-              name={parameter.name}
               placeholder={parameter.placeholder!}
-              onChange={handleUpdateFormData}
+              {...register(parameter.name)}
             />
           )}
         </div>

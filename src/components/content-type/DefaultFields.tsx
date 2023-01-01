@@ -1,9 +1,7 @@
 import { ContentType } from "@prisma/client";
 import Select from "../ui/Select";
 import { variantOptions, toneOptions } from "@/constants/constants";
-import { useState } from "react";
-import { useContentTypeFormData } from "@/hooks/useContentTypeFormData";
-import handler from "../../pages/api/hello";
+import { useFormContext } from "react-hook-form";
 
 type ContentTypeProps = {
   data: ContentType;
@@ -16,7 +14,7 @@ type Option = {
 };
 
 const DefaultFields = ({ data }: ContentTypeProps) => {
-  const { handleUpdateFormData } = useContentTypeFormData();
+  const { register } = useFormContext();
 
   return (
     <div>
@@ -25,24 +23,19 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
       </label>
       <input
         type="text"
-        name="name"
         className="input input-bordered w-full"
         placeholder="e.g. 'Thank you letter for Peter Kreft'"
-        onChange={handleUpdateFormData}
+        {...register("name")}
       />
       <div className="flex space-x-4 w-full mt-3">
         {/* Number of variants selection */}
         <Select
           label="Number of variants"
           options={variantOptions}
-          onChange={handleUpdateFormData}
+          {...register("numberOfVariants")}
         />
         {/* Tone Selection */}
-        <Select
-          label="Tone"
-          options={toneOptions}
-          onChange={handleUpdateFormData}
-        />
+        <Select label="Tone" options={toneOptions} {...register("tone")} />
       </div>
     </div>
   );

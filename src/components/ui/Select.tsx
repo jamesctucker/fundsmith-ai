@@ -18,7 +18,10 @@ type SelectProps = {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-export default function Select({ options, label, onChange }: SelectProps) {
+export function CustomSelect(
+  { options, label, onChange }: SelectProps,
+  ref: React.Ref<HTMLSelectElement>
+) {
   return (
     <div className="flex flex-col flex-1">
       <label
@@ -33,6 +36,7 @@ export default function Select({ options, label, onChange }: SelectProps) {
         className="relative mt-2 w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
         defaultValue={options[0]!.value}
         onChange={onChange}
+        ref={ref}
       >
         {options.map((option) => (
           <option key={option.id} value={option.value}>
@@ -43,3 +47,7 @@ export default function Select({ options, label, onChange }: SelectProps) {
     </div>
   );
 }
+
+const Select = React.forwardRef(CustomSelect);
+
+export default Select;
