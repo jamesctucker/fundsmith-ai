@@ -17,7 +17,7 @@ const ContentTypeList = () => {
               <img src="https://placeimg.com/300/175/nature" alt="nature" />
             </figure>
             <div className="pt-5">
-              <h2 className="text-base font-bold">{contentType.name}</h2>
+              <h2 className="text-base font-bold">{contentType.displayName}</h2>
               <p className="text-sm">{contentType.description}</p>
             </div>
           </Link>

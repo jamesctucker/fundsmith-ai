@@ -1,4 +1,16 @@
-import { parameters } from "../seeds/parameter";
+import { testParameters, thankYouLetterParameters } from "../seeds/parameter";
+
+// connectOrCreate for each parameter
+const loopThroughParameters = (parameters: any) => {
+  const connectOrCreate = [];
+  for (const parameter of parameters) {
+    connectOrCreate.push({
+      create: parameter,
+      where: { name: parameter.name },
+    });
+  }
+  return connectOrCreate;
+};
 
 export const contentTypes = [
   {
@@ -9,44 +21,19 @@ export const contentTypes = [
     rules: {},
     isLive: true,
     parameters: {
-      connectOrCreate: {
-        where: {
-          name: "Description",
-        },
-        create: parameters.description,
-      },
+      connectOrCreate: loopThroughParameters(testParameters),
     },
   },
   {
-    name: "appeal-test-2",
-    displayName: "Appeal Test 2",
-    description: "write a test appeal",
+    name: "thank-you-letter",
+    displayName: "Thank You L etter",
+    description:
+      "Craft a heartfelt message expressing your gratitude for your donors/supporters and the impact of their support",
     position: 0,
     rules: {},
     isLive: true,
     parameters: {
-      connectOrCreate: {
-        where: {
-          name: "Description",
-        },
-        create: parameters.description,
-      },
-    },
-  },
-  {
-    name: "appeal-test-3",
-    displayName: "Appeal Test 3",
-    description: "write a test appeal",
-    position: 0,
-    rules: {},
-    isLive: true,
-    parameters: {
-      connectOrCreate: {
-        where: {
-          name: "Description",
-        },
-        create: parameters.description,
-      },
+      connectOrCreate: loopThroughParameters(thankYouLetterParameters),
     },
   },
 ];

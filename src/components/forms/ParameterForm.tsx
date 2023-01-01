@@ -1,10 +1,13 @@
 import { Parameter } from "@prisma/client";
+import { useContentTypeFormData } from "@/hooks/useContentTypeFormData";
 
 type ParameterProps = {
   parameters: Parameter[];
 };
 
 const ParameterForm = ({ parameters }: ParameterProps) => {
+  const { handleUpdateFormData } = useContentTypeFormData();
+
   return (
     <div className="space-y-3">
       {parameters.map((parameter) => (
@@ -19,6 +22,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
               name={parameter.name}
               rows={5}
               placeholder={parameter.placeholder!}
+              onChange={handleUpdateFormData}
             />
           )}
           {parameter.displayType === "TEXT" && (
@@ -27,6 +31,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
               id={parameter.name}
               name={parameter.name}
               placeholder={parameter.placeholder!}
+              onChange={handleUpdateFormData}
             />
           )}
         </div>

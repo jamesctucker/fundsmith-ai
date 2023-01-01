@@ -130,7 +130,7 @@ export default function HeaderV2() {
                       >
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
-                            <p className="px-4 py-2 text-sm truncate">
+                            <p className="px-4 py-2 text-sm font-bold truncate">
                               {user!.emailAddresses[0]!.emailAddress}
                             </p>
                           </Menu.Item>
@@ -141,7 +141,7 @@ export default function HeaderV2() {
                               onChange={() => console.log("changed workspace!")}
                             />
                           </Menu.Item> */}
-                          {/* <div className="w-full border-t-2 border-accent"></div> */}
+                          <div className="w-full border-t-2 border-accent"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <Link
@@ -184,6 +184,7 @@ export default function HeaderV2() {
                               </Link>
                             )}
                           </Menu.Item>
+                          <div className="w-full border-t-2 border-accent"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <a
@@ -202,7 +203,9 @@ export default function HeaderV2() {
                       </Transition>
                     </Menu>
                   ) : (
-                    <button className="btn btn-primary">Sign In</button>
+                    <Link className="btn-primary" href="/auth/signin">
+                      Sign In
+                    </Link>
                   )}
                 </div>
               </div>

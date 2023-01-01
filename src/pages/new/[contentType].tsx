@@ -3,6 +3,7 @@ import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
 import ParameterForm from "@/components/forms/ParameterForm";
 import DefaultFields from "@/components/content-type/DefaultFields";
+import { useContentTypeFormData } from "@/hooks/useContentTypeFormData";
 
 const NewPage = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const NewPage = () => {
   if (error) {
     toast.error("Oops, something went wrong");
   }
+  const { formData } = useContentTypeFormData();
 
   return (
     <>

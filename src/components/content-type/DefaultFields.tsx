@@ -2,6 +2,8 @@ import { ContentType } from "@prisma/client";
 import Select from "../ui/Select";
 import { variantOptions, toneOptions } from "@/constants/constants";
 import { useState } from "react";
+import { useContentTypeFormData } from "@/hooks/useContentTypeFormData";
+import handler from "../../pages/api/hello";
 
 type ContentTypeProps = {
   data: ContentType;
@@ -14,20 +16,7 @@ type Option = {
 };
 
 const DefaultFields = ({ data }: ContentTypeProps) => {
-  // only store the option's value
-  const [numberofVariants, setNumberOfVariants] = useState<Option | null>(null);
-  const [tone, setTone] = useState<Option | null>(null);
-
-  const handleOnChange = (option: Option) => {
-    //  if option.value is found in variantOptions, set numberofVariants
-    if (variantOptions.find((variant) => variant.value === option.value)) {
-      setNumberOfVariants(option);
-    }
-
-    if (toneOptions.find((tone) => tone.value === option.value)) {
-      setTone(option);
-    }
-  };
+  const { handleUpdateFormData } = useContentTypeFormData();
 
   return (
     <div>
@@ -39,16 +28,21 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
         name="name"
         className="input input-bordered w-full"
         placeholder="e.g. 'Thank you letter for Peter Kreft'"
+        onChange={handleUpdateFormData}
       />
       <div className="flex space-x-4 w-full mt-3">
         {/* Number of variants selection */}
         <Select
           label="Number of variants"
           options={variantOptions}
-          onChange={handleOnChange}
+          onChange={handleUpdateFormData}
         />
         {/* Tone Selection */}
-        <Select label="Tone" options={toneOptions} onChange={handleOnChange} />
+        <Select
+          label="Tone"
+          options={toneOptions}
+          onChange={handleUpdateFormData}
+        />
       </div>
     </div>
   );
