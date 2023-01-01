@@ -7,12 +7,6 @@ type ContentTypeProps = {
   data: ContentType;
 };
 
-type Option = {
-  id: number;
-  label: string;
-  value: string | number;
-};
-
 const DefaultFields = ({ data }: ContentTypeProps) => {
   const { register } = useFormContext();
 
