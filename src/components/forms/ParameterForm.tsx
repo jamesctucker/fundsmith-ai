@@ -21,7 +21,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
               id={parameter.name}
               rows={5}
               placeholder={parameter.placeholder!}
-              {...register(parameter.name)}
+              {...register(parameter.name, { required: parameter.isRequired })}
             />
           )}
           {parameter.displayType === "TEXT" && (
@@ -29,7 +29,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
               className="input input-bordered w-full"
               id={parameter.name}
               placeholder={parameter.placeholder!}
-              {...register(parameter.name)}
+              {...register(parameter.name, { required: parameter.isRequired })}
             />
           )}
         </div>

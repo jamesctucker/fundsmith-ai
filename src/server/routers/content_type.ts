@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
-import { parameters } from "../../../prisma/seeds/parameter";
 
 export const contentTypesRouter = router({
   //   query that returns the entire list of active content types

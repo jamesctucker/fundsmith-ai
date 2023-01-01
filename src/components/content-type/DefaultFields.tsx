@@ -19,7 +19,7 @@ const DefaultFields = ({ data }: ContentTypeProps) => {
         type="text"
         className="input input-bordered w-full"
         placeholder="e.g. 'Thank you letter for Peter Kreft'"
-        {...register("name")}
+        {...register("name", { required: true })}
       />
       <div className="flex space-x-4 w-full mt-3">
         {/* Number of variants selection */}
