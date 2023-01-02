@@ -1,13 +1,8 @@
-import { ContentType } from "@prisma/client";
 import Select from "../ui/Select";
 import { variantOptions, toneOptions } from "@/constants/constants";
 import { useFormContext } from "react-hook-form";
 
-type ContentTypeProps = {
-  data: ContentType;
-};
-
-const DefaultFields = ({ data }: ContentTypeProps) => {
+const DefaultFields = () => {
   const { register } = useFormContext();
 
   return (
