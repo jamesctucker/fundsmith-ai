@@ -6,31 +6,60 @@ type ParameterProps = {
 };
 
 const ParameterForm = ({ parameters }: ParameterProps) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <div className="space-y-3">
+    <div>
       {parameters.map((parameter) => (
         <div key={parameter.id}>
-          <label className="label text-sm" htmlFor={parameter.name}>
-            {parameter.displayLabel}
+          <label className="label block text-sm" htmlFor={parameter.name}>
+            {/* add red required asterisk */}
+            {parameter.displayLabel}{" "}
+            {parameter.isRequired && <span className="text-error">*</span>}
           </label>
           {parameter.displayType === "TEXTAREA" && (
-            <textarea
-              className="textarea textarea-bordered w-full"
-              id={parameter.name}
-              rows={5}
-              placeholder={parameter.placeholder!}
-              {...register(parameter.name, { required: parameter.isRequired })}
-            />
+            <>
+              <textarea
+                className="textarea textarea-bordered w-full"
+                id={parameter.name}
+                rows={5}
+                placeholder={parameter.placeholder!}
+                {...register(parameter.name, {
+                  required: parameter.isRequired,
+                })}
+              />
+              {errors[parameter.name]?.type === "required" && (
+                <p
+                  className="mt-1 text-sm text-error"
+                  id={`${parameter.name}-error}`}
+                >
+                  This field is required.
+                </p>
+              )}
+            </>
           )}
           {parameter.displayType === "TEXT" && (
-            <input
-              className="input input-bordered w-full"
-              id={parameter.name}
-              placeholder={parameter.placeholder!}
-              {...register(parameter.name, { required: parameter.isRequired })}
-            />
+            <>
+              <input
+                className="input input-bordered w-full"
+                id={parameter.name}
+                placeholder={parameter.placeholder!}
+                {...register(parameter.name, {
+                  required: parameter.isRequired,
+                })}
+              />
+              {errors[parameter.name]?.type === "required" && (
+                <p
+                  className="mt-1 text-sm text-error"
+                  id={`${parameter.name}-error}`}
+                >
+                  This field is required.
+                </p>
+              )}
+            </>
           )}
         </div>
       ))}
