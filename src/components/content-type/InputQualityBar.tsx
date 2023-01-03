@@ -17,7 +17,8 @@ const InputQualityBar = ({
     const percentage = (characterCount! / maxLength) * 100;
 
     return (
-      <div>
+      <>
+        {/* TODO add transition for when bar progresses */}
         {percentage < 10 && (
           <div
             className="h-2 rounded-full bg-error"
@@ -26,7 +27,7 @@ const InputQualityBar = ({
         )}
         {percentage >= 10 && percentage < 25 && (
           <div
-            className="h-2 rounded-full bg-warning"
+            className="h-2 rounded-full bg-yellow-400"
             style={{ width: "66.6%" }}
           />
         )}
@@ -36,8 +37,21 @@ const InputQualityBar = ({
             style={{ width: "100%" }}
           />
         )}
-      </div>
+      </>
     );
+  };
+
+  const showQualityInfo = () => {
+    {
+      /* <div className="text-left text-warning">Fair</div>
+        <div className="text-left text-success">Great!</div> */
+    }
+
+    if (!characterCount) {
+      return;
+    }
+
+    return <div className="text-left text-error">Weak</div>;
   };
 
   return (
@@ -45,11 +59,9 @@ const InputQualityBar = ({
       <div className="overflow-hidden rounded-full bg-gray-200">
         {getQuality(parameterName)}
       </div>
-      {/* <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
-                  <div className="text-left text-error">Weak</div>
-                  <div className="text-center text-warning">Good</div>
-                  <div className="text-right text-success">Great!</div>
-                </div> */}
+      <div className="mt-1 hidden text-sm font-medium text-gray-600 sm:flex">
+        {showQualityInfo()}
+      </div>
     </div>
   );
 };
