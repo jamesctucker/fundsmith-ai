@@ -1,4 +1,4 @@
-import { Parameter } from "@prisma/client";
+import { Parameter, Prisma } from "@prisma/client";
 import { useFormContext } from "react-hook-form";
 
 type ParameterProps = {
@@ -11,15 +11,46 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
     formState: { errors },
   } = useFormContext();
 
+  const getRules = (parameter: Parameter, rule: string) => {
+    const rules = parameter?.rules as Prisma.JsonObject;
+    const ruleValue = rules[rule];
+
+    return JSON.parse(ruleValue as string);
+  };
+
+  const getCharacterCount = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const currentCount = e.target.value.length;
+    const countLabel = document.getElementById(
+      `maxlength-${e.target.id}`
+    ) as HTMLLabelElement;
+
+    const maxLength = getRules(
+      parameters.find((parameter) => parameter.name === e.target.id)!,
+      "maxLength"
+    );
+
+    countLabel.innerText = `${currentCount}/${maxLength}`;
+  };
+
   return (
     <div>
       {parameters.map((parameter) => (
         <div key={parameter.id}>
-          <label className="label block text-sm" htmlFor={parameter.name}>
-            {/* add red required asterisk */}
-            {parameter.displayLabel}{" "}
-            {parameter.isRequired && <span className="text-error">*</span>}
-          </label>
+          <div className="flex justify-between items-center">
+            <label className="label block text-sm" htmlFor={parameter.name}>
+              {/* add red required asterisk */}
+              {parameter.displayLabel}{" "}
+              {parameter.isRequired && <span className="text-error">*</span>}
+            </label>
+            {getRules(parameter, "maxLength") && (
+              <span
+                className="text-sm text-gray-500"
+                id={`maxlength-${parameter.name}`}
+              />
+            )}
+          </div>
           {parameter.displayType === "TEXTAREA" && (
             <>
               <textarea
@@ -30,6 +61,8 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
                 {...register(parameter.name, {
                   required: parameter.isRequired,
                 })}
+                maxLength={getRules(parameter, "maxLength")}
+                onChange={getCharacterCount}
               />
               {errors[parameter.name]?.type === "required" && (
                 <p
@@ -50,6 +83,8 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
                 {...register(parameter.name, {
                   required: parameter.isRequired,
                 })}
+                maxLength={getRules(parameter, "maxLength")}
+                onChange={getCharacterCount}
               />
               {errors[parameter.name]?.type === "required" && (
                 <p

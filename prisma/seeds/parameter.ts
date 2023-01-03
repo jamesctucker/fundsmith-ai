@@ -10,7 +10,7 @@ export const testParameters = [
     isRequired: true,
     displayType: DisplayType.TEXTAREA,
     position: 0,
-    rules: [{ minLength: 10, maxLength: 1000 }],
+    rules: { minLength: 10, maxLength: 1000 },
   },
 ];
 
@@ -22,7 +22,7 @@ export const thankYouLetterParameters = [
     isRequired: true,
     displayType: DisplayType.TEXT,
     position: 0,
-    rules: [{ minLength: 10, maxLength: 100 }],
+    rules: { minLength: 10, maxLength: 100 },
   },
   {
     name: "supported_project",
@@ -31,7 +31,7 @@ export const thankYouLetterParameters = [
     isRequired: true,
     displayType: DisplayType.TEXTAREA,
     position: 0,
-    rules: [{ minLength: 10, maxLength: 250 }],
+    rules: { minLength: 10, maxLength: 250 },
   },
   {
     name: "support_description",
@@ -40,6 +40,6 @@ export const thankYouLetterParameters = [
     isRequired: true,
     displayType: DisplayType.TEXTAREA,
     position: 0,
-    rules: [{ minLength: 10, maxLength: 250 }],
+    rules: { minLength: 10, maxLength: 250 },
   },
 ];
