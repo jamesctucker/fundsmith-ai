@@ -1,6 +1,7 @@
 import { Parameter, Prisma } from "@prisma/client";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
+import InputQualityBar from "../content-type/InputQualityBar";
 
 type ParameterProps = {
   parameters: Parameter[];
@@ -16,6 +17,8 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
     formState: { errors },
   } = useFormContext();
 
+  // extract rules from parameter
+  // TODO: explore a better way for fetching rules
   const getRules = (parameter: Parameter, rule: string) => {
     const rules = parameter?.rules as Prisma.JsonObject;
     const ruleValue = rules[rule];
@@ -23,6 +26,8 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
     return JSON.parse(ruleValue as string);
   };
 
+  // get character count for textareas
+  // TODO: explore refactoring for better performance
   const getCharacterCount = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -44,49 +49,12 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
     }));
   };
 
-  const getQuality = (id: string) => {
-    const maxLength = getRules(
-      parameters.find((parameter) => parameter.name === id)!,
-      "maxLength"
-    );
-
-    if (!characterCount[id]) {
-      return;
-    }
-
-    const percentage = (characterCount[id]! / maxLength) * 100;
-
-    return (
-      <div>
-        {percentage < 10 && (
-          <div
-            className="h-2 rounded-full bg-error"
-            style={{ width: "33.3%" }}
-          />
-        )}
-        {percentage >= 10 && percentage < 25 && (
-          <div
-            className="h-2 rounded-full bg-warning"
-            style={{ width: "66.6%" }}
-          />
-        )}
-        {percentage >= 25 && (
-          <div
-            className="h-2 rounded-full bg-success"
-            style={{ width: "100%" }}
-          />
-        )}
-      </div>
-    );
-  };
-
   return (
     <div>
       {parameters.map((parameter) => (
         <div key={parameter.id}>
           <div className="flex justify-between items-center">
             <label className="label block text-sm" htmlFor={parameter.name}>
-              {/* add red required asterisk */}
               {parameter.displayLabel}{" "}
               {parameter.isRequired && <span className="text-error">*</span>}
             </label>
@@ -118,16 +86,11 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
                   This field is required.
                 </p>
               )}
-              <div className="input-quality-status-bar mt-2" aria-hidden="true">
-                <div className="overflow-hidden rounded-full bg-gray-200">
-                  {getQuality(parameter.name)}
-                </div>
-                {/* <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
-                  <div className="text-left text-error">Weak</div>
-                  <div className="text-center text-warning">Good</div>
-                  <div className="text-right text-success">Great!</div>
-                </div> */}
-              </div>
+              <InputQualityBar
+                parameterName={parameter.name}
+                characterCount={characterCount[parameter.name]}
+                maxLength={getRules(parameter, "maxLength")}
+              />
             </>
           )}
           {parameter.displayType === "TEXT" && (
