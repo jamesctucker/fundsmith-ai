@@ -46,9 +46,20 @@ const NewPage = () => {
     );
   };
 
+  const contentTypeNameFormatted = contentTypeName
+    ?.replace(/_/g, " ")
+    ?.replace(/-/g, " ")
+    ?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1));
+
   return (
     <>
-      <div className="overflow-hidden rounded-md bg-white max-w-3xl mx-auto shadow-md">
+      <div className="bg-white max-w-3xl mx-auto rounded-t-md">
+        <h1 className="text-2xl font-bold px-4 py-5 sm:p-6 flex items-center">
+          {contentTypeName ? contentTypeNameFormatted : "Loading..."}
+        </h1>
+        <div className="border-t border-gray-200 p-0" />
+      </div>
+      <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto shadow-md">
         {/* TODO: add document's content-type at the top */}
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
@@ -65,20 +76,24 @@ const NewPage = () => {
           </FormProvider>
         </div>
       </div>
+      {/* TODO: move to separate component */}
       {/* list of variation results */}
-      <div className="overflow-visible rounded-md bg-white mt-4 max-w-3xl mx-auto shadow-md">
-        <div className="px-4 py-5 sm:p-6">
+      {variants.length > 0 && (
+        <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto shadow-md">
           {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
           {generateVariants.isLoading && <p>Loading...</p>}
-          {variants.length > 0 && (
-            <ul>
-              {variants.map((variant, index) => (
-                <li key={index}>{variant}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
+
+          {variants.map((variant, index) => (
+            <li key={index} className="hover:bg-base-100">
+              <div className="px-4 py-5 sm:p-6">{variant}</div>
+              {/* divider */}
+              {index !== variants.length - 1 && (
+                <div className="border-t border-gray-200 p-0" />
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
