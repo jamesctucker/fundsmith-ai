@@ -14,11 +14,11 @@
 
 @layer components {
   .nav-link {
-    @apply p-2 inline-flex text-base-100 items-center hover:bg-secondary hover:text-primary rounded-md;
+    @apply p-2 inline-flex text-base-100 items-center hover:bg-base-100 hover:text-primary rounded-md;
   }
 
   .nav-link-current {
-    @apply p-2 inline-flex items-center font-bold bg-secondary text-primary rounded-md;
+    @apply p-2 inline-flex items-center font-bold bg-base-100 text-primary rounded-md;
   }
 
   .btn-primary {

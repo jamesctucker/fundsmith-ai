@@ -58,7 +58,7 @@ export default function HeaderV2() {
               <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <Link
-                    className="font-bold text-xl normal-case text-base-100 hover:text-primary hover:bg-secondary rounded-md py-2 px-4"
+                    className="font-bold text-xl normal-case text-base-100 hover:text-primary hover:bg-base-100 rounded-md py-2 px-4"
                     href="/"
                   >
                     fundsmith
@@ -102,7 +102,7 @@ export default function HeaderV2() {
                   {user ? (
                     <Menu as="div" className="relative ml-3">
                       <>
-                        <Menu.Button className="flex items-center py-1 px-4 text-base-100 hover:text-primary hover:bg-secondary rounded-md">
+                        <Menu.Button className="flex items-center py-1 px-4 text-base-100 hover:text-primary hover:bg-base-100 rounded-md">
                           <span className="sr-only">Open user menu</span>
                           <p className="text-base font-bold mr-4 hidden md:block">
                             {user.firstName} {user.lastName}
