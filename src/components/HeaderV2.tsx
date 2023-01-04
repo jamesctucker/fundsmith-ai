@@ -141,7 +141,7 @@ export default function HeaderV2() {
                               onChange={() => console.log("changed workspace!")}
                             />
                           </Menu.Item> */}
-                          <div className="w-full border-t-2 border-accent"></div>
+                          <div className="w-full border-t-2 border-gray-300"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <Link
@@ -184,7 +184,7 @@ export default function HeaderV2() {
                               </Link>
                             )}
                           </Menu.Item>
-                          <div className="w-full border-t-2 border-accent"></div>
+                          <div className="w-full border-t-2 border-gray-300"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <a

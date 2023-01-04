@@ -24,4 +24,8 @@
   .btn-primary {
     @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent hover:shadow-md;
   }
+
+  .quality-badge {
+    @apply inline-flex items-center rounded-md px-2.5 py-0.5 text-sm font-medium;
+  }
 }

@@ -13,24 +13,24 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          // Spanish Viridian
+          // Y in Mn Blue
           primary: "#162E37",
-          // Cultured
-          secondary: "#9DC0C3",
-          // Mint Cream
-          accent: "#F24B4D",
+          // Maximum Blue Green
+          secondary: "#3FC1C9",
+          // Frenc
+          accent: "#FC5185",
           // Eerie Black
           neutral: "#131516",
-          // White
-          "base-100": "#ECF4F4",
-          // True Blue
-          info: "#5899E2",
+          // Cultured
+          "base-100": "#F5F5F5",
+          // Maximum Blue Green
+          info: "#3FC1C9",
           //  Spanish Viridian
           success: "#57886C",
-          // Amber
-          warning: "#F6AE2D",
-          // Cardinal
-          error: "#F24B4D",
+          // Honey Yellow
+          warning: "#FFB30F",
+          // French Rose
+          error: "#FC5185",
         },
       },
     ],
