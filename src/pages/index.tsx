@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Wrapper title={"Dashboard"}>
       <div className="flex flex-col justify-center p-4 max-w-5xl mx-auto">
-        <h1 className="text-2xl text-center font-bold">
+        <h1 className="text-2xl text-center text-serif font-bold">
           👋 Hello, {user?.firstName}! What would you like to create today?
         </h1>
         <p className="text-center">

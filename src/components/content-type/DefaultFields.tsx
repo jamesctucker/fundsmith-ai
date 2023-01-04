@@ -16,7 +16,7 @@ const DefaultFields = () => {
       <div>
         <input
           type="text"
-          className="input input-bordered w-full"
+          className="input input-bordered bg-white w-full"
           placeholder="e.g. 'Thank you letter for Peter Kreft'"
           {...register("documentName", { required: true })}
         />

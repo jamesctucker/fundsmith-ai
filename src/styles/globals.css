@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Cardo";
+  src: url("/fonts/Cardo-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Merriweather  Sans";
+  src: url("/fonts/MerriweatherSans-VariableFont_wght.ttf");
+}
+
 @layer components {
   .nav-link {
-    @apply p-2 inline-flex items-center hover:bg-secondary rounded-md;
+    @apply p-2 inline-flex text-base-100 items-center hover:bg-secondary hover:text-primary rounded-md;
   }
 
   .nav-link-current {
-    @apply p-2 inline-flex items-center font-bold bg-secondary rounded-md hover:bg-secondary;
+    @apply p-2 inline-flex items-center font-bold bg-secondary text-primary rounded-md;
   }
 
   .btn-primary {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary hover:shadow-md;
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent hover:shadow-md;
   }
 }

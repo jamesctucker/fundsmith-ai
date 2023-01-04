@@ -4,9 +4,8 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ["Inter", "sans-serif"],
-      serif: ["Montserrat", "serif"],
-      mono: ["Railway", "monospace"],
+      sans: ["MerriweatherSans", "sans-serif"],
+      serif: ["Cardo", "serif"],
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
@@ -15,23 +14,23 @@ module.exports = {
       {
         mytheme: {
           // Spanish Viridian
-          primary: "#2B7C5F",
+          primary: "#162E37",
           // Cultured
-          secondary: "#F5F5F5",
+          secondary: "#9DC0C3",
           // Mint Cream
-          accent: "#F4FBF7",
+          accent: "#F24B4D",
           // Eerie Black
-          neutral: "#212121",
+          neutral: "#131516",
           // White
-          "base-100": "#FFFFFF",
+          "base-100": "#ECF4F4",
           // True Blue
-          info: "#4062BB",
+          info: "#5899E2",
           //  Spanish Viridian
-          success: "#2B7C5F",
+          success: "#57886C",
           // Amber
-          warning: "#FF7D00",
+          warning: "#F6AE2D",
           // Cardinal
-          error: "#C5283D",
+          error: "#F24B4D",
         },
       },
     ],

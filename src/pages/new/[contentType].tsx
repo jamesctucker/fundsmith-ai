@@ -51,7 +51,7 @@ const NewPage = () => {
 
   return (
     <>
-      <div className="overflow-hidden rounded-md bg-secondary max-w-3xl mx-auto">
+      <div className="overflow-hidden rounded-md bg-white max-w-3xl mx-auto shadow-md">
         {/* TODO: add document's content-type at the top */}
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
@@ -66,7 +66,7 @@ const NewPage = () => {
         </div>
       </div>
       {/* list of variation results */}
-      <div className="overflow-visible rounded-md bg-secondary mt-4 max-w-3xl mx-auto">
+      <div className="overflow-visible rounded-md bg-white mt-4 max-w-3xl mx-auto shadow-md">
         <div className="px-4 py-5 sm:p-6">
           {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
           {generateVariants.isLoading && <p>Loading...</p>}
