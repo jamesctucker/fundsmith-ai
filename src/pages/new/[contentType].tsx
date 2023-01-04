@@ -27,8 +27,6 @@ const NewPage = () => {
   const generateVariants = trpc.prompts.generateVariants.useMutation();
 
   const onSubmit = (data: any) => {
-    console.log(data);
-
     generateVariants.mutate(
       {
         content_type: contentTypeName,
@@ -36,7 +34,6 @@ const NewPage = () => {
         support_description: data.support_description,
         supported_project: data.supported_project,
         tone: data.tone,
-        // prompt: "Who is Abraham Lincoln?",
         max_tokens: 1000,
         n: Number(data.numberOfVariants),
       },
@@ -58,7 +55,10 @@ const NewPage = () => {
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               {data && <DefaultFields />}
               {data && <ParameterForm parameters={data.parameters} />}
-              <button className=" btn-primary my-2" type="submit">
+              <button
+                className=" btn-primary mt-4 sm:mt-6 md:mt-8"
+                type="submit"
+              >
                 Generate
               </button>
             </form>
