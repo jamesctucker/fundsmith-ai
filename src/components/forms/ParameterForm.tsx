@@ -87,7 +87,6 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
                 </p>
               )}
               <InputQualityBar
-                parameterName={parameter.name}
                 characterCount={characterCount[parameter.name]}
                 maxLength={getRules(parameter, "maxLength")}
               />
