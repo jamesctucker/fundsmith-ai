@@ -10,8 +10,10 @@ const NewPage = () => {
   const methods = useForm();
   const router = useRouter();
   const contentModelName = router.query.contentModel as string;
+  const documentId = Number(router.query.id);
   const [variants, setVariants] = useState<string[]>([]);
 
+  // get the parameters for the content model
   const { data, error } =
     trpc.content_models.getContentModelParameters.useQuery(
       {
@@ -24,7 +26,18 @@ const NewPage = () => {
     toast.error("Oops, something went wrong");
   }
 
-  // trpc mutation that calls generateVariants in the prompt.tsx router
+  // get data from freshly-created document
+  const { data: documentData, error: documentError } =
+    trpc.documents.getDocument.useQuery(
+      {
+        id: documentId,
+      },
+      { enabled: !!documentId }
+    );
+
+  console.log("documentData", documentData);
+
+  // Variant generation
   const generateVariants = trpc.prompts.generateVariants.useMutation();
 
   const onSubmit = (data: any) => {
@@ -46,6 +59,7 @@ const NewPage = () => {
       }
     );
   };
+  // End variant generation
 
   const contentModelNameFormatted = contentModelName
     ?.replace(/_/g, " ")
@@ -61,11 +75,10 @@ const NewPage = () => {
         <div className="border-t border-gray-200 p-0" />
       </div>
       <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto shadow-md">
-        {/* TODO: add document's content-type at the top */}
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
-              {data && <DefaultFields />}
+              {data && <DefaultFields documentData={documentData} />}
               {data && <ParameterForm parameters={data.parameters} />}
               <button
                 className=" btn-primary mt-4 sm:mt-6 md:mt-8"

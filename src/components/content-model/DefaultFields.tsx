@@ -1,8 +1,13 @@
 import Select from "../ui/Select";
 import { variantOptions, toneOptions } from "@/constants/constants";
-import { useFormContext, useFormState } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import { Document } from "@prisma/client";
 
-const DefaultFields = () => {
+type Props = {
+  documentData?: Document | null;
+};
+
+const DefaultFields = ({ documentData }: Props) => {
   const {
     register,
     formState: { errors },
@@ -19,6 +24,7 @@ const DefaultFields = () => {
           className="input input-bordered bg-white w-full"
           placeholder="e.g. 'Thank you letter for Peter Kreft'"
           {...register("documentName", { required: true })}
+          defaultValue={documentData?.name}
         />
         {errors.documentName?.type === "required" && (
           <p className="mt-1 text-sm text-error" id="document-name-error">

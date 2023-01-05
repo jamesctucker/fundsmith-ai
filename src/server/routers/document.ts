@@ -3,6 +3,21 @@ import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
 
 export const documentsRouter = router({
+  getDocument: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const document = await ctx.prisma.document.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      return document;
+    }),
   createDocument: protectedProcedure
     .input(
       z.object({

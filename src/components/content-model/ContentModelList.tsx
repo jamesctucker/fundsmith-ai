@@ -1,5 +1,4 @@
 import { trpc } from "../../utils/trpc";
-import Link from "next/link";
 import { slugify } from "@/helpers/slugify";
 import { useUser } from "@clerk/clerk-react";
 import { toast } from "react-hot-toast";
