@@ -11,7 +11,7 @@ export default function Layout({ children }: Props) {
     <div className="min-h-screen relative">
       <HeaderV2 />
       <main className="container mx-auto p-4 sm:p-6 lg:p-8">{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

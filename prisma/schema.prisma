@@ -14,7 +14,7 @@ model User {
   userId    String     @id @unique
   firstName String
   lastName  String
-  email     String
+  email     String     @unique
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now())
   documents Document[]
@@ -67,16 +67,16 @@ enum DisplayType {
   CHECKBOX
 }
 
+
 model Document {
   id             Int          @id @default(autoincrement())
-  name           String
-  displayName    String
+  name           String       @default("Untitled")
   savedVariants  Json?        @default("[]")
   savedResponses Json?        @default("[]")
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @default(now())
   contentModelId Int
   contentModel   ContentModel @relation(fields: [contentModelId], references: [id])
-  user           User         @relation(fields: [userId], references: [userId])
-  userId         String
+  ownerEmail     String
+  owner          User         @relation(fields: [ownerEmail], references: [email])
 }
