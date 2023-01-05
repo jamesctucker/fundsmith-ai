@@ -1,26 +1,26 @@
 import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
 
-export const contentTypesRouter = router({
+export const contentModelsRouter = router({
   //   query that returns the entire list of active content types
-  getContentTypes: publicProcedure.query(async ({ ctx }) => {
-    const contentTypes = await ctx.prisma.contentType.findMany({
+  getContentModels: publicProcedure.query(async ({ ctx }) => {
+    const contentModels = await ctx.prisma.contentModel.findMany({
       where: {
-        isLive: true,
+        active: true,
       },
     });
 
-    return contentTypes;
+    return contentModels;
   }),
   // get the parameters for a specific content type
-  getContentTypeParameters: publicProcedure
+  getContentModelParameters: publicProcedure
     .input(
       z.object({
         name: z.string(),
       })
     )
     .query(async ({ ctx, input }) => {
-      const contentType = await ctx.prisma.contentType.findFirst({
+      const contentModel = await ctx.prisma.contentModel.findFirst({
         where: {
           name: input.name,
         },
@@ -29,6 +29,6 @@ export const contentTypesRouter = router({
         },
       });
 
-      return contentType;
+      return contentModel;
     }),
 });

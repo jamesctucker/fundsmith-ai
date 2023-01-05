@@ -1,7 +1,7 @@
 import { Parameter, Prisma } from "@prisma/client";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
-import InputQualityBar from "../content-type/InputQualityBar";
+import InputQualityBar from "../content-model/InputQualityBar";
 
 type ParameterProps = {
   parameters: Parameter[];

@@ -1,18 +1,18 @@
 import { prisma } from "./prisma_client";
-import { contentTypes } from "./seeds/content_type";
+import { contentModels } from "./seeds/content_model";
 
 // promise function that creates content types
-async function createContentTypes() {
-  for (const contentType of contentTypes) {
-    await prisma.contentType.create({
-      data: contentType,
+async function createContentModels() {
+  for (const contentModel of contentModels) {
+    await prisma.contentModel.create({
+      data: contentModel,
     });
   }
   console.log("🌱 Successfully seeded content types.");
 }
 
 async function main() {
-  await createContentTypes();
+  await createContentModels();
 
   console.log("✅ Successfully completed seeding.");
 }

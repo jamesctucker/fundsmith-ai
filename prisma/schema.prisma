@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  // unique Id
-  userId    String   @id @unique
+  userId    String     @id @unique
   firstName String
   lastName  String
   email     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+  documents Document[]
 }
 
 model Workspaces {
@@ -30,35 +30,33 @@ model Workspaces {
 }
 
 // fine-tuned AI models
-model ContentType {
+model ContentModel {
   id          Int         @id @default(autoincrement())
-  name        String 
-  displayName String      @default("New Content Type")
+  name        String
+  displayName String
   description String
-  // default order that the model is displayed in the UI
   position    Int?        @default(0)
-  // TODO: update default rules
   rules       Json?       @default("{}")
-  isLive      Boolean     @default(true)
+  active      Boolean     @default(true)
   parameters  Parameter[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @default(now())
+  documents   Document[]
 }
 
 model Parameter {
-  id           Int           @id @default(autoincrement())
-  name         String        @unique
-  displayLabel String
-  isRequired   Boolean       @default(false)
-  rules        Json?         @default("{}")
-  placeholder  String?
-  // displayType cannot be null
-  displayType  DisplayType   @default(TEXT)
-  options      Json?         @default("[]")
-  position     Int?          @default(0)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @default(now())
-  contentTypes ContentType[]
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
+  displayLabel  String
+  required      Boolean        @default(false)
+  rules         Json?          @default("{}")
+  placeholder   String?
+  displayType   DisplayType    @default(TEXT)
+  options       Json?          @default("[]")
+  position      Int?           @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now())
+  contentModels ContentModel[]
 }
 
 enum DisplayType {
@@ -67,4 +65,18 @@ enum DisplayType {
   SELECT
   RADIO
   CHECKBOX
+}
+
+model Document {
+  id             Int          @id @default(autoincrement())
+  name           String
+  displayName    String
+  savedVariants  Json?        @default("[]")
+  savedResponses Json?        @default("[]")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now())
+  contentModelId Int
+  contentModel   ContentModel @relation(fields: [contentModelId], references: [id])
+  user           User         @relation(fields: [userId], references: [userId])
+  userId         String
 }

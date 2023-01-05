@@ -2,7 +2,7 @@ import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 import { workspacesRouter } from "./workspace";
 import { usersRouter } from "./user";
-import { contentTypesRouter } from "./content_type";
+import { contentModelsRouter } from "./content_model";
 import { promptsRouter } from "./prompt";
 
 export const appRouter = router({
@@ -19,7 +19,7 @@ export const appRouter = router({
     }),
   workspaces: workspacesRouter,
   users: usersRouter,
-  content_types: contentTypesRouter,
+  content_models: contentModelsRouter,
   prompts: promptsRouter,
 });
 // export type definition of API

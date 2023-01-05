@@ -2,22 +2,23 @@ import { useRouter } from "next/router";
 import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
 import ParameterForm from "@/components/forms/ParameterForm";
-import DefaultFields from "@/components/content-type/DefaultFields";
+import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
 import { useState } from "react";
 
 const NewPage = () => {
   const methods = useForm();
   const router = useRouter();
-  const contentTypeName = router.query.contentType as string;
+  const contentModelName = router.query.contentModel as string;
   const [variants, setVariants] = useState<string[]>([]);
 
-  const { data, error } = trpc.content_types.getContentTypeParameters.useQuery(
-    {
-      name: contentTypeName,
-    },
-    { enabled: !!contentTypeName }
-  );
+  const { data, error } =
+    trpc.content_models.getContentModelParameters.useQuery(
+      {
+        name: contentModelName,
+      },
+      { enabled: !!contentModelName }
+    );
 
   if (error) {
     toast.error("Oops, something went wrong");
@@ -29,7 +30,7 @@ const NewPage = () => {
   const onSubmit = (data: any) => {
     generateVariants.mutate(
       {
-        content_type: contentTypeName,
+        content_type: contentModelName,
         organization_name: data.organization_name,
         support_description: data.support_description,
         supported_project: data.supported_project,
@@ -46,7 +47,7 @@ const NewPage = () => {
     );
   };
 
-  const contentTypeNameFormatted = contentTypeName
+  const contentModelNameFormatted = contentModelName
     ?.replace(/_/g, " ")
     ?.replace(/-/g, " ")
     ?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1));
@@ -55,7 +56,7 @@ const NewPage = () => {
     <>
       <div className="bg-white max-w-3xl mx-auto rounded-t-md">
         <h1 className="text-2xl font-bold px-4 py-5 sm:p-6 flex items-center">
-          {contentTypeName ? contentTypeNameFormatted : "Loading..."}
+          {contentModelName ? contentModelNameFormatted : "Loading..."}
         </h1>
         <div className="border-t border-gray-200 p-0" />
       </div>
