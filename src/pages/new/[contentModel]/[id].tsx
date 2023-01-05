@@ -4,12 +4,9 @@ import { toast } from "react-hot-toast";
 import ParameterForm from "@/components/forms/ParameterForm";
 import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
-import { useState, useEffect, use } from "react";
-import { useUser } from "@clerk/clerk-react";
-import { useMount } from "react-use";
+import { useState } from "react";
 
 const NewPage = () => {
-  const { user } = useUser();
   const methods = useForm();
   const router = useRouter();
   const contentModelName = router.query.contentModel as string;
@@ -54,29 +51,6 @@ const NewPage = () => {
     ?.replace(/_/g, " ")
     ?.replace(/-/g, " ")
     ?.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1));
-
-  const createDocument = trpc.documents.createDocument.useMutation();
-
-  const handleCreateDocument = (contentModelId: number) => {
-    if (!user) {
-      toast.error("Sorry, something went wrong.");
-      return;
-    }
-
-    console.log("userEmail", user.emailAddresses[0]!.emailAddress);
-
-    createDocument.mutate({
-      userEmail: user.emailAddresses[0]!.emailAddress,
-      contentModelId: contentModelId,
-    });
-  };
-
-  // call handleCreateDocument on page load
-  useMount(() => {
-    if (data) {
-      handleCreateDocument(data.id);
-    }
-  });
 
   return (
     <>
