@@ -12,8 +12,27 @@ export const contentModelsRouter = router({
 
     return contentModels;
   }),
+  getContentModel: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const contentModel = await ctx.prisma.contentModel.findFirst({
+        where: {
+          id: input.id,
+        },
+        include: {
+          parameters: true,
+        },
+      });
+
+      return contentModel;
+    }),
   // get the parameters for a specific content type
-  getContentModelParameters: publicProcedure
+  // TODO: this should probably be moved to a new "parameters" router
+  getContentModelParametersByName: publicProcedure
     .input(
       z.object({
         name: z.string(),

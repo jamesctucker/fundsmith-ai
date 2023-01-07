@@ -37,7 +37,7 @@ const ContentModelList = () => {
       {contentModels.data?.map((contentModel) => (
         <li key={contentModel.id}>
           <a
-            className="card basis-1/4  rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:border-gray-400 cursor-pointer"
+            className="card basis-1/4 rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:border-gray-400 cursor-pointer"
             onClick={() =>
               handleCreateDocument(contentModel.name, contentModel.id)
             }
