@@ -6,10 +6,14 @@ export const documentsRouter = router({
   getDocument: protectedProcedure
     .input(
       z.object({
-        id: z.number(),
+        id: z.number().optional(),
       })
     )
     .query(async ({ ctx, input }) => {
+      if (!input.id) {
+        return;
+      }
+
       const document = await ctx.prisma.document.findUnique({
         where: {
           id: input.id,
@@ -67,5 +71,25 @@ export const documentsRouter = router({
       });
 
       return document;
+    }),
+  getDocuments: protectedProcedure
+    .input(
+      z.object({
+        userEmail: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const documents = await ctx.prisma.document.findMany({
+        where: {
+          owner: {
+            email: input.userEmail,
+          },
+        },
+        include: {
+          contentModel: true,
+        },
+      });
+
+      return documents;
     }),
 });

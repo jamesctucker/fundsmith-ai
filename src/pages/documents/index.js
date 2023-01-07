@@ -1,7 +1,9 @@
+import DocumentList from "@/components/documents/DocumentList";
+
 const DocumentsPage = () => {
   return (
     <div>
-      <h1>Documents</h1>
+      <DocumentList />
     </div>
   );
 };
