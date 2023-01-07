@@ -5,6 +5,7 @@ import ParameterForm from "@/components/forms/ParameterForm";
 import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
 import { useState } from "react";
+import { SavedResponses } from "@/types/types";
 
 const NewPage = () => {
   const methods = useForm();
@@ -35,26 +36,46 @@ const NewPage = () => {
       { enabled: !!documentId }
     );
 
-  console.log("documentData", documentData);
-
-  // Variant generation
+  const updateDocument = trpc.documents.updateDocument.useMutation();
   const generateVariants = trpc.prompts.generateVariants.useMutation();
 
   const onSubmit = (data: any) => {
-    generateVariants.mutate(
+    console.log("data", data);
+    // generateVariants.mutate(
+    //   {
+    //     content_type: contentModelName,
+    //     organization_name: data.organization_name,
+    //     support_description: data.support_description,
+    //     supported_project: data.supported_project,
+    //     tone: data.tone,
+    //     max_tokens: 1000,
+    //     n: Number(data.numberOfVariants),
+    //   },
+    //   {
+    //     onSuccess: (data) => {
+    //       setVariants(data.variants);
+    //     },
+    //   }
+    // );
+
+    const savedResponses: SavedResponses = {
+      organization_name: data.organization_name,
+      support_description: data.support_description,
+      supported_project: data.supported_project,
+      tone: data.tone,
+      numberOfVariants: data.numberOfVariants,
+    };
+
+    // update document
+    updateDocument.mutate(
       {
-        content_type: contentModelName,
-        organization_name: data.organization_name,
-        support_description: data.support_description,
-        supported_project: data.supported_project,
-        tone: data.tone,
-        max_tokens: 1000,
-        n: Number(data.numberOfVariants),
+        id: documentId,
+        name: data.documentName,
+        savedResponses: savedResponses,
       },
       {
-        onSuccess: (data) => {
-          console.log("data", data);
-          setVariants(data.variants);
+        onSuccess: () => {
+          toast.success("Document saved");
         },
       }
     );
@@ -79,7 +100,12 @@ const NewPage = () => {
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               {data && <DefaultFields documentData={documentData} />}
-              {data && <ParameterForm parameters={data.parameters} />}
+              {data && (
+                <ParameterForm
+                  parameters={data.parameters}
+                  documentData={documentData}
+                />
+              )}
               <button
                 className=" btn-primary mt-4 sm:mt-6 md:mt-8"
                 type="submit"

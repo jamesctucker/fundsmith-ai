@@ -44,4 +44,28 @@ export const documentsRouter = router({
 
       return document;
     }),
+  updateDocument: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        name: z.string(),
+        savedVariants: z.array(z.string()).optional(),
+        // TODO: this shoud be an array of objects with a specific shape and properties
+        savedResponses: z.record(z.any()).optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const document = await ctx.prisma.document.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          name: input.name,
+          savedVariants: input.savedVariants,
+          savedResponses: input.savedResponses,
+        },
+      });
+
+      return document;
+    }),
 });

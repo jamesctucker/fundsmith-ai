@@ -1,13 +1,14 @@
-import { Parameter, Prisma } from "@prisma/client";
+import { Parameter, Document, Prisma } from "@prisma/client";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import InputQualityBar from "../content-model/InputQualityBar";
 
 type ParameterProps = {
   parameters: Parameter[];
+  documentData?: Document | null;
 };
 
-const ParameterForm = ({ parameters }: ParameterProps) => {
+const ParameterForm = ({ parameters, documentData }: ParameterProps) => {
   const [characterCount, setCharacterCount] = useState<Record<string, number>>(
     {}
   );
@@ -49,6 +50,22 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
     }));
   };
 
+  // get savedResponses from documentData if it exists and map it to the related fields/parameters
+  const savedResponses = documentData?.savedResponses as Prisma.JsonObject;
+  const savedResponsesMap = Object.entries(savedResponses).map(
+    ([key, value]) => ({
+      [key]: value,
+    })
+  );
+  // find saved response for a given parameter
+  const findSavedResponse = (parameterName: string) => {
+    const savedResponse = savedResponsesMap.find(
+      (response) => Object.keys(response)[0] === parameterName
+    );
+
+    return savedResponse ? Object.values(savedResponse)[0] : "";
+  };
+
   return (
     <div>
       {parameters.map((parameter) => (
@@ -56,7 +73,7 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
           <div className="flex justify-between items-center">
             <label className="label block text-sm" htmlFor={parameter.name}>
               {parameter.displayLabel}{" "}
-              {parameter.isRequired && <span className="text-error">*</span>}
+              {parameter.required && <span className="text-error">*</span>}
             </label>
             {getRules(parameter, "maxLength") && (
               <span
@@ -73,10 +90,13 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
                 rows={5}
                 placeholder={parameter.placeholder!}
                 {...register(parameter.name, {
-                  required: parameter.isRequired,
+                  required: parameter.required,
                 })}
                 maxLength={getRules(parameter, "maxLength")}
                 onChange={getCharacterCount}
+                defaultValue={
+                  (findSavedResponse(parameter.name) as string) || ""
+                }
               />
               {errors[parameter.name]?.type === "required" && (
                 <p
@@ -99,10 +119,13 @@ const ParameterForm = ({ parameters }: ParameterProps) => {
                 id={parameter.name}
                 placeholder={parameter.placeholder!}
                 {...register(parameter.name, {
-                  required: parameter.isRequired,
+                  required: parameter.required,
                 })}
                 maxLength={getRules(parameter, "maxLength")}
                 onChange={getCharacterCount}
+                defaultValue={
+                  (findSavedResponse(parameter.name) as string) || ""
+                }
               />
               {errors[parameter.name]?.type === "required" && (
                 <p
