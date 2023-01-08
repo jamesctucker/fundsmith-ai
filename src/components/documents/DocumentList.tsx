@@ -1,6 +1,7 @@
 import { trpc } from "@/utils/trpc";
 import { useUser } from "@clerk/clerk-react";
 import DocumentCard from "@/components/documents/DocumentCard";
+import CreateNewDocumentMenu from "@/components/documents/CreateNewDocumentMenu";
 
 const DocumentList = () => {
   const { user } = useUser();
@@ -18,7 +19,7 @@ const DocumentList = () => {
           <h2 className="text-2xl font-bold pr-4 py-5 flex items-center">
             Documents
           </h2>
-          <button className="btn-primary">Create New Document</button>
+          <CreateNewDocumentMenu />
         </div>
         {/* render flex container of all documents - each document should be a card */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">

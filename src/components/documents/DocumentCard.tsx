@@ -9,8 +9,6 @@ type DocumentCardProps = {
 };
 
 const DocumentCard = ({ document }: DocumentCardProps) => {
-  console.log(document);
-
   const menuItems = [
     {
       name: "Delete",
