@@ -18,7 +18,7 @@ const DocumentList = () => {
           Documents
         </h1>
         {/* render flex container of all documents - each document should be a card */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
           {documents?.map((document) => (
             <DocumentCard key={document.id} document={document} />
           ))}

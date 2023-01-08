@@ -31,17 +31,20 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
         className="card basis-1/4 rounded-md border border-gray-300 bg-white shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:border-gray-400 cursor-pointer hover:shadow-md"
         key={document.id}
       >
-        <div className="document-card-header px-6 py-5">
-          <h2 className="font-semibold">{document.name}</h2>
+        <div className="document-card-header px-6 py-5 h-1/3 flex items-center">
+          {/* vertically align */}
+          <h2 className="font-semibold truncate" title={document.name}>
+            {document.name}
+          </h2>
         </div>
         {/* divider */}
         <div className="border-t border-gray-300" />
-        <div className="document-card-body px-6 py-5">
+        <div className="document-card-body px-6 py-5 h-1/3">
           <p className="text-sm">{document.contentModel.displayName}</p>
         </div>
         <div className="border-t border-gray-300" />
         {/* footer */}
-        <div className="document-card-footer px-6 py-5 flex justify-between">
+        <div className="document-card-footer px-6 py-5 flex justify-between h-1/3">
           <p className="text-sm italic">
             Updated: <span className="text-gray-400 ">1/22/22</span>
           </p>
