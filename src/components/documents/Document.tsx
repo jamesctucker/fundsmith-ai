@@ -64,7 +64,7 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
     );
   };
 
-  const contentModelNameFormatted = contentModelData.name
+  const contentModelNameFormatted = contentModelData?.name
     ?.replace(/_/g, " ")
     ?.replace(/-/g, " ")
     ?.replace(
@@ -76,7 +76,7 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
     <>
       <div className="bg-white max-w-3xl mx-auto rounded-t-md">
         <h1 className="text-2xl font-bold px-4 py-5 sm:p-6 flex items-center">
-          {contentModelData.name ? contentModelNameFormatted : "Loading..."}
+          {contentModelData?.name ? contentModelNameFormatted : "Loading..."}
         </h1>
         <div className="border-t border-gray-200 p-0" />
       </div>

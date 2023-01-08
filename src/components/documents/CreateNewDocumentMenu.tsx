@@ -28,7 +28,7 @@ export default function CreateNewDocumentMenu() {
   }
 
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left my-3 sm:my-0">
       <div>
         <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
           Create New Document
@@ -47,7 +47,7 @@ export default function CreateNewDocumentMenu() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {contentModels?.map((contentModel) => (
-            <div className="py-1">
+            <div className="py-1" key={`cm` + contentModel.id}>
               <Menu.Item>
                 {({ active }) => (
                   <a

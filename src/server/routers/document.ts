@@ -22,6 +22,60 @@ export const documentsRouter = router({
 
       return document;
     }),
+  getDocumentsBySearch: protectedProcedure
+    .input(
+      z.object({
+        searchText: z.string().optional(),
+        userEmail: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      if (!input.userEmail) {
+        return;
+      }
+
+      if (!input.searchText) {
+        const documents = await ctx.prisma.document.findMany({
+          where: {
+            owner: {
+              email: input.userEmail,
+            },
+          },
+          orderBy: {
+            contentModel: {
+              name: "asc",
+            },
+          },
+          include: {
+            contentModel: true,
+          },
+        });
+        return documents;
+      }
+      // if a name is provided, return all documents for the user that are associated with that contentModel
+      if (input.searchText) {
+        const documents = await ctx.prisma.document.findMany({
+          where: {
+            name: {
+              search: input.searchText,
+              mode: "insensitive",
+            },
+            owner: {
+              email: input.userEmail,
+            },
+          },
+          orderBy: {
+            contentModel: {
+              name: "asc",
+            },
+          },
+          include: {
+            contentModel: true,
+          },
+        });
+        return documents;
+      }
+    }),
   createDocument: protectedProcedure
     .input(
       z.object({
