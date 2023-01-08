@@ -1,6 +1,6 @@
 import { trpc } from "@/utils/trpc";
 import { useUser } from "@clerk/clerk-react";
-import Link from "next/link";
+import DocumentCard from "@/components/documents/DocumentCard";
 
 const DocumentList = () => {
   const { user } = useUser();
@@ -18,18 +18,11 @@ const DocumentList = () => {
           Documents
         </h1>
         {/* render flex container of all documents - each document should be a card */}
-        <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {documents?.map((document) => (
-            <li
-              className="card basis-1/4 rounded-md border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:border-gray-400 cursor-pointer"
-              key={document.id}
-            >
-              <Link href={`/documents/${document.id}`}>
-                <p>{document.name}</p>
-              </Link>
-            </li>
+            <DocumentCard key={document.id} document={document} />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

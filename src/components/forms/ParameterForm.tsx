@@ -29,6 +29,7 @@ const ParameterForm = ({ parameters, documentData }: ParameterProps) => {
 
   // get character count for textareas
   // TODO: explore refactoring for better performance
+  // Idea: run this only when a user has paused typing for a certain amount of time - might include a debouncer
   const getCharacterCount = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

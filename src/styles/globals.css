@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+  background-color: black;
+} */
+
 @font-face {
   font-family: "Cardo";
   src: url("/fonts/Cardo-Regular.ttf");
@@ -27,5 +31,10 @@
 
   .quality-badge {
     @apply inline-flex items-center rounded-md px-2.5 py-0.5 text-sm font-medium;
+  }
+
+  .btn-ghost {
+    /* button without outline or background */
+    @apply inline-flex items-center border border-transparent hover:bg-transparent;
   }
 }
