@@ -161,4 +161,49 @@ export const documentsRouter = router({
 
       return document;
     }),
+  saveVariant: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        variant: z.string(),
+        existingSavedVariants: z.array(z.string()).optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const document = await ctx.prisma.document.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          savedVariants: [
+            input.variant,
+            ...(input.existingSavedVariants || []),
+          ],
+        },
+      });
+
+      return document;
+    }),
+  unsaveVariant: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        variant: z.string(),
+        existingSavedVariants: z.array(z.string()).optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const document = await ctx.prisma.document.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          savedVariants: input.existingSavedVariants?.filter(
+            (v) => v !== input.variant
+          ),
+        },
+      });
+
+      return document;
+    }),
 });

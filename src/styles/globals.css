@@ -39,6 +39,6 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center border border-base-100 hover:bg-base-100 hover:text-primary;
+    @apply inline-flex justify-center rounded-md border border-gray-300 bg-transparent hover:bg-primary px-4 py-2 text-sm font-medium text-neutral focus:outline-none focus:ring-2 focus:ring-primary;
   }
 }

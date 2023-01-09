@@ -3,7 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import DocumentCard from "@/components/documents/DocumentCard";
 import CreateNewDocumentMenu from "@/components/documents/CreateNewDocumentMenu";
 import DocumentSearch from "@/components/documents/DocumentSearch";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 const DocumentList = () => {

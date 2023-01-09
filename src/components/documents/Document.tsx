@@ -1,11 +1,13 @@
 import ParameterForm from "@/components/forms/ParameterForm";
 import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
-import { Document } from "@prisma/client";
+import { Document, Prisma } from "@prisma/client";
 import { trpc } from "@/utils/trpc";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { SavedResponses } from "@/types/types";
+import NewVariants from "@/components/documents/NewVariants";
+import VariantTabs from "@/components/documents/VariantTabs";
 
 type DocumentProps = {
   documentData: Document;
@@ -15,14 +17,13 @@ type DocumentProps = {
 
 const Document = ({ documentData, contentModelData }: DocumentProps) => {
   const methods = useForm();
+
   const [variants, setVariants] = useState<string[]>([]);
 
   const updateDocument = trpc.documents.updateDocument.useMutation();
   const generateVariants = trpc.prompts.generateVariants.useMutation();
 
   const onSubmit = (data: any) => {
-    console.log("data", data);
-
     generateVariants.mutate(
       {
         content_type: contentModelData.name,
@@ -64,6 +65,8 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
     );
   };
 
+  const savedVariants = documentData?.savedVariants as Prisma.JsonObject;
+
   const contentModelNameFormatted = contentModelData?.name
     ?.replace(/_/g, " ")
     ?.replace(/-/g, " ")
@@ -72,19 +75,15 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
       (txt: any) => txt.charAt(0).toUpperCase() + txt.substr(1)
     );
 
-  const getVariantWordCount = (variant: string) => {
-    return variant.split(" ").length;
-  };
-
   return (
     <>
-      <div className="bg-white max-w-3xl mx-auto rounded-t-md shadow-lg">
+      <div className="bg-white max-w-3xl mx-auto rounded-t-md border border-b-0 border-gray-300">
         <h1 className="text-2xl font-bold px-4 py-5 sm:p-6 flex items-center">
           {contentModelData?.name ? contentModelNameFormatted : "Loading..."}
         </h1>
         <div className="border-t border-gray-200 p-0" />
       </div>
-      <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto shadow-lg">
+      <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto border border-t-0 border-gray-300">
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -105,31 +104,10 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
           </FormProvider>
         </div>
       </div>
-      {/* TODO: move to separate component */}
-      {/* list of variation results */}
-      {variants.length > 0 && (
-        <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto shadow-lg">
-          {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
-          {generateVariants.isLoading && <p>Loading...</p>}
-
-          {variants.map((variant, index) => (
-            <li key={index} className="hover:bg-base-100">
-              <div className="px-4 py-5 sm:p-6 whitespace-pre-line ">
-                {variant}
-              </div>
-              {/* word count */}
-              <div className="px-4 py-5 sm:p-6">
-                <span className="text-gray-500 text-xs">
-                  {getVariantWordCount(variant)} words
-                </span>
-              </div>
-              {/* divider */}
-              {index !== variants.length - 1 && (
-                <div className="border-t border-gray-200 p-0" />
-              )}
-            </li>
-          ))}
-        </ul>
+      {(variants?.length > 0 || savedVariants) && (
+        <div className="max-w-3xl mx-auto">
+          <VariantTabs documentData={documentData} variants={variants} />
+        </div>
       )}
     </>
   );
