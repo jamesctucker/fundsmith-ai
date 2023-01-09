@@ -38,14 +38,14 @@ const DocumentList = () => {
   }, [searchText]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-w-5xl mx-auto">
       <div className="document-list-header flex flex-col sm:flex-row items-center justify-between ">
         <h2 className="text-2xl font-bold pr-4 py-3 mr-4 flex items-center">
           Documents
         </h2>
         <CreateNewDocumentMenu />
       </div>
-      <div className="my-3">
+      <div className="document-list-search sm:mt-4">
         <DocumentSearch handleSearchTermSubmit={setSearchText} />
       </div>
       {noSearchResults && (
@@ -57,7 +57,7 @@ const DocumentList = () => {
         </div>
       )}
       {/* render flex container of all documents - each document should be a card */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-3 sm:mt-4">
         {documents &&
           documents.map((document) => (
             <DocumentCard key={document.id} document={document} />

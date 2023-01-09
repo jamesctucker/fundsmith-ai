@@ -13,14 +13,14 @@ export default function DocumentSearch({ handleSearchTermSubmit }: Props) {
       <label htmlFor="search" className="sr-only">
         Document Search
       </label>
-      <div className="flex rounded-md shadow-sm">
+      <div className="flex rounded-md">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <input
             type="text"
             name="search"
             id="search"
-            className="block w-full rounded-none rounded-l-md border-gray-300 focus:border-primary focus:ring-primary sm:text-sm"
-            placeholder="Search for a document"
+            className="block w-full rounded-none rounded-l-md border-gray-300 bg-gray-100 focus:border-primary focus:ring-primary sm:text-sm px-4"
+            placeholder="Search documents"
             onChange={(e) => {
               setSearchTerm(e.currentTarget.value);
             }}
@@ -38,7 +38,7 @@ export default function DocumentSearch({ handleSearchTermSubmit }: Props) {
         </div>
         <button
           type="button"
-          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium text-neutral focus:border-primary focus:ring-primary"
           onClick={(e) => {
             handleSearchTermSubmit(searchTerm);
           }}

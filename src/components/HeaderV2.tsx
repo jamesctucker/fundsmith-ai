@@ -39,11 +39,11 @@ export default function HeaderV2() {
   //   ];
 
   return (
-    <Disclosure as="nav" className="bg-primary shadow-sm">
+    <Disclosure as="nav" className="bg-primary">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
-            <div className="relative flex h-14 justify-between">
+            <div className="relative flex h-8 justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -58,7 +58,7 @@ export default function HeaderV2() {
               <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <Link
-                    className="font-bold text-xl normal-case text-base-100 hover:text-primary hover:bg-base-100 rounded-md py-2 px-4"
+                    className="font-bold text-xl normal-case text-base-100 hover:text-primary hover:bg-base-100 rounded-md py-1 px-4"
                     href="/"
                   >
                     fundsmith
@@ -109,7 +109,7 @@ export default function HeaderV2() {
                           </p>
                           {user.profileImageUrl ? (
                             <img
-                              className="h-9 w-9 rounded-full"
+                              className="h-7 w-7 rounded-full"
                               src={user.profileImageUrl}
                               alt="profile picture"
                             />

@@ -17,16 +17,16 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          // Y in Mn Blue
-          primary: "#162E37",
+          // Verdigris
+          primary: "#00ABB3",
           // Maximum Blue Green
-          secondary: "#3FC1C9",
+          secondary: "#3C4048",
           // Frenc
-          accent: "#FC5185",
-          // Eerie Black
-          neutral: "#131516",
-          // Cultured
-          "base-100": "#F5F5F5",
+          accent: "#D8315B",
+          // Rich Black
+          neutral: "#042A2B",
+          // White
+          "base-100": "#FFFFFF",
           // Maximum Blue Green
           info: "#3FC1C9",
           //  Spanish Viridian

@@ -74,13 +74,13 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
   return (
     <>
-      <div className="bg-white max-w-3xl mx-auto rounded-t-md">
+      <div className="bg-white max-w-3xl mx-auto rounded-t-md shadow-lg">
         <h1 className="text-2xl font-bold px-4 py-5 sm:p-6 flex items-center">
           {contentModelData?.name ? contentModelNameFormatted : "Loading..."}
         </h1>
         <div className="border-t border-gray-200 p-0" />
       </div>
-      <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto shadow-md">
+      <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto shadow-lg">
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -104,7 +104,7 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
       {/* TODO: move to separate component */}
       {/* list of variation results */}
       {variants.length > 0 && (
-        <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto shadow-md">
+        <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto shadow-lg">
           {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
           {generateVariants.isLoading && <p>Loading...</p>}
 
