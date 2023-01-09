@@ -5,7 +5,6 @@ import CreateNewDocumentMenu from "@/components/documents/CreateNewDocumentMenu"
 import DocumentSearch from "@/components/documents/DocumentSearch";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { FolderMinusIcon } from "@heroicons/react/24/outline";
 
 const DocumentList = () => {
   const { user } = useUser();
@@ -14,14 +13,13 @@ const DocumentList = () => {
   const {
     data: documents,
     error: getDocumentError,
-    refetch,
     isFetched,
   } = trpc.documents.getDocumentsBySearch.useQuery(
     {
       searchText: searchText,
       userEmail: user ? user.emailAddresses[0]!.emailAddress : "",
     },
-    { enabled: false }
+    { enabled: !!user }
   );
 
   if (getDocumentError) {
@@ -30,12 +28,6 @@ const DocumentList = () => {
 
   const noSearchResults =
     isFetched && searchText !== "" && documents?.length === 0;
-
-  useEffect(() => {
-    if (user) {
-      refetch();
-    }
-  }, [searchText]);
 
   return (
     <div className="flex flex-col max-w-5xl mx-auto">

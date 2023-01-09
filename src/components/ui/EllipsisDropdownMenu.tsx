@@ -9,13 +9,12 @@ function classNames(...classes: any) {
 type MenuItem = {
   name: string;
   href?: string;
-  icon?: string;
   action?: string;
 };
 
 type Props = {
   menuItems: MenuItem[];
-  onClick?: () => void;
+  onClick?: (action: string) => void;
 };
 
 const Dropdown = ({ menuItems, onClick }: Props) => {
@@ -51,7 +50,7 @@ const Dropdown = ({ menuItems, onClick }: Props) => {
                       onClick={(e) => {
                         if (onClick && item.action) {
                           e.preventDefault();
-                          onClick();
+                          onClick(item.action);
                         }
                       }}
                       href={item.href ? item.href : undefined}

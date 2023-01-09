@@ -1,25 +1,44 @@
-// import { Document } from "@prisma/client";
 import Link from "next/link";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import EllipsisDropdownMenu from "@/components/ui/EllipsisDropdownMenu";
+import { trpc } from "@/utils/trpc";
+import { toast } from "react-hot-toast";
 
 type DocumentCardProps = {
   // TODO: figure out how to type Prisma associations
   document: any;
 };
 
+const DropDownMenuActions = {
+  DELETE: "delete",
+} as const;
+
 const DocumentCard = ({ document }: DocumentCardProps) => {
+  const utils = trpc.useContext();
   const menuItems = [
     {
       name: "Delete",
       href: `/documents/${document.id}`,
-      action: "delete",
-      icon: "trash",
+      action: DropDownMenuActions.DELETE,
     },
   ];
 
-  const handleDelete = () => {
-    console.log("delete");
+  const deleteDocumentMutation = trpc.documents.deleteDocument.useMutation({
+    onSuccess: () => {
+      utils.documents.getDocumentsBySearch.invalidate();
+    },
+    onError: () => {
+      toast.error("Unable to delete journey");
+    },
+  });
+
+  const handleMenuClick = (action: string) => {
+    switch (action) {
+      case DropDownMenuActions.DELETE:
+        deleteDocumentMutation.mutate({ id: document.id });
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -44,7 +63,10 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
           <p className="text-sm italic">
             Updated: <span className="text-gray-400 ">1/22/22</span>
           </p>
-          <EllipsisDropdownMenu menuItems={menuItems} onClick={handleDelete} />
+          <EllipsisDropdownMenu
+            menuItems={menuItems}
+            onClick={handleMenuClick}
+          />
         </div>
       </Link>
     </>

@@ -146,4 +146,19 @@ export const documentsRouter = router({
 
       return documents;
     }),
+  deleteDocument: protectedProcedure
+    .input(
+      z.object({
+        id: z.number(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const document = await ctx.prisma.document.delete({
+        where: {
+          id: input.id,
+        },
+      });
+
+      return document;
+    }),
 });
