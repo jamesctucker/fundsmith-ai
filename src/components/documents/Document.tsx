@@ -72,6 +72,10 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
       (txt: any) => txt.charAt(0).toUpperCase() + txt.substr(1)
     );
 
+  const getVariantWordCount = (variant: string) => {
+    return variant.split(" ").length;
+  };
+
   return (
     <>
       <div className="bg-white max-w-3xl mx-auto rounded-t-md shadow-lg">
@@ -110,9 +114,14 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
           {variants.map((variant, index) => (
             <li key={index} className="hover:bg-base-100">
-              {/* preserve whitespace/formatting */}
               <div className="px-4 py-5 sm:p-6 whitespace-pre-line ">
                 {variant}
+              </div>
+              {/* word count */}
+              <div className="px-4 py-5 sm:p-6">
+                <span className="text-gray-500 text-xs">
+                  {getVariantWordCount(variant)} words
+                </span>
               </div>
               {/* divider */}
               {index !== variants.length - 1 && (
