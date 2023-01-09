@@ -110,7 +110,10 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
           {variants.map((variant, index) => (
             <li key={index} className="hover:bg-base-100">
-              <div className="px-4 py-5 sm:p-6">{variant}</div>
+              {/* preserve whitespace/formatting */}
+              <div className="px-4 py-5 sm:p-6 whitespace-pre-line ">
+                {variant}
+              </div>
               {/* divider */}
               {index !== variants.length - 1 && (
                 <div className="border-t border-gray-200 p-0" />
