@@ -2,6 +2,8 @@ import Link from "next/link";
 import EllipsisDropdownMenu from "@/components/ui/EllipsisDropdownMenu";
 import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
+import DeleteDocumentConfirmModal from "./DeleteDocumentConfirmModal";
 
 type DocumentCardProps = {
   // TODO: figure out how to type Prisma associations
@@ -14,6 +16,8 @@ const DropDownMenuActions = {
 
 const DocumentCard = ({ document }: DocumentCardProps) => {
   const utils = trpc.useContext();
+  const [modalOpen, setModalOpen] = useState(false);
+
   const menuItems = [
     {
       name: "Delete",
@@ -27,17 +31,13 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
       utils.documents.getDocumentsBySearch.invalidate();
     },
     onError: () => {
-      toast.error("Unable to delete journey");
+      toast.error("Unable to delete document");
     },
   });
 
   const handleMenuClick = (action: string) => {
-    switch (action) {
-      case DropDownMenuActions.DELETE:
-        deleteDocumentMutation.mutate({ id: document.id });
-        break;
-      default:
-        break;
+    if (action === DropDownMenuActions.DELETE) {
+      setModalOpen(true);
     }
   };
 
@@ -49,7 +49,6 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
         key={document.id}
       >
         <div className="document-card-header px-6 py-5 h-1/3 flex items-center">
-          {/* vertically align */}
           <h2 className="font-semibold truncate" title={document.name}>
             {document.name}
           </h2>
@@ -66,6 +65,14 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
           <EllipsisDropdownMenu
             menuItems={menuItems}
             onClick={handleMenuClick}
+          />
+          <DeleteDocumentConfirmModal
+            isOpen={modalOpen}
+            onDismiss={() => setModalOpen(false)}
+            onConfirm={() =>
+              document && deleteDocumentMutation.mutate({ id: document.id })
+            }
+            isLoading={deleteDocumentMutation.isLoading}
           />
         </div>
       </Link>
