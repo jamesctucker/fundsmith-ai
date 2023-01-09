@@ -4,6 +4,7 @@ import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import DeleteDocumentConfirmModal from "./DeleteDocumentConfirmModal";
+import { DocumentIcon } from "@heroicons/react/24/outline";
 
 type DocumentCardProps = {
   // TODO: figure out how to type Prisma associations
@@ -59,9 +60,7 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
         <div className="border-t border-gray-100" />
         {/* footer */}
         <div className="document-card-footer px-6 py-5 flex justify-between h-1/3">
-          <p className="text-sm italic">
-            Updated: <span className="text-gray-400 ">1/22/22</span>
-          </p>
+          <DocumentIcon className="h-6 w-6 text-neutral" />
           <EllipsisDropdownMenu
             menuItems={menuItems}
             onClick={handleMenuClick}
