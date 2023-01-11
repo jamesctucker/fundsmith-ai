@@ -27,9 +27,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         {...pageProps}
         appearance={{
           variables: {
-            colorPrimary: "#2B7C5F",
-            colorDanger: "#C5283D",
-            colorSuccess: "#2B7C5F",
+            colorPrimary: "#00ABB3",
+            colorDanger: "#FC5185",
+            colorSuccess: "#57886C",
             colorBackground: "#FFFFFF",
             fontFamily: "Inter, sans-serif",
             borderRadius: "0.5rem",
