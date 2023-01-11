@@ -22,6 +22,29 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
+        {/* o.g */}
+        <meta property="og:title" content="Fundsmith AI" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://app.fundsmith.ai/" />
+        {/* <meta property="og:image" content="/images/og-image.png" />
+        <meta property="og:image:alt" content="Fundsmith AI" /> */}
+        <meta
+          property="og:description"
+          content="An A.I. writing assistant for fundraisers."
+        />
+
+        {/* TODO: implement twitter meta data */}
+        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@fundsmithai" />
+        <meta name="twitter:creator" content="@fundsmithai" />
+        <meta name="twitter:title" content="Fundsmith AI" />
+        <meta
+          name="twitter:description"
+          content="An A.I. writing assistant for fundraisers."
+        /> */}
+        {/* <meta name="twitter:image" content="/images/og-image.png" /> */}
       </Head>
       <ClerkProvider
         {...pageProps}
