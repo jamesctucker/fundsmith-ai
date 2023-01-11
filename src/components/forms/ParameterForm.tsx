@@ -2,6 +2,7 @@ import { Parameter, Document, Prisma } from "@prisma/client";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import InputQualityBar from "../content-model/InputQualityBar";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type ParameterProps = {
   parameters: Parameter[];
@@ -12,6 +13,8 @@ const ParameterForm = ({ parameters, documentData }: ParameterProps) => {
   const [characterCount, setCharacterCount] = useState<Record<string, number>>(
     {}
   );
+
+  const [parent] = useAutoAnimate<HTMLDivElement>();
 
   const {
     register,
@@ -68,7 +71,7 @@ const ParameterForm = ({ parameters, documentData }: ParameterProps) => {
   };
 
   return (
-    <div>
+    <div ref={parent}>
       {parameters.map((parameter) => (
         <div key={parameter.id}>
           <div className="flex justify-between items-center">

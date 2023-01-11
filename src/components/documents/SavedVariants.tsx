@@ -1,6 +1,7 @@
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/20/solid";
 import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type Props = {
   variants: string[];
@@ -9,6 +10,7 @@ type Props = {
 
 const SavedVariants = ({ variants, documentData }: Props) => {
   const utils = trpc.useContext();
+  const [parent] = useAutoAnimate<HTMLUListElement>();
   //   TODO: move to reusable hook
   const unsaveVariant = trpc.documents.unsaveVariant.useMutation({
     onSuccess: () => {
@@ -26,7 +28,10 @@ const SavedVariants = ({ variants, documentData }: Props) => {
 
   const savedVariants: string[] = documentData?.savedVariants;
   return (
-    <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto border border-gray-300">
+    <ul
+      className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto border border-gray-300"
+      ref={parent}
+    >
       {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
 
       {savedVariants.map((variant, index) => (

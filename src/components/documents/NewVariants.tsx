@@ -1,8 +1,8 @@
 import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
-import { Prisma } from "@prisma/client";
 import { HeartIcon as OutlinedHeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/20/solid";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type NewVariantsProps = {
   variants: string[];
@@ -11,6 +11,7 @@ type NewVariantsProps = {
 
 const newVariants = ({ variants, documentData }: NewVariantsProps) => {
   const utils = trpc.useContext();
+  const [parent] = useAutoAnimate<HTMLUListElement>();
 
   //   TODO: also move to reusable hook or util/helper
   const getVariantWordCount = (variant: string) => {
@@ -45,7 +46,10 @@ const newVariants = ({ variants, documentData }: NewVariantsProps) => {
     },
   });
   return (
-    <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto border border-gray-300">
+    <ul
+      className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto border border-gray-300"
+      ref={parent}
+    >
       {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
 
       {variants.map((variant, index) => (
