@@ -1,6 +1,5 @@
 import Wrapper from "@/components/Wrapper";
 import { useUser } from "@clerk/clerk-react";
-import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 import ContentModelList from "@/components/content-model/ContentModelList";
 
 export default function Home() {
@@ -9,7 +8,7 @@ export default function Home() {
   return (
     <Wrapper title={"Dashboard"}>
       {/* <SignedIn> */}
-      <div className="flex flex-col justify-center p-4 max-w-5xl mx-auto">
+      <div className="flex flex-col justify-center p-4 max-w-6xl mx-auto">
         <h1 className="text-2xl text-center text-serif font-bold">
           👋 Hello, {user?.firstName}! What would you like to create today?
         </h1>

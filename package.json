@@ -20,6 +20,7 @@
     "@clerk/clerk-react": "^4.7.0",
     "@clerk/nextjs": "^4.6.15",
     "@clerk/types": "^3.23.0",
+    "@formkit/auto-animate": "^1.0.0-beta.5",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@next/font": "13.1.0",
