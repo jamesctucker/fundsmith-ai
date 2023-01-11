@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {

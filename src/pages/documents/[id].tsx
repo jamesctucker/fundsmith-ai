@@ -1,6 +1,7 @@
 import { trpc } from "@/utils/trpc";
 import Document from "@/components/documents/Document";
 import { useRouter } from "next/router";
+import Wrapper from "@/components/Wrapper";
 
 const DocumentPage = () => {
   const router = useRouter();
@@ -24,12 +25,14 @@ const DocumentPage = () => {
 
   return (
     <div>
-      {documentData && contentModelData && (
-        <Document
-          documentData={documentData}
-          contentModelData={contentModelData}
-        />
-      )}
+      <Wrapper title={documentData?.name ? documentData.name : "Your document"}>
+        {documentData && contentModelData && (
+          <Document
+            documentData={documentData}
+            contentModelData={contentModelData}
+          />
+        )}
+      </Wrapper>
     </div>
   );
 };
