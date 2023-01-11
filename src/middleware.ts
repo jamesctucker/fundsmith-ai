@@ -3,7 +3,6 @@ import type { NextRequest } from "next/server";
 import { withClerkMiddleware, getAuth } from "@clerk/nextjs/server";
 
 const publicPaths = [
-  "/",
   "/auth/signin*",
   "/auth/signup*",
   "/auth/signout*",
