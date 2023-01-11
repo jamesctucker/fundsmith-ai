@@ -3,7 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import DocumentCard from "@/components/documents/DocumentCard";
 import CreateNewDocumentMenu from "@/components/documents/CreateNewDocumentMenu";
 import DocumentSearch from "@/components/documents/DocumentSearch";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
@@ -34,7 +34,7 @@ const DocumentList = () => {
     isFetched && searchText !== "" && documents?.length === 0;
 
   return (
-    <div className="flex flex-col max-w-5xl mx-auto">
+    <div className="flex flex-col max-w-6xl mx-auto">
       <div className="document-list-header flex flex-col sm:flex-row items-center justify-between ">
         <h2 className="text-2xl font-bold pr-4 py-3 mr-4 flex items-center">
           Documents
