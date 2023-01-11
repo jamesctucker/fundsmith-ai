@@ -36,15 +36,6 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
 
         {/* TODO: implement twitter meta data */}
-        {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@fundsmithai" />
-        <meta name="twitter:creator" content="@fundsmithai" />
-        <meta name="twitter:title" content="Fundsmith AI" />
-        <meta
-          name="twitter:description"
-          content="An A.I. writing assistant for fundraisers."
-        /> */}
-        {/* <meta name="twitter:image" content="/images/og-image.png" /> */}
       </Head>
       <ClerkProvider
         {...pageProps}
