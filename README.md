@@ -9,6 +9,8 @@ This app comprises of the following stack:
 - Postgres
 - Clerk auth
 
+The web app and its Postgres service are both hosted on [Railway](https://railway.app/).
+
 ## Get up and running on your machine
 
 1. Clone the repo
@@ -27,3 +29,20 @@ TODO: explain why webhooks from Clerk.dev are needed.
 - User created webhook
   - inserts a copy of the Clerk user object into our db
   - creates a default workspace for the user
+
+Note: The [Railway CLI(https://docs.railway.app/develop/cli) is required for the following sections
+
+## Staging
+
+To deploy:
+`railway up`
+
+To run migrations:
+`railway run yarn generate`, then `railway run yarn migrate:deploy`
+
+To seed the database:
+`railway run yarn seed`
+
+## Production
+
+Same as staging at this point.

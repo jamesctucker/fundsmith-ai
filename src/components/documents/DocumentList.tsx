@@ -5,10 +5,14 @@ import CreateNewDocumentMenu from "@/components/documents/CreateNewDocumentMenu"
 import DocumentSearch from "@/components/documents/DocumentSearch";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const DocumentList = () => {
   const { user } = useUser();
   const [searchText, setSearchText] = useState("");
+  const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>({
+    duration: 300,
+  });
 
   const {
     data: documents,
@@ -30,7 +34,7 @@ const DocumentList = () => {
     isFetched && searchText !== "" && documents?.length === 0;
 
   return (
-    <div className="flex flex-col max-w-5xl mx-auto">
+    <div className="flex flex-col max-w-6xl mx-auto">
       <div className="document-list-header flex flex-col sm:flex-row items-center justify-between ">
         <h2 className="text-2xl font-bold pr-4 py-3 mr-4 flex items-center">
           Documents
@@ -49,7 +53,10 @@ const DocumentList = () => {
         </div>
       )}
       {/* render flex container of all documents - each document should be a card */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-3 sm:mt-4">
+      <div
+        className="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-3 sm:mt-4"
+        ref={parent}
+      >
         {documents &&
           documents.map((document) => (
             <DocumentCard key={document.id} document={document} />

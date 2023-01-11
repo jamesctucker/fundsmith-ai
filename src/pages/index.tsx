@@ -7,7 +7,8 @@ export default function Home() {
 
   return (
     <Wrapper title={"Dashboard"}>
-      <div className="flex flex-col justify-center p-4 max-w-5xl mx-auto">
+      {/* <SignedIn> */}
+      <div className="flex flex-col justify-center p-4 max-w-6xl mx-auto">
         <h1 className="text-2xl text-center text-serif font-bold">
           👋 Hello, {user?.firstName}! What would you like to create today?
         </h1>

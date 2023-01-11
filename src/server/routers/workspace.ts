@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { router, publicProcedure } from "../trpc";
+import { router, protectedProcedure } from "../trpc";
 
 export const workspacesRouter = router({
-  createWorkspace: publicProcedure
+  createWorkspace: protectedProcedure
     .input(
       z.object({
         name: z.string(),

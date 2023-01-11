@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { router, publicProcedure } from "../trpc";
+import { router, protectedProcedure } from "../trpc";
 
 export const usersRouter = router({
-  upsertUser: publicProcedure
+  upsertUser: protectedProcedure
     .input(
       z.object({
         userId: z.string(),

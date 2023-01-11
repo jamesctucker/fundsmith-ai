@@ -7,17 +7,6 @@ import { promptsRouter } from "./prompt";
 import { documentsRouter } from "./document";
 
 export const appRouter = router({
-  hello: publicProcedure
-    .input(
-      z.object({
-        text: z.string(),
-      })
-    )
-    .query(({ input }) => {
-      return {
-        greeting: `hello ${input.text}`,
-      };
-    }),
   workspaces: workspacesRouter,
   users: usersRouter,
   content_models: contentModelsRouter,

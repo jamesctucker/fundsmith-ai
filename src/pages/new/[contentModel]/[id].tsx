@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { trpc } from "@/utils/trpc";
 import { toast } from "react-hot-toast";
 import Document from "@/components/documents/Document";
+import Wrapper from "@/components/Wrapper";
 
 const NewPage = () => {
   const router = useRouter();
@@ -32,12 +33,18 @@ const NewPage = () => {
 
   return (
     <>
-      {documentData && (
-        <Document
-          documentData={documentData}
-          contentModelData={contentModelData}
-        />
-      )}
+      <Wrapper
+        title={
+          contentModelData?.name ? contentModelData.displayName : "New document"
+        }
+      >
+        {documentData && (
+          <Document
+            documentData={documentData}
+            contentModelData={contentModelData}
+          />
+        )}
+      </Wrapper>
     </>
   );
 };

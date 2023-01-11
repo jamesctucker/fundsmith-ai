@@ -1,9 +1,8 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../trpc";
+import { router, protectedProcedure } from "../trpc";
 
 export const contentModelsRouter = router({
-  //   query that returns the entire list of active content types
-  getContentModels: publicProcedure.query(async ({ ctx }) => {
+  getContentModels: protectedProcedure.query(async ({ ctx }) => {
     const contentModels = await ctx.prisma.contentModel.findMany({
       where: {
         active: true,
@@ -12,7 +11,7 @@ export const contentModelsRouter = router({
 
     return contentModels;
   }),
-  getContentModel: publicProcedure
+  getContentModel: protectedProcedure
     .input(
       z.object({
         id: z.number(),
@@ -30,9 +29,8 @@ export const contentModelsRouter = router({
 
       return contentModel;
     }),
-  // get the parameters for a specific content type
   // TODO: this should probably be moved to a new "parameters" router
-  getContentModelParametersByName: publicProcedure
+  getContentModelParametersByName: protectedProcedure
     .input(
       z.object({
         name: z.string(),
