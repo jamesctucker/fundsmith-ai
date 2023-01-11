@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "../components/Layout";
+import Maintenance from "@/components/Maintenance";
 import { ClerkProvider } from "@clerk/nextjs";
 import { useEffect } from "react";
 import "../styles/globals.css";
@@ -50,10 +51,14 @@ const App = ({ Component, pageProps }: AppProps) => {
           },
         }}
       >
-        <Layout>
-          <Component {...pageProps} />
-          <Toaster position="bottom-left" reverseOrder={true} />
-        </Layout>
+        {process.env.NEXT_PUBLIC_SHOW_MAINTENANCE_PAGE === "true" ? (
+          <Maintenance />
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+            <Toaster position="bottom-left" reverseOrder={true} />
+          </Layout>
+        )}
       </ClerkProvider>
     </>
   );
