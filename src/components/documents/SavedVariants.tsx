@@ -26,7 +26,7 @@ const SavedVariants = ({ variants, documentData }: Props) => {
 
   const savedVariants: string[] = documentData?.savedVariants;
   return (
-    <ul className="mt-4 rounded-md overflow-visible bg-white max-w-3xl mx-auto border border-gray-300">
+    <ul className="mt-4 rounded-md overflow-visible bg-base-100 max-w-3xl mx-auto border border-gray-300 shadow-md">
       {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
 
       {savedVariants.map((variant, index) => (

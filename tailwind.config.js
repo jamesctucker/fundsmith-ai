@@ -1,11 +1,14 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-    fontFamily: {
-      sans: ["MerriweatherSans", "sans-serif"],
-      serif: ["Cardo", "serif"],
+    extend: {
+      fontFamily: {
+        serif: ["var(--font-literata)", ...fontFamily.serif],
+      },
     },
   },
   plugins: [
@@ -17,24 +20,24 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          // Verdigris
-          primary: "#00ABB3",
-          // Maximum Blue Green
-          secondary: "#3C4048",
+          // Midnight Green
+          primary: "#023D45",
+          // Viridian Green
+          secondary: "#0CA4A5",
           // Frenc
           accent: "#D8315B",
-          // Rich Black
-          neutral: "#042A2B",
-          // White
-          "base-100": "#FFFFFF",
+          // Dark Jungle Green
+          neutral: "#022327",
+          // Cultured
+          "base-100": "#F0F2EF",
           // Maximum Blue Green
           info: "#3FC1C9",
-          //  Spanish Viridian
-          success: "#57886C",
-          // Honey Yellow
-          warning: "#FFB30F",
-          // French Rose
-          error: "#FC5185",
+          //  Viridian Green
+          success: "#0CA4A5",
+          // Bright Yellow Crayola
+          warning: "#F9A620",
+          // Fire Engine Red
+          error: "#C1292E",
         },
       },
     ],

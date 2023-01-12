@@ -42,11 +42,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         {...pageProps}
         appearance={{
           variables: {
-            colorPrimary: "#00ABB3",
+            colorPrimary: "#023D45",
             colorDanger: "#FC5185",
             colorSuccess: "#57886C",
-            colorBackground: "#FFFFFF",
-            fontFamily: "Inter, sans-serif",
+            colorBackground: "#F0F2EF",
+            fontFamily: "Literata, serif",
             borderRadius: "0.5rem",
           },
         }}

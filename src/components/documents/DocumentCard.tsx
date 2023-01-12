@@ -46,7 +46,7 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
     <>
       <Link
         href={`/documents/${document.id}`}
-        className="card basis-1/4 rounded-md border border-gray-200 shadow-sm bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 cursor-pointer hover:bg-gray-50 hover:border-gray-200"
+        className="card basis-1/4 rounded-md border border-primary shadow-md bg-base-200 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 cursor-pointer hover:bg-base-100 hover:border-primary"
         key={document.id}
       >
         <div className="document-card-header px-6 py-5 h-1/3 flex items-center">
@@ -57,7 +57,7 @@ const DocumentCard = ({ document }: DocumentCardProps) => {
         <div className="document-card-body px-6 py-5 h-1/3">
           <p className="text-sm">{document.contentModel.displayName}</p>
         </div>
-        <div className="border-t border-gray-100" />
+        <div className="border-t border-primary" />
         {/* footer */}
         <div className="document-card-footer px-6 py-5 flex justify-between h-1/3">
           <DocumentIcon className="h-6 w-6 text-neutral" />

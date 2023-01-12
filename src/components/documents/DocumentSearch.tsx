@@ -19,7 +19,7 @@ export default function DocumentSearch({ handleSearchTermSubmit }: Props) {
             type="text"
             name="search"
             id="search"
-            className="block w-full rounded-none rounded-l-md border-gray-300 bg-gray-100 focus:border-primary focus:ring-primary sm:text-sm px-4"
+            className="block w-full rounded-none rounded-l-md border-primary bg-base-200 focus:border-primary focus:ring-primary sm:text-sm px-4"
             placeholder="Search documents"
             onChange={(e) => {
               setSearchTerm(e.currentTarget.value);
@@ -38,7 +38,7 @@ export default function DocumentSearch({ handleSearchTermSubmit }: Props) {
         </div>
         <button
           type="button"
-          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium text-neutral focus:border-primary focus:ring-primary"
+          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-primary bg-base-200 px-4 py-2 text-sm font-medium text-neutral focus:border-primary focus:ring-primary"
           onClick={(e) => {
             handleSearchTermSubmit(searchTerm);
           }}

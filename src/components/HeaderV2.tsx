@@ -39,7 +39,7 @@ export default function HeaderV2() {
   //   ];
 
   return (
-    <Disclosure as="nav" className="bg-primary">
+    <Disclosure as="nav" className="bg-primary font-serif">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">

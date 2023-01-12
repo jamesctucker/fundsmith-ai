@@ -13,7 +13,7 @@ export default function Home() {
           👋 Hello, {user?.firstName}! What would you like to create today?
         </h1>
         <p className="text-center">
-          You can choose one of the content types below to get started.
+          Choose one of the content types below to get started.
         </p>
         <section className="content-types mt-4">
           <ContentModelList />

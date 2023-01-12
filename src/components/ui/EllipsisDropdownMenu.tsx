@@ -22,7 +22,7 @@ const Dropdown = ({ menuItems, onClick }: Props) => {
     <>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="flex items-center rounded-full text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+          <Menu.Button className="flex items-center rounded-full text-primary hover:text-gray-600 focus:outline-none">
             <span className="sr-only">Open options</span>
             <EllipsisHorizontalIcon className="h-5 w-5" aria-hidden="true" />
           </Menu.Button>
@@ -37,14 +37,14 @@ const Dropdown = ({ menuItems, onClick }: Props) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-base-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             {menuItems.map((item) => (
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
                     <a
                       className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        active ? "bg-base-200 text-neutral" : "text-neutral",
                         "block px-4 py-2 text-sm"
                       )}
                       onClick={(e) => {

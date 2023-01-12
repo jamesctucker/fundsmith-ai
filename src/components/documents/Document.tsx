@@ -77,13 +77,13 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
   return (
     <>
-      <div className="bg-white max-w-3xl mx-auto rounded-t-md border border-b-0 border-gray-300">
+      <div className="bg-base-100 max-w-3xl mx-auto rounded-t-md border border-b-0 border-gray-300 shadow-md">
         <h1 className="text-2xl font-bold px-4 py-5 sm:p-6 flex items-center">
           {contentModelData?.name ? contentModelNameFormatted : "Loading..."}
         </h1>
         <div className="border-t border-gray-200 p-0" />
       </div>
-      <div className="overflow-hidden rounded-b-md bg-white max-w-3xl mx-auto border border-t-0 border-gray-300">
+      <div className="overflow-hidden rounded-b-md bg-base-100 max-w-3xl mx-auto border border-t-0 border-gray-300 shadow-md">
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>

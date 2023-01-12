@@ -25,7 +25,7 @@ const ContentModelList = () => {
       {contentModels.data?.map((contentModel) => (
         <li
           key={contentModel.id}
-          className="card rounded-md border basis-1/4 h-64 border-gray-200 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:bg-gray-50 hover:border-gray-200 cursor-pointer"
+          className="card rounded-md border basis-1/4 h-64 border-primary bg-base-200 px-6 py-5 shadow-md focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:bg-base-100 hover:border-primary cursor-pointer"
         >
           <a
             onClick={() =>
@@ -40,10 +40,10 @@ const ContentModelList = () => {
               ✏️
             </div>
             <div className="pt-5">
-              <h2 className="text-base font-bold">
+              <h2 className="text-md font-bold mb-2">
                 {contentModel.displayName}
               </h2>
-              <p className="text-sm">{contentModel.description}</p>
+              <p className="text-xs">{contentModel.description}</p>
             </div>
           </a>
         </li>
