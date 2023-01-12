@@ -7,7 +7,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 const ContentModelList = () => {
   const { user } = useUser();
   const userEmail = user ? user.emailAddresses[0]!.emailAddress : "";
-  const [parent, enableAnimations] = useAutoAnimate<HTMLUListElement>();
+  const [parent] = useAutoAnimate<HTMLUListElement>();
 
   const contentModels = trpc.content_models.getContentModels.useQuery();
 
