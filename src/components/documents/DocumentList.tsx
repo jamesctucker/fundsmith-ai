@@ -10,7 +10,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 const DocumentList = () => {
   const { user } = useUser();
   const [searchText, setSearchText] = useState("");
-  const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>({
+  const [parent] = useAutoAnimate<HTMLDivElement>({
     duration: 300,
   });
 
