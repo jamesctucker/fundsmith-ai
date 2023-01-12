@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-  background-color: black;
-} */
-
-@font-face {
-  font-family: "Cardo";
-  src: url("/fonts/Cardo-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Merriweather  Sans";
-  src: url("/fonts/MerriweatherSans-VariableFont_wght.ttf");
-}
-
 @layer components {
   .nav-link {
     @apply px-3 py-1 inline-flex text-base-100 items-center hover:bg-base-100 hover:text-primary rounded-md;
