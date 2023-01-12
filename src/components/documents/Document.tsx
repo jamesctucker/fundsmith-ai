@@ -6,8 +6,8 @@ import { trpc } from "@/utils/trpc";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { SavedResponses } from "@/types/types";
-import NewVariants from "@/components/documents/NewVariants";
 import VariantTabs from "@/components/documents/VariantTabs";
+import SubmitButton from "@/components/SubmitButton";
 
 type DocumentProps = {
   documentData: Document;
@@ -94,12 +94,11 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                   documentData={documentData}
                 />
               )}
-              <button
-                className=" btn-primary mt-4 sm:mt-6 md:mt-8"
-                type="submit"
-              >
-                Generate
-              </button>
+
+              <SubmitButton
+                loading={generateVariants.isLoading}
+                cta="Get Your Suggestions"
+              />
             </form>
           </FormProvider>
         </div>
