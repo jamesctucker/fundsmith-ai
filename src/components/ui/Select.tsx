@@ -27,7 +27,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <select
           id={name}
           name={name}
-          className="relative mt-2 w-full cursor-default rounded-md border border-gray-300 bg-base-200 py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+          className="relative mt-2 w-full cursor-default rounded-none border border-gray-300 bg-base-200 p-3 pr-10 text-left shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:primary sm:text-sm"
           onChange={onChange}
           onBlur={onBlur}
           ref={ref}

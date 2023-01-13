@@ -20,9 +20,8 @@ const DefaultFields = ({ documentData }: Props) => {
       </label>
       <div>
         <input
-          type="text"
-          className="input input-bordered bg-base-200 w-full"
-          placeholder="e.g. 'Thank you letter for Peter Kreft'"
+          className="textinput"
+          placeholder="e.g. 'Thank you letter for Alice Peterson'"
           {...register("documentName", { required: true })}
           defaultValue={documentData?.name}
         />

@@ -18,13 +18,13 @@ export default function VariantTabs({ variants, documentData }: Props) {
   return (
     <div className="w-full px-2 py-16 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-md bg-blue-900/20 p-1">
+        <Tab.List className="flex space-x-1 rounded-none bg-blue-900/20 p-1">
           {categories.map((category) => (
             <Tab
               key={category}
               className={({ selected }) =>
                 classNames(
-                  "w-full rounded-md py-2.5 text-sm font-medium leading-5 text-blue-700",
+                  "w-full rounded-none py-2.5 text-sm font-medium leading-5 text-blue-700",
                   "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                   selected
                     ? "bg-white shadow"

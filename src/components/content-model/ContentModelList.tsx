@@ -25,7 +25,7 @@ const ContentModelList = () => {
       {contentModels.data?.map((contentModel) => (
         <li
           key={contentModel.id}
-          className="card rounded-md border basis-1/4 h-64 border-primary bg-base-200 px-6 py-5 shadow-md focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:bg-base-100 hover:border-primary cursor-pointer hover:-translate-y-1"
+          className="card rounded-none border basis-1/4 h-64 border-primary bg-base-200 px-6 py-5 shadow-md focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:bg-base-100 hover:border-primary cursor-pointer hover:-translate-y-1"
         >
           <a
             onClick={() =>
