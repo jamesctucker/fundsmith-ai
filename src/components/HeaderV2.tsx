@@ -12,7 +12,7 @@ import {
   DocumentTextIcon,
   HomeModernIcon,
   FolderIcon,
-} from "@heroicons/react/24/outline";
+} from "@heroicons/react/24/solid";
 // import Select from "./ui/Select";
 
 function classNames(...classes: string[]) {
@@ -61,7 +61,7 @@ export default function HeaderV2() {
                     className="font-bold text-xl normal-case text-base-100 hover:text-primary hover:bg-base-100 rounded-md py-1 px-4"
                     href="/"
                   >
-                    fundsmith
+                    Fundsmith
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 md:flex sm:space-x-6 items-center">
@@ -71,7 +71,7 @@ export default function HeaderV2() {
                       isCurrentPath("/") ? "nav-link-current" : "nav-link"
                     }
                   >
-                    <HomeModernIcon className="w-5 h-5 mx-2" />
+                    <HomeModernIcon className="w-5 h-5 mr-2 hover:text-primary" />
                     Dashboard
                   </Link>
                   <Link
@@ -82,7 +82,7 @@ export default function HeaderV2() {
                         : "nav-link"
                     }
                   >
-                    <DocumentTextIcon className="w-5 h-5 mx-2" />
+                    <DocumentTextIcon className="w-5 h-5 mr-2 hover:text-primary" />
                     Documents
                   </Link>
                   <Link
@@ -93,7 +93,7 @@ export default function HeaderV2() {
                         : "nav-link"
                     }
                   >
-                    <FolderIcon className="w-5 h-5 mx-2" />
+                    <FolderIcon className="w-5 h-5 mr-2 hover:text-primary" />
                     Projects
                   </Link>
                 </div>
@@ -141,14 +141,14 @@ export default function HeaderV2() {
                               onChange={() => console.log("changed workspace!")}
                             />
                           </Menu.Item> */}
-                          <div className="w-full border-t-2 border-gray-300"></div>
+                          <div className="w-full border-t border-primary"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <Link
                                 href="/user/profile"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                  active ? "bg-base-200" : "",
+                                  "inline-flex px-4 py-2 text-sm text-primary w-full"
                                 )}
                               >
                                 <UserCircleIcon className="w-5 h-5 mr-2" />
@@ -161,8 +161,8 @@ export default function HeaderV2() {
                               <Link
                                 href="/user/settings"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                  active ? "bg-base-100" : "",
+                                  "inline-flex px-4 py-2 text-sm text-primary w-full"
                                 )}
                               >
                                 <Cog8ToothIcon className="w-5 h-5 mr-2" />
@@ -175,8 +175,8 @@ export default function HeaderV2() {
                               <Link
                                 href="/user/billing"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                  active ? "bg-base-200" : "",
+                                  "inline-flex px-4 py-2 text-sm text-primary w-full"
                                 )}
                               >
                                 <CreditCardIcon className="w-5 h-5 mr-2" />
@@ -184,14 +184,14 @@ export default function HeaderV2() {
                               </Link>
                             )}
                           </Menu.Item>
-                          <div className="w-full border-t-2 border-gray-300"></div>
+                          <div className="w-full border-t border-primary"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <a
                                 onClick={handleSignOut}
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "inline-flex px-4 py-2 text-sm text-gray-700 w-full"
+                                  active ? "bg-base-200" : "",
+                                  "inline-flex px-4 py-2 text-sm text-primary w-full"
                                 )}
                               >
                                 <ArrowLeftOnRectangleIcon className="w-5 h-5 mr-2" />

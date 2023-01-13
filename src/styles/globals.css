@@ -4,11 +4,11 @@
 
 @layer components {
   .nav-link {
-    @apply px-3 py-1 inline-flex text-base-100 items-center hover:bg-base-100 hover:text-primary rounded-md;
+    @apply py-1 px-4 inline-flex text-base-100 font-bold items-center justify-center hover:bg-base-100 hover:text-primary rounded-md;
   }
 
   .nav-link-current {
-    @apply px-3 py-1 inline-flex items-center font-bold bg-base-100 text-primary rounded-md;
+    @apply py-1 px-4 inline-flex items-center justify-center font-bold border-b-2 border-base-100 text-base-100;
   }
 
   .btn-primary {
