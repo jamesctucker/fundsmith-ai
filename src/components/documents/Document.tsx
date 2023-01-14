@@ -3,7 +3,7 @@ import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
 import { Document, Prisma } from "@prisma/client";
 import { trpc } from "@/utils/trpc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { SavedResponses } from "@/types/types";
 import VariantTabs from "@/components/documents/VariantTabs";
@@ -23,7 +23,9 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
   const updateDocument = trpc.documents.updateDocument.useMutation();
   const generateVariants = trpc.prompts.generateVariants.useMutation();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = () => {
+    const data = methods.getValues();
+
     generateVariants.mutate(
       {
         content_type: contentModelData.name,
@@ -42,6 +44,14 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
     );
 
     // save document
+
+    saveDocument(data);
+  };
+
+  // TODO: type this function
+  const saveDocument = (data: any) => {
+    data = data || methods.getValues();
+
     const savedResponses: SavedResponses = {
       organization_name: data.organization_name,
       support_description: data.support_description,
@@ -50,7 +60,6 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
       numberOfVariants: data.numberOfVariants,
     };
 
-    // update document
     updateDocument.mutate(
       {
         id: documentData.id,
@@ -101,6 +110,12 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
               />
             </form>
           </FormProvider>
+          <button
+            className="mt-4 border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
+            onClick={saveDocument}
+          >
+            save your changes
+          </button>
         </div>
       </div>
       {(variants?.length > 0 || savedVariants) && (

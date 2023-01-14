@@ -7,7 +7,7 @@ type ButtonProps = {
 const SubmitButton = ({ loading, cta, onClick }: ButtonProps) => {
   return (
     <button
-      className=" btn-primary mt-4 sm:mt-6 md:mt-8 flex items-center hover:-translate-y-1 transition ease-in-out delay-50"
+      className=" btn-primary flex items-center hover:-translate-y-1 transition ease-in-out delay-50"
       type="submit"
       disabled={loading}
     >
