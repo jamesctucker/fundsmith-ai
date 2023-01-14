@@ -47,7 +47,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             colorSuccess: "#57886C",
             colorBackground: "#F0F2EF",
             fontFamily: "Literata, serif",
-            borderRadius: "0.5rem",
+            borderRadius: "0",
           },
         }}
       >

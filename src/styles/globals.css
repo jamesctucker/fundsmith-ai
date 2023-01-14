@@ -12,7 +12,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-none text-white bg-primary hover:shadow-md;
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-none text-white bg-primary hover:shadow-md hover:bg-secondary;
   }
 
   .quality-badge {
@@ -25,7 +25,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex justify-center rounded-none border border-primary bg-transparent hover:bg-base-200 hover:text-primary px-4 py-2 text-sm font-medium text-neutral focus:outline-primary focus:ring-primary;
+    @apply inline-flex justify-center rounded-none border border-primary bg-transparent hover:bg-secondary hover:text-base-100 px-4 py-2 text-sm font-medium text-neutral focus:outline-primary focus:ring-primary;
   }
 
   .textinput {

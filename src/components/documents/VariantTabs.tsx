@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import NewVariants from "@/components/documents/NewVariants";
 import SavedVariants from "@/components/documents/SavedVariants";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -14,35 +15,41 @@ type Props = {
 
 export default function VariantTabs({ variants, documentData }: Props) {
   let [categories] = useState(["new", "saved"]);
+  const [parent] = useAutoAnimate<HTMLDivElement>({
+    duration: 300,
+  });
 
   return (
-    <div className="w-full px-2 py-16 sm:px-0">
+    <div className="w-full px-2 py-16 sm:px-0" ref={parent}>
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-none bg-blue-900/20 p-1">
+        <Tab.List className="flex justify-start">
           {categories.map((category) => (
             <Tab
               key={category}
               className={({ selected }) =>
                 classNames(
-                  "w-full rounded-none py-2.5 text-sm font-medium leading-5 text-blue-700",
-                  "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                  "w-full py-5 text-sm leading-5 font-medium",
                   selected
-                    ? "bg-white shadow"
-                    : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                    ? "border-r border-l border-t border-b-none border-primary text-neutral focus:outline-none focus:shadow-outline-none focus:border-primary shadow-md"
+                    : "text-neutral border-b border-primary hover:text-base-100 hover:bg-secondary"
                 )
               }
             >
               {category}
+              {category === "saved" && (
+                <span className="inline-flex items-center px-2.5 py-0.5 ml-2 rounded-full text-xs font-medium leading-4 bg-primary text-base-100">
+                  {documentData?.savedVariants?.length}
+                </span>
+              )}
             </Tab>
           ))}
         </Tab.List>
-        <Tab.Panels className="mt-2">
+        <Tab.Panels>
           <Tab.Panel>
             <NewVariants variants={variants} documentData={documentData} />
           </Tab.Panel>
-
           <Tab.Panel>
-            <SavedVariants variants={variants} documentData={documentData} />
+            <SavedVariants documentData={documentData} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

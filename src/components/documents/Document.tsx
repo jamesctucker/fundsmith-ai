@@ -97,7 +97,7 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
               <SubmitButton
                 loading={generateVariants.isLoading}
-                cta="Get Your Suggestions"
+                cta="Get Your Copy"
               />
             </form>
           </FormProvider>

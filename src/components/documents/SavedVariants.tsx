@@ -4,11 +4,10 @@ import { toast } from "react-hot-toast";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type Props = {
-  variants: string[];
   documentData: any;
 };
 
-const SavedVariants = ({ variants, documentData }: Props) => {
+const SavedVariants = ({ documentData }: Props) => {
   const utils = trpc.useContext();
   const [parent] = useAutoAnimate<HTMLUListElement>();
   //   TODO: move to reusable hook
@@ -29,18 +28,26 @@ const SavedVariants = ({ variants, documentData }: Props) => {
   const savedVariants: string[] = documentData?.savedVariants;
   return (
     <ul
-      className="mt-4 rounded-none overflow-visible bg-base-100 max-w-3xl mx-auto border border-gray-300 shadow-md"
+      className="rounded-none overflow-visible bg-base-100 max-w-3xl mx-auto border-l border-r border-b border-primary shadow-md"
       ref={parent}
     >
-      {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
+      {savedVariants.length < 1 && (
+        <div className="h-32 flex justify-center items-center">
+          <div className="w-3/4 px-3 py-2 sm:p-2 whitespace-pre-line">
+            <p className="text-neutral ">
+              No saved copy yet. Click the heart icon to save a copy.
+            </p>
+          </div>
+        </div>
+      )}
 
-      {savedVariants.map((variant, index) => (
+      {savedVariants?.map((variant, index) => (
         <li key={index} className="hover:bg-base-100">
           <div className="px-4 py-5 sm:p-6 whitespace-pre-line ">{variant}</div>
           {/* word count */}
           <div className="px-4 py-5 sm:p-6 flex justify-between">
             <button
-              className="btn-outline text-gray-500 hover:text-white"
+              className="btn-outline"
               onClick={() => {
                 unsaveVariant.mutate({
                   id: documentData.id,
@@ -53,13 +60,13 @@ const SavedVariants = ({ variants, documentData }: Props) => {
               Remove
             </button>
 
-            <span className="text-gray-500 text-xs">
+            <span className="text-neutral text-xs">
               {getVariantWordCount(variant)} words
             </span>
           </div>
           {/* divider */}
-          {index !== variants.length - 1 && (
-            <div className="border-t border-gray-200 p-0" />
+          {index !== savedVariants.length - 1 && (
+            <div className="border-t border-primary p-0" />
           )}
         </li>
       ))}
