@@ -64,42 +64,45 @@ export default function HeaderV2() {
                     Fundsmith
                   </Link>
                 </div>
-                <div className="hidden sm:ml-6 md:flex sm:space-x-6 items-center">
-                  <Link
-                    href="/"
-                    className={
-                      isCurrentPath("/") ? "nav-link-current" : "nav-link"
-                    }
-                  >
-                    <HomeModernIcon className="w-5 h-5 mr-2 hover:text-primary" />
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/documents"
-                    className={
-                      isCurrentPath("/documents")
-                        ? "nav-link-current"
-                        : "nav-link"
-                    }
-                  >
-                    <DocumentTextIcon className="w-5 h-5 mr-2 hover:text-primary" />
-                    Documents
-                  </Link>
-                  <Link
-                    href="/projects"
-                    className={
-                      isCurrentPath("/projects")
-                        ? "nav-link-current"
-                        : "nav-link"
-                    }
-                  >
-                    <FolderIcon className="w-5 h-5 mr-2 hover:text-primary" />
-                    Projects
-                  </Link>
-                </div>
+                {user && (
+                  <div className="hidden sm:ml-6 md:flex sm:space-x-6 items-center">
+                    <Link
+                      href="/"
+                      className={
+                        isCurrentPath("/") ? "nav-link-current" : "nav-link"
+                      }
+                    >
+                      <HomeModernIcon className="w-5 h-5 mr-2 hover:text-primary" />
+                      Dashboard
+                    </Link>
+                    <Link
+                      href="/documents"
+                      className={
+                        isCurrentPath("/documents")
+                          ? "nav-link-current"
+                          : "nav-link"
+                      }
+                    >
+                      <DocumentTextIcon className="w-5 h-5 mr-2 hover:text-primary" />
+                      Documents
+                    </Link>
+                    <Link
+                      href="/projects"
+                      className={
+                        isCurrentPath("/projects")
+                          ? "nav-link-current"
+                          : "nav-link"
+                      }
+                    >
+                      <FolderIcon className="w-5 h-5 mr-2 hover:text-primary" />
+                      Projects
+                    </Link>
+                  </div>
+                )}
+
                 <div className="flex items-center pr-2 absolute right-0 md:static sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
-                  {user ? (
+                  {user && (
                     <Menu as="div" className="relative ml-3">
                       <>
                         <Menu.Button className="flex items-center py-1 px-4 text-base-100 hover:text-primary hover:bg-base-100 rounded-none">
@@ -202,10 +205,6 @@ export default function HeaderV2() {
                         </Menu.Items>
                       </Transition>
                     </Menu>
-                  ) : (
-                    <Link className="btn-primary" href="/auth/signin">
-                      Sign In
-                    </Link>
                   )}
                 </div>
               </div>
