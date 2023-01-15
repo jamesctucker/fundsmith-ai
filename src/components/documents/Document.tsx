@@ -3,7 +3,7 @@ import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
 import { Document, Prisma } from "@prisma/client";
 import { trpc } from "@/utils/trpc";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { SavedResponses } from "@/types/types";
 import VariantTabs from "@/components/documents/VariantTabs";
@@ -21,41 +21,41 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
   const [variants, setVariants] = useState<string[]>([]);
 
   const updateDocument = trpc.documents.updateDocument.useMutation();
-  const generateVariants = trpc.prompts.generateVariants.useMutation();
+  const generateVariants =
+    trpc.prompts.generateVariantsByContentModelName.useMutation();
 
   const onSubmit = () => {
     const data = methods.getValues();
 
     generateVariants.mutate(
       {
-        content_type: contentModelData.name,
-        organization_name: data.organization_name,
-        support_description: data.support_description,
-        supported_project: data.supported_project,
+        content_model_name: contentModelData.name,
+        responses: data,
         tone: data.tone,
-        max_tokens: 1000,
+        max_tokens: Number(contentModelData.rules.maxTokens),
         n: Number(data.numberOfVariants),
       },
       {
         onSuccess: (data) => {
           setVariants(data.variants);
         },
+        onError: (error) => {
+          toast.error(error.message);
+        },
       }
     );
 
-    // save document
-
     saveDocument(data);
   };
+
+  console.log("contentModelData", contentModelData.rules);
 
   // TODO: type this function
   const saveDocument = (data: any) => {
     data = data || methods.getValues();
 
     const savedResponses: SavedResponses = {
-      organization_name: data.organization_name,
-      support_description: data.support_description,
-      supported_project: data.supported_project,
+      ...data,
       tone: data.tone,
       numberOfVariants: data.numberOfVariants,
     };
@@ -104,10 +104,12 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                 />
               )}
 
-              <SubmitButton
-                loading={generateVariants.isLoading}
-                cta="Get Your Copy"
-              />
+              <div className="mt-6">
+                <SubmitButton
+                  loading={generateVariants.isLoading}
+                  cta="Get Your Copy"
+                />
+              </div>
             </form>
           </FormProvider>
           <button

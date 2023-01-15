@@ -43,3 +43,15 @@ export const thankYouLetterParameters = [
     rules: { minLength: 10, maxLength: 250 },
   },
 ];
+
+export const contentRewriterParameters = [
+  {
+    name: "content",
+    displayLabel: "Content",
+    placeholder: "Enter your content here",
+    required: true,
+    displayType: DisplayType.TEXTAREA,
+    position: 0,
+    rules: { minLength: 10, maxLength: 1000 },
+  },
+];

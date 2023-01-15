@@ -19,7 +19,7 @@ const ContentModelList = () => {
 
   return (
     <ul
-      className="grid grid-cols-2 gap-4 lg:grid-cols-4 mt-3 sm:mt-4"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mt-3 sm:mt-4"
       ref={parent}
     >
       {contentModels.data?.map((contentModel) => (
