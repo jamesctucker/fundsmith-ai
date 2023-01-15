@@ -6,6 +6,7 @@ import DocumentSearch from "@/components/documents/DocumentSearch";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const DocumentList = () => {
   const { user } = useUser();
@@ -18,6 +19,7 @@ const DocumentList = () => {
     data: documents,
     error: getDocumentError,
     isFetched,
+    isLoading,
   } = trpc.documents.getDocumentsBySearch.useQuery(
     {
       searchText: searchText,
@@ -52,7 +54,12 @@ const DocumentList = () => {
           <p className="mt-1 text-sm text-gray-500">Try a different search.</p>
         </div>
       )}
-      {/* render flex container of all documents - each document should be a card */}
+
+      {isLoading && (
+        <div className="flex justify-center items-center h-300">
+          <LoadingSpinner />
+        </div>
+      )}
       <div
         className="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-3 sm:mt-4"
         ref={parent}
