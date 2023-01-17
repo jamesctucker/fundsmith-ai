@@ -20,47 +20,25 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
   const [variants, setVariants] = useState<string[]>([]);
 
-  const updateDocument = trpc.documents.updateDocument.useMutation();
-  const generateVariants =
+  const updateDocumentMutation = trpc.documents.updateDocument.useMutation();
+  const generateVariantsMutation =
     trpc.prompts.generateVariantsByContentModelName.useMutation();
 
   const onSubmit = () => {
-    const data = methods.getValues();
-
-    generateVariants.mutate(
-      {
-        content_model_name: contentModelData.name,
-        responses: data,
-        tone: data.tone,
-        max_tokens: Number(contentModelData.rules.maxTokens),
-        n: Number(data.numberOfVariants),
-      },
-      {
-        onSuccess: (data) => {
-          setVariants(data.variants);
-        },
-        onError: (error) => {
-          toast.error(error.message);
-        },
-      }
-    );
-
-    saveDocument(data);
+    generateVariants();
+    saveDocument();
   };
 
-  console.log("contentModelData", contentModelData.rules);
-
   // TODO: type this function
-  const saveDocument = (data: any) => {
-    data = data || methods.getValues();
-
+  const saveDocument = () => {
+    const data = methods.getValues();
     const savedResponses: SavedResponses = {
       ...data,
       tone: data.tone,
       numberOfVariants: data.numberOfVariants,
     };
 
-    updateDocument.mutate(
+    updateDocumentMutation.mutate(
       {
         id: documentData.id,
         name: data.documentName,
@@ -69,6 +47,30 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
       {
         onSuccess: () => {
           toast.success("Document saved");
+        },
+        // onError: (error) => {
+        //   toast.error(error.message);
+        // },
+      }
+    );
+  };
+
+  const generateVariants = () => {
+    const data = methods.getValues();
+
+    generateVariantsMutation.mutate(
+      {
+        content_model_name: contentModelData.name,
+        responses:
+          Object.keys(data).length === 0 ? documentData.savedResponses : data,
+        max_tokens: Number(contentModelData.rules.maxTokens),
+      },
+      {
+        onSuccess: (result) => {
+          setVariants(result.variants);
+        },
+        onError: (error) => {
+          toast.error(error.message);
         },
       }
     );
@@ -104,20 +106,21 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                 />
               )}
 
-              <div className="mt-6">
+              <div className="mt-6 flex items-center justify-between">
                 <SubmitButton
-                  loading={generateVariants.isLoading}
+                  loading={generateVariantsMutation.isLoading}
                   cta="Get Your Copy"
                 />
+                <button
+                  type="button"
+                  className="border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
+                  onClick={saveDocument}
+                >
+                  save your changes
+                </button>
               </div>
             </form>
           </FormProvider>
-          <button
-            className="mt-4 border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
-            onClick={saveDocument}
-          >
-            save your changes
-          </button>
         </div>
       </div>
       {(variants?.length > 0 || savedVariants) && (

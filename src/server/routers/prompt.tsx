@@ -15,20 +15,17 @@ export const promptsRouter = router({
         content_model_name: z.string(),
         // TODO: figure out how to dynamically type this according to the prompt name
         responses: z.any(),
-        tone: z.string(),
         max_tokens: z.number(),
-        n: z.number(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       // find the prompt template in the prompts object
-      const { content_model_name, responses, tone, max_tokens, n } = input;
+      const { content_model_name, responses, max_tokens } = input;
       const prompt = prompts[content_model_name as keyof typeof prompts];
 
       // inject the responses into the prompt template
       const finalPrompt = prompt({
         responses: responses,
-        tone: tone,
         content_model_name: content_model_name,
       });
 
@@ -42,15 +39,20 @@ export const promptsRouter = router({
           model: "text-davinci-003",
           prompt: finalPrompt,
           max_tokens: max_tokens,
-          temperature: 0.4,
-          n: n,
+          temperature: 0,
+          n: Number(responses.numberOfVariants),
           // we send this to Open AI so they can track users who abuse the API
           user: ctx.user.id,
         }),
       });
       const body = await res.json();
 
-      const variants = body.choices.map((choice: Choice) => choice.text);
+      const variants = body.choices?.map((choice: Choice) => choice.text);
+
+      // handle no variants being returned
+      if (!variants) {
+        throw new Error("No variants were returned");
+      }
 
       return { variants: variants };
     }),
