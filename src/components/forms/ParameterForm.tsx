@@ -93,11 +93,12 @@ const ParameterForm = ({ parameters, documentData }: ParameterProps) => {
                 id={parameter.name}
                 rows={5}
                 placeholder={parameter.placeholder!}
+                maxLength={getRules(parameter, "maxLength")}
                 {...register(parameter.name, {
                   required: parameter.required,
+                  onChange: getCharacterCount,
                 })}
-                maxLength={getRules(parameter, "maxLength")}
-                onChange={getCharacterCount}
+                // onChange={getCharacterCount}
                 defaultValue={
                   (findSavedResponse(parameter.name) as string) || ""
                 }
@@ -124,9 +125,10 @@ const ParameterForm = ({ parameters, documentData }: ParameterProps) => {
                 placeholder={parameter.placeholder!}
                 {...register(parameter.name, {
                   required: parameter.required,
+                  onChange: getCharacterCount,
                 })}
                 maxLength={getRules(parameter, "maxLength")}
-                onChange={getCharacterCount}
+                // onChange={getCharacterCount}
                 defaultValue={
                   (findSavedResponse(parameter.name) as string) || ""
                 }

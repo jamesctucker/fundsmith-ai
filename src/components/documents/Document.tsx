@@ -3,7 +3,7 @@ import DefaultFields from "@/components/content-model/DefaultFields";
 import { useForm, FormProvider } from "react-hook-form";
 import { Document, Prisma } from "@prisma/client";
 import { trpc } from "@/utils/trpc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { SavedResponses } from "@/types/types";
 import VariantTabs from "@/components/documents/VariantTabs";
@@ -19,19 +19,24 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
   const methods = useForm();
 
   const [variants, setVariants] = useState<string[]>([]);
+  const [showSaveButton, setShowSaveButton] = useState<boolean>(false);
 
   const updateDocumentMutation = trpc.documents.updateDocument.useMutation();
+
   const generateVariantsMutation =
     trpc.prompts.generateVariantsByContentModelName.useMutation();
 
-  const onSubmit = () => {
-    generateVariants();
-    saveDocument();
-  };
+  // watch to see if user has made any changes to the form
+  // if so, show the save button
+  useEffect(() => {
+    methods.watch((data) => {
+      setShowSaveButton(true);
+    });
+  }, [methods]);
 
-  // TODO: type this function
-  const saveDocument = () => {
+  const handleManualSave = () => {
     const data = methods.getValues();
+
     const savedResponses: SavedResponses = {
       ...data,
       tone: data.tone,
@@ -45,35 +50,37 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
         savedResponses: savedResponses,
       },
       {
-        onSuccess: () => {
-          toast.success("Document saved");
-        },
-        // onError: (error) => {
-        //   toast.error(error.message);
-        // },
-      }
-    );
-  };
-
-  const generateVariants = () => {
-    const data = methods.getValues();
-
-    generateVariantsMutation.mutate(
-      {
-        content_model_name: contentModelData.name,
-        responses:
-          Object.keys(data).length === 0 ? documentData.savedResponses : data,
-        max_tokens: Number(contentModelData.rules.maxTokens),
-      },
-      {
-        onSuccess: (result) => {
+        onSuccess: (result: any) => {
+          toast.success("Document saved!");
           setVariants(result.variants);
+          setShowSaveButton(false);
         },
         onError: (error) => {
           toast.error(error.message);
         },
       }
     );
+  };
+
+  const handleGenerateVariants = () => {
+    methods.handleSubmit((data) => {
+      generateVariantsMutation.mutate(
+        {
+          content_model_name: contentModelData.name,
+          responses:
+            Object.keys(data).length === 0 ? documentData.savedResponses : data,
+          max_tokens: Number(contentModelData.rules.maxTokens),
+        },
+        {
+          onSuccess: (result: any) => {
+            setVariants(result.variants);
+          },
+          onError: (error) => {
+            toast.error(error.message);
+          },
+        }
+      );
+    })();
   };
 
   const savedVariants = documentData?.savedVariants as Prisma.JsonObject;
@@ -97,27 +104,28 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
       <div className="overflow-hidden rounded-b-none bg-base-100 max-w-3xl mx-auto border border-t-0 border-primary shadow-md">
         <div className="px-4 py-5 sm:p-6">
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <form onSubmit={methods.handleSubmit(handleGenerateVariants)}>
               <DefaultFields documentData={documentData} />
-              {contentModelData && (
-                <ParameterForm
-                  parameters={contentModelData.parameters}
-                  documentData={documentData}
-                />
-              )}
+
+              <ParameterForm
+                parameters={contentModelData.parameters}
+                documentData={documentData}
+              />
 
               <div className="mt-6 flex items-center justify-between">
                 <SubmitButton
                   loading={generateVariantsMutation.isLoading}
                   cta="Get Your Copy"
                 />
-                <button
-                  type="button"
-                  className="border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
-                  onClick={saveDocument}
-                >
-                  save your changes
-                </button>
+                {showSaveButton && (
+                  <button
+                    type="button"
+                    className="border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
+                    onClick={handleManualSave}
+                  >
+                    save your changes
+                  </button>
+                )}
               </div>
             </form>
           </FormProvider>
