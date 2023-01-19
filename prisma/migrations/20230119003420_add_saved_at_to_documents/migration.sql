@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Document" ADD COLUMN     "savedAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP;

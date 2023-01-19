@@ -54,7 +54,7 @@ const newVariants = ({ variants, documentData }: NewVariantsProps) => {
     >
       {/* TODO: display a series of random copy saying things like "cooking something up in the kitchen..." */}
 
-      {variants.length < 1 && (
+      {variants?.length < 1 && (
         <div className="h-32 flex justify-center items-center">
           <div className="w-3/4 px-3 py-2 sm:p-2 whitespace-pre-line">
             <p className="text-neutral ">
