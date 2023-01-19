@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { SavedResponses } from "@/types/types";
 import VariantTabs from "@/components/documents/VariantTabs";
 import SubmitButton from "@/components/SubmitButton";
+import SaveButton from "@/components/SaveButton";
 
 type DocumentProps = {
   documentData: Document;
@@ -118,13 +119,10 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                   cta="Get Your Copy"
                 />
                 {showSaveButton && (
-                  <button
-                    type="button"
-                    className="border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
+                  <SaveButton
                     onClick={handleManualSave}
-                  >
-                    save your changes
-                  </button>
+                    cta="Save your changes"
+                  />
                 )}
               </div>
             </form>
