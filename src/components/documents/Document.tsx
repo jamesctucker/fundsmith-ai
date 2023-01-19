@@ -9,6 +9,7 @@ import { SavedResponses } from "@/types/types";
 import VariantTabs from "@/components/documents/VariantTabs";
 import SubmitButton from "@/components/SubmitButton";
 import SaveButton from "@/components/SaveButton";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 type DocumentProps = {
   documentData: Document;
@@ -123,6 +124,12 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                     onClick={handleManualSave}
                     cta="Save your changes"
                   />
+                )}
+                {!showSaveButton && (
+                  <div className="flex flex-row items-center bg-secondary py-1 px-3 shadow-sm">
+                    <CheckCircleIcon className="h-6 w-6 mr-2 text-base-100" />
+                    <p className="text-sm text-base-100">Changes Saved</p>
+                  </div>
                 )}
               </div>
             </form>

@@ -41,7 +41,7 @@ model ContentModel {
   active      Boolean     @default(true)
   parameters  Parameter[]
   createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) 
   documents   Document[]
 }
 
@@ -76,6 +76,7 @@ model Document {
   savedResponses Json?        @default("[]")
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @default(now())
+  savedAt        DateTime?    @default(now())
   contentModelId Int
   contentModel   ContentModel @relation(fields: [contentModelId], references: [id])
   ownerEmail     String
