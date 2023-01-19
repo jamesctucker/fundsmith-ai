@@ -56,7 +56,30 @@ const App = ({ Component, pageProps }: AppProps) => {
         ) : (
           <Layout>
             <Component {...pageProps} />
-            <Toaster position="bottom-left" reverseOrder={true} />
+            <Toaster
+              position="bottom-left"
+              reverseOrder={true}
+              toastOptions={{
+                success: {
+                  style: {
+                    background: "#F0F2EF",
+                  },
+                  iconTheme: {
+                    primary: "#0CA4A5",
+                    secondary: "#F0F2EF",
+                  },
+                },
+                error: {
+                  style: {
+                    background: "#F0F2EF",
+                  },
+                  iconTheme: {
+                    primary: "#C1292E",
+                    secondary: "#F0F2EF",
+                  },
+                },
+              }}
+            />
           </Layout>
         )}
       </ClerkProvider>
