@@ -54,12 +54,6 @@ const DocumentList = () => {
           <p className="mt-1 text-sm text-gray-500">Try a different search.</p>
         </div>
       )}
-
-      {isLoading && (
-        <div className="flex justify-center items-center h-300">
-          <LoadingSpinner />
-        </div>
-      )}
       <div
         className="grid grid-cols-1 gap-4 sm:grid-cols-4 mt-3 sm:mt-4"
         ref={parent}

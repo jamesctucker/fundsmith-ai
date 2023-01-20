@@ -9,7 +9,7 @@ import { SavedResponses } from "@/types/types";
 import VariantTabs from "@/components/documents/VariantTabs";
 import SubmitButton from "@/components/SubmitButton";
 import SaveButton from "@/components/SaveButton";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { DocumentCheckIcon } from "@heroicons/react/24/outline";
 
 type DocumentProps = {
   documentData: Document;
@@ -22,6 +22,10 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
 
   const [variants, setVariants] = useState<string[]>([]);
   const [showSaveButton, setShowSaveButton] = useState<boolean>(false);
+  const [showSaveSuccessIcon, setShowSaveSuccessIcon] =
+    useState<boolean>(false);
+  const [showSaveSuccessMessage, setShowSaveSuccessMessage] =
+    useState<boolean>(false);
 
   const updateDocumentMutation = trpc.documents.updateDocument.useMutation();
 
@@ -32,11 +36,23 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
   // if so, show the save button
   useEffect(() => {
     methods.watch((data) => {
+      setShowSaveSuccessIcon(false);
+      setShowSaveSuccessMessage(false);
       setShowSaveButton(true);
     });
   }, [methods]);
 
+  // after 2 seconds, hide the save success message
+  useEffect(() => {
+    if (showSaveSuccessMessage) {
+      setTimeout(() => {
+        setShowSaveSuccessMessage(false);
+      }, 2000);
+    }
+  }, [showSaveSuccessMessage]);
+
   const handleManualSave = () => {
+    setShowSaveButton(false);
     const data = methods.getValues();
 
     const savedResponses: SavedResponses = {
@@ -52,10 +68,9 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
         savedResponses: savedResponses,
       },
       {
-        onSuccess: (result: any) => {
-          toast.success("Document saved!");
-          setVariants(result.variants);
-          setShowSaveButton(false);
+        onSuccess: () => {
+          setShowSaveSuccessIcon(true);
+          setShowSaveSuccessMessage(true);
         },
         onError: (error) => {
           toast.error(error.message);
@@ -125,10 +140,18 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                     cta="Save your changes"
                   />
                 )}
-                {!showSaveButton && (
-                  <div className="flex flex-row items-center bg-secondary py-1 px-3 shadow-sm">
-                    <CheckCircleIcon className="h-6 w-6 mr-2 text-base-100" />
-                    <p className="text-sm text-base-100">Changes Saved</p>
+                {updateDocumentMutation.isLoading && (
+                  <div className="w-5 h-5 rounded-full animate-spin border-4 border-solid border-neutral border-t-transparent" />
+                )}
+                {showSaveSuccessIcon && (
+                  <div className="flex items-center text-neutral">
+                    <DocumentCheckIcon
+                      className="h-5 w-5"
+                      title="All changes saved"
+                    />
+                    {showSaveSuccessMessage && (
+                      <span className="ml-1 text-sm">All changes saved</span>
+                    )}
                   </div>
                 )}
               </div>

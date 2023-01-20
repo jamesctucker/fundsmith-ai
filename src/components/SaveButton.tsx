@@ -8,7 +8,7 @@ const SaveButton = ({ cta, onClick }: SaveButtonProps) => {
     <>
       <button
         type="button"
-        className="border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 transition ease-in-out delay-50"
+        className="border-b border-primary hover:text-secondary hover:border-secondary hover:-translate-y-1 text-sm transition ease-in-out delay-50"
         onClick={onClick}
       >
         {cta}
