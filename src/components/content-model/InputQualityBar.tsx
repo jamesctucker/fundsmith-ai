@@ -48,11 +48,6 @@ const InputQualityBar = ({ characterCount, maxLength }: Props) => {
   };
 
   const showQualityInfo = () => {
-    {
-      /* <div className="text-left text-warning">Fair</div>
-        <div className="text-left text-success">Great!</div> */
-    }
-
     if (!characterCount) {
       return;
     }
@@ -91,7 +86,7 @@ const InputQualityBar = ({ characterCount, maxLength }: Props) => {
       <div className="overflow-hidden rounded-full bg-gray-200">
         {getQuality()}
       </div>
-      <div className="mt-1 text-sm font-medium text-gray-600 flex justify-between items-start">
+      <div className="mt-1 text-xs font-medium text-neutral flex justify-between items-start">
         {showQualityInfo()}
       </div>
     </div>

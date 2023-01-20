@@ -137,7 +137,7 @@ const Document = ({ documentData, contentModelData }: DocumentProps) => {
                 {showSaveButton && (
                   <SaveButton
                     onClick={handleManualSave}
-                    cta="Save your changes"
+                    cta="Save Your Changes"
                   />
                 )}
                 {updateDocumentMutation.isLoading && (
