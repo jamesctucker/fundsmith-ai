@@ -86,7 +86,7 @@ export default function HeaderV2() {
                       <DocumentTextIcon className="w-5 h-5 mr-2 hover:text-primary" />
                       Documents
                     </Link>
-                    <Link
+                    {/* <Link
                       href="/projects"
                       className={
                         isCurrentPath("/projects")
@@ -96,7 +96,7 @@ export default function HeaderV2() {
                     >
                       <FolderIcon className="w-5 h-5 mr-2 hover:text-primary" />
                       Projects
-                    </Link>
+                    </Link> */}
                   </div>
                 )}
 
@@ -236,7 +236,7 @@ export default function HeaderV2() {
               >
                 Documents
               </Disclosure.Button>
-              <Disclosure.Button
+              {/* <Disclosure.Button
                 as="a"
                 href="/projects"
                 className={
@@ -246,7 +246,7 @@ export default function HeaderV2() {
                 }
               >
                 Projects
-              </Disclosure.Button>
+              </Disclosure.Button> */}
             </div>
           </Disclosure.Panel>
         </>

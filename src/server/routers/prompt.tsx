@@ -26,7 +26,6 @@ export const promptsRouter = router({
       // inject the responses into the prompt template
       const finalPrompt = prompt({
         responses: responses,
-        content_model_name: content_model_name,
       });
 
       const res = await fetch("https://api.openai.com/v1/completions", {
@@ -39,7 +38,7 @@ export const promptsRouter = router({
           model: "text-davinci-003",
           prompt: finalPrompt,
           max_tokens: max_tokens,
-          temperature: 0,
+          temperature: 0.4,
           n: Number(responses.numberOfVariants),
           // we send this to Open AI so they can track users who abuse the API
           user: ctx.user.id,
