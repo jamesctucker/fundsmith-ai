@@ -27,8 +27,6 @@ export default withClerkMiddleware((req: NextRequest) => {
   const { userId } = getAuth(req);
 
   if (!userId) {
-    // redirect the users to /pages/sign-in/[[...index]].ts
-
     const signInUrl = new URL("/auth/signin", req.url);
     signInUrl.searchParams.set("redirect_url", req.url);
     return NextResponse.redirect(signInUrl);
