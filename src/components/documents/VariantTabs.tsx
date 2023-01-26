@@ -28,7 +28,7 @@ export default function VariantTabs({ variants, documentData }: Props) {
               key={category}
               className={({ selected }) =>
                 classNames(
-                  "w-full py-5 text-sm leading-5 font-medium",
+                  "w-full p-6 text-sm leading-5 font-medium",
                   selected
                     ? "border-r border-l border-t border-b-none border-primary text-neutral focus:outline-none focus:shadow-outline-none focus:border-primary shadow-md"
                     : "text-neutral border-b border-primary hover:text-base-100 hover:bg-secondary"

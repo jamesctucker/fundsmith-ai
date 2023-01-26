@@ -12,7 +12,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center px-3 py-1 border border-transparent text-base font-medium rounded-none text-white bg-primary hover:shadow-md hover:bg-secondary;
+    @apply inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-none text-white bg-primary hover:shadow-md hover:bg-secondary;
   }
 
   .quality-badge {

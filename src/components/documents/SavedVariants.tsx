@@ -32,12 +32,10 @@ const SavedVariants = ({ documentData }: Props) => {
       ref={parent}
     >
       {savedVariants.length < 1 && (
-        <div className="h-32 flex justify-center items-center">
-          <div className="w-3/4 px-3 py-2 sm:p-2 whitespace-pre-line">
-            <p className="text-neutral ">
-              No saved copy yet. Click the heart icon to save a copy.
-            </p>
-          </div>
+        <div className="flex justify-center items-center h-24 p-4 sm:p-6">
+          <p className="text-neutral ">
+            No saved copy yet. Click the heart icon to save a copy.
+          </p>
         </div>
       )}
 
