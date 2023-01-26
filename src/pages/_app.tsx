@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import Maintenance from "@/components/Maintenance";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { ClerkProvider } from "@clerk/nextjs";
 import { useEffect } from "react";
 import "../styles/globals.css";
@@ -54,33 +55,35 @@ const App = ({ Component, pageProps }: AppProps) => {
         {process.env.NEXT_PUBLIC_SHOW_MAINTENANCE_PAGE === "true" ? (
           <Maintenance />
         ) : (
-          <Layout>
-            <Component {...pageProps} />
-            <Toaster
-              position="bottom-left"
-              reverseOrder={true}
-              toastOptions={{
-                success: {
-                  style: {
-                    background: "#F0F2EF",
+          <ErrorBoundary>
+            <Layout>
+              <Component {...pageProps} />
+              <Toaster
+                position="bottom-left"
+                reverseOrder={true}
+                toastOptions={{
+                  success: {
+                    style: {
+                      background: "#F0F2EF",
+                    },
+                    iconTheme: {
+                      primary: "#0CA4A5",
+                      secondary: "#F0F2EF",
+                    },
                   },
-                  iconTheme: {
-                    primary: "#0CA4A5",
-                    secondary: "#F0F2EF",
+                  error: {
+                    style: {
+                      background: "#F0F2EF",
+                    },
+                    iconTheme: {
+                      primary: "#C1292E",
+                      secondary: "#F0F2EF",
+                    },
                   },
-                },
-                error: {
-                  style: {
-                    background: "#F0F2EF",
-                  },
-                  iconTheme: {
-                    primary: "#C1292E",
-                    secondary: "#F0F2EF",
-                  },
-                },
-              }}
-            />
-          </Layout>
+                }}
+              />
+            </Layout>
+          </ErrorBoundary>
         )}
       </ClerkProvider>
     </>
