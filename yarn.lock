@@ -500,6 +500,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.0.0-beta.209.tgz#f34a6cda849c16d7dbf9677e2cf6242cc6987a9e"
   integrity sha512-12PTPTQViDR7xDLwxGMPiYaV89E9olH/+4Zfoh6QiOjHqhmgYu3+/c8YZ3eARgXnfpy/EzUD0PBxiAyDZJ1vdw==
 
+"@tiptap/extension-underline@^2.0.0-beta.209":
+  version "2.0.0-beta.209"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-underline/-/extension-underline-2.0.0-beta.209.tgz#9f12040c32bfbc72db180deede8805b2dbb4ef62"
+  integrity sha512-xCW0GvCE883l8+YLvDkj5lNdVpqL15uJFMvWP9v79rqlMVZGIFd49saMyAPQworZqepnhnndFOELZ0pHcCV4vQ==
+
 "@tiptap/react@^2.0.0-beta.209":
   version "2.0.0-beta.209"
   resolved "https://registry.yarnpkg.com/@tiptap/react/-/react-2.0.0-beta.209.tgz#8a547b2d48f39a285dbe83d1e38f035f688bfa12"

@@ -20,7 +20,7 @@ export default function VariantTabs({ variants, documentData }: Props) {
   });
 
   return (
-    <div className="w-full px-2 py-16 sm:px-0" ref={parent}>
+    <div className="w-full" ref={parent}>
       <Tab.Group>
         <Tab.List className="flex justify-start">
           {categories.map((category) => (
@@ -28,7 +28,7 @@ export default function VariantTabs({ variants, documentData }: Props) {
               key={category}
               className={({ selected }) =>
                 classNames(
-                  "w-full p-6 text-sm leading-5 font-medium",
+                  "w-full px-6 pt-6 pb-4 text-sm leading-5 font-medium",
                   selected
                     ? "border-r border-l border-t border-b-none border-primary text-neutral focus:outline-none focus:shadow-outline-none focus:border-primary shadow-md"
                     : "text-neutral border-b border-primary hover:text-base-100 hover:bg-secondary"
