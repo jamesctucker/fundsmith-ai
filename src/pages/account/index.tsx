@@ -34,8 +34,6 @@ const AccountPage = () => {
     reset,
   } = useForm<PasswordData & NameData>();
 
-  console.log(user);
-
   const updateName = async (data: NameData) => {
     if (user) {
       await user
@@ -78,23 +76,35 @@ const AccountPage = () => {
     }
   };
 
+  // set avatar
+  // const setAvatar = async (e: Event) => {
+  //   if (user) {
+  //     const file = (e.target as HTMLInputElement).files![0];
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = async () => {
+  //       const base64 = reader.result as string;
+  //       await user.update({
+  //         profileImageUrl: base64,
+  //       });
+  //     };
+  //   }
+  // };
+
   return (
     <AccountLayout title="Your account">
       <h1 className="text-xl py-2 mb-6">Your Account</h1>
       <div className="account-info space-y-6">
         {/* Avatar */}
         <section className="account-avatar">
-          {user?.profileImageUrl ? (
+          {user?.profileImageUrl && (
             <Image
-              className="pl-2 rounded-full"
+              className="p-2 rounded-full cursor-pointer"
               src={user.profileImageUrl}
               alt="profile picture"
-              width={60}
-              height={60}
+              width={80}
+              height={80}
             />
-          ) : (
-            // placeholder - on hover it shows an upload button and when you click on it, it opens a file picker
-            <div className="h-7 w-7 rounded-full bg-gray-300"></div>
           )}
         </section>
         {/* Name */}
