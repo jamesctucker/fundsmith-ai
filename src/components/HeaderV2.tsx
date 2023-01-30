@@ -144,50 +144,22 @@ export default function HeaderV2() {
                               onChange={() => console.log("changed workspace!")}
                             />
                           </Menu.Item> */}
-                          <div className="w-full border-t border-primary"></div>
+                          <div className="w-full border-t border-base-200"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                href="/user/profile"
-                                className={classNames(
-                                  active ? "bg-base-200" : "",
-                                  "inline-flex px-4 py-2 text-sm text-primary w-full"
-                                )}
-                              >
-                                <UserCircleIcon className="w-5 h-5 mr-2" />
-                                Your Profile
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                href="/user/settings"
+                                href="/account"
                                 className={classNames(
                                   active ? "bg-base-100" : "",
                                   "inline-flex px-4 py-2 text-sm text-primary w-full"
                                 )}
                               >
                                 <Cog8ToothIcon className="w-5 h-5 mr-2" />
-                                Settings
+                                Manage account
                               </Link>
                             )}
                           </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                href="/user/billing"
-                                className={classNames(
-                                  active ? "bg-base-200" : "",
-                                  "inline-flex px-4 py-2 text-sm text-primary w-full"
-                                )}
-                              >
-                                <CreditCardIcon className="w-5 h-5 mr-2" />
-                                Billing
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <div className="w-full border-t border-primary"></div>
+                          <div className="w-full border-t border-base-200"></div>
                           <Menu.Item>
                             {({ active }) => (
                               <a
