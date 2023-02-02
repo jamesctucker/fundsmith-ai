@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { PencilIcon } from "@heroicons/react/24/outline";
+import React from "react";
+import { toast } from "react-hot-toast";
 
 type PasswordData = {
   newPassword: string;
@@ -26,6 +28,7 @@ const AccountPage = () => {
   const [changePasswordErrors, setChangePasswordErrors] = useState<Error[]>([]);
   const [showNameForm, setShowNameForm] = useState(false);
   const [updateNameErrors, setUpdateNameErrors] = useState<Error[]>([]);
+  const [uploading, setUploading] = useState(false);
 
   const {
     register,
@@ -37,7 +40,6 @@ const AccountPage = () => {
   const updateName = async (data: NameData) => {
     if (user) {
       await user
-
         .update({
           firstName: data.firstName,
           lastName: data.lastName,
@@ -77,19 +79,41 @@ const AccountPage = () => {
   };
 
   // set avatar
-  // const setAvatar = async (e: Event) => {
-  //   if (user) {
-  //     const file = (e.target as HTMLInputElement).files![0];
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = async () => {
-  //       const base64 = reader.result as string;
-  //       await user.update({
-  //         profileImageUrl: base64,
-  //       });
-  //     };
-  //   }
-  // };
+  const setAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (user && e.target.files) {
+      setUploading(true);
+      // get file
+      const file = e.target.files[0];
+      const fileReader = new FileReader();
+
+      if (!file) {
+        setUploading(false);
+        return;
+      }
+
+      fileReader.readAsArrayBuffer(file);
+      fileReader.onloadend = async () => {
+        const arrayBuffer = fileReader.result;
+
+        if (!arrayBuffer) {
+          return toast.error(
+            "Ope! There was an error uploading the file. Please try again."
+          );
+        }
+
+        const newBlob = new Blob([arrayBuffer], { type: file.type });
+
+        // now you can use the `newBlob` object to upload the image file
+        const response = await user.setProfileImage({ file: newBlob });
+
+        if (response) {
+          toast.success("Avatar updated!");
+        }
+
+        setUploading(false);
+      };
+    }
+  };
 
   return (
     <AccountLayout title="Your account">
@@ -98,13 +122,19 @@ const AccountPage = () => {
         {/* Avatar */}
         <section className="account-avatar">
           {user?.profileImageUrl && (
-            <Image
-              className="p-2 rounded-full cursor-pointer"
-              src={user.profileImageUrl}
-              alt="profile picture"
-              width={80}
-              height={80}
-            />
+            // avatar with hidden input to trigger file upload
+            <div className="relative">
+              <img
+                src={user.profileImageUrl}
+                className="rounded-full h-24 w-24 object-cover"
+                alt="Avatar"
+              />
+              <input
+                className="absolute inset-0 opacity-0 cursor-pointer"
+                type="file"
+                onChange={setAvatar}
+              />
+            </div>
           )}
         </section>
         {/* Name */}
@@ -112,7 +142,7 @@ const AccountPage = () => {
           <h2 className="text-base font-bold">Name</h2>
           {!showNameForm && user?.firstName && user?.lastName && (
             <div className="flex items-center">
-              <p className="text-base pl-2 hidden md:block">
+              <p className="text-base hidden md:block">
                 {user.firstName} {user.lastName}
               </p>
               <PencilIcon
@@ -129,7 +159,7 @@ const AccountPage = () => {
               onSubmit={handleSubmit((data) => updateName(data))}
             >
               <input
-                className="border border-gray-300 rounded-none p-2"
+                className="border border-gray-300 rounded-none"
                 type="text"
                 placeholder="First name"
                 {...register("firstName", { required: true })}
@@ -140,7 +170,7 @@ const AccountPage = () => {
                 </p>
               )}
               <input
-                className="border border-gray-300 rounded-none p-2"
+                className="border border-gray-300 rounded-none"
                 type="text"
                 placeholder="Last name"
                 {...register("lastName", { required: true })}
@@ -178,7 +208,7 @@ const AccountPage = () => {
         <section className="account-email space-y-2">
           <h2 className="text-base font-bold">Email</h2>
           {user?.emailAddresses && (
-            <p className="text-base pl-2 hidden md:block">
+            <p className="text-base hidden md:block">
               {user.emailAddresses[0]!.emailAddress}
             </p>
           )}
@@ -189,7 +219,7 @@ const AccountPage = () => {
             <h2 className="text-base font-bold">Your password</h2>
             {!showPasswordForm && (
               <button
-                className="btn-primary ml-2"
+                className="btn-primary"
                 onClick={() => setShowPasswordForm(true)}
               >
                 Change password
@@ -201,7 +231,7 @@ const AccountPage = () => {
                 onSubmit={handleSubmit((data) => updatePassword(data))}
               >
                 <input
-                  className="border border-gray-300 rounded-none p-2"
+                  className="border border-gray-300 rounded-none"
                   type="password"
                   placeholder="New password"
                   {...register("newPassword", { required: true })}
@@ -213,7 +243,7 @@ const AccountPage = () => {
                 )}
 
                 <input
-                  className="border border-gray-300 rounded-none p-2"
+                  className="border border-gray-300 rounded-none"
                   type="password"
                   placeholder="Confirm new password"
                   {...register("newPasswordConfirm", { required: true })}
