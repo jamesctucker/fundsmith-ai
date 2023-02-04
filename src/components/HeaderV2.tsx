@@ -5,15 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth, useUser } from "@clerk/nextjs";
 import {
-  UserCircleIcon,
   Cog8ToothIcon,
-  CreditCardIcon,
   ArrowLeftOnRectangleIcon,
   DocumentTextIcon,
   HomeModernIcon,
-  FolderIcon,
 } from "@heroicons/react/24/solid";
-// import Select from "./ui/Select";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
