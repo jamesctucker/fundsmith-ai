@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function AccountNavigation() {
+const MobileAccountNavigation = () => {
   const router = useRouter();
 
   const isCurrentPath = (name: string) => {
@@ -10,7 +10,7 @@ export default function AccountNavigation() {
 
   const navigation = [
     {
-      name: "Account settings",
+      name: "Settings",
       href: "/account",
       current: isCurrentPath("/account"),
     },
@@ -31,16 +31,16 @@ export default function AccountNavigation() {
   }
 
   return (
-    <nav className="space-y-1 " aria-label="Sidebar">
+    <nav className="flex flex-row space-x-4">
       {navigation.map((item) => (
         <Link
           key={item.name}
           href={item.href}
           className={classNames(
             item.current
-              ? "bg-base-200"
-              : "text-neutral hover:bg-base-200 hover:text-neutral",
-            "flex items-center px-3 py-2 font-medium rounded-none"
+              ? "border-b-2 border-primary"
+              : "text-neutral hover:text-secondary",
+            "flex items-center py-1 font-medium rounded-none"
           )}
           aria-current={item.current ? "page" : undefined}
         >
@@ -49,4 +49,6 @@ export default function AccountNavigation() {
       ))}
     </nav>
   );
-}
+};
+
+export default MobileAccountNavigation;

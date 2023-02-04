@@ -7,7 +7,7 @@ import Password from "@/components/account/Password";
 const AccountPage = () => {
   return (
     <AccountLayout title="Your account">
-      <h1 className="text-xl py-2 mb-6">Your Account</h1>
+      <h1 className="text-xl py-2 mb-4">Your Account</h1>
       <div className="account-info space-y-6">
         <Avatar />
         <Name />
