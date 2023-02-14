@@ -51,7 +51,7 @@ const Email = () => {
           <ul className="text-base">
             {user.emailAddresses.map((email) => (
               <div className="flex items-center space-x-2">
-                <li key={email.emailAddress}>{email.emailAddress}</li>
+                <li key={email.id}>{email.emailAddress}</li>
                 <div className="flex items-center">
                   {email.verification.status === "verified" ? (
                     <div className="bg-secondary text-base-100 text-xs px-2 py-1">

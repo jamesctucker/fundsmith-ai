@@ -21,6 +21,15 @@ model User {
   documents Document[]
 }
 
+// model Organization {
+//   id        Int      @id @default(autoincrement())
+//   name      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   ownerId   String
+//   isDefault Boolean  @default(false)
+// }
+
 model Workspaces {
   id        Int      @id @default(autoincrement())
   name      String
