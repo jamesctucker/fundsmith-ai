@@ -39,6 +39,8 @@ export default async function handler(
         firstName: evt.data.first_name,
         lastName: evt.data.last_name,
       });
+
+      await createDefaultClerkOrganization(evt.data.id);
     }
   }
 
@@ -67,3 +69,20 @@ type EventUserData = {
 };
 
 type EventType = "user.created" | "user.updated" | "*";
+
+const createDefaultClerkOrganization = async (userId: string) => {
+  const res = await fetch("https://api.clerk.dev/v1/organizations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + process.env.CLERK_API_KEY,
+    },
+    body: JSON.stringify({
+      name: "Default Organization",
+      created_by: userId,
+    }),
+  });
+  const body = await res.json();
+
+  console.log(body);
+};

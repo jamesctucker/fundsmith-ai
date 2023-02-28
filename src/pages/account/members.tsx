@@ -30,14 +30,12 @@ const MembersPage = () => {
     reset,
   } = useForm<OrganizationData>();
 
-  useEffect(() => {
-    // if organizations exist, set the first one as the current organization
-    if (organizationList && organizationList.length > 0) {
-      setActive({ organization: organizationList[0]!.organization });
-    }
-  }, [organizationList]);
-
-  console.log(membershipList);
+  // useEffect(() => {
+  //   // if organizations exist, set the first one as the current organization
+  //   if (organizationList && organizationList.length > 0) {
+  //     setActive({ organization: organizationList[0]!.organization });
+  //   }
+  // }, [organizationList]);
 
   const handleCreateOrganization = async (data: OrganizationData) => {
     const response = await createOrganization!({ name: data.name });
