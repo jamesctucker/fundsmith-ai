@@ -53,7 +53,7 @@ const Name = () => {
       <h2 className="text-base font-bold">Name</h2>
       {!showNameForm && user?.firstName && user?.lastName && (
         <div className="flex items-center">
-          <p className="text-base hidden md:block">
+          <p className="text-base md:block">
             {user.firstName} {user.lastName}
           </p>
           <PencilIcon
