@@ -30,10 +30,6 @@ export default function HeaderV2() {
     return router.pathname === name;
   };
 
-  //   const workspaces = [
-  //     { id: 1, label: "Default Workspace", value: "default-workspace" },
-  //   ];
-
   return (
     <Disclosure as="nav" className="bg-primary font-serif">
       {({ open }) => (
@@ -133,13 +129,6 @@ export default function HeaderV2() {
                               {user!.emailAddresses[0]!.emailAddress}
                             </p>
                           </Menu.Item>
-                          {/* TODO: let user change actual current workspace */}
-                          {/* <Menu.Item>
-                            <Select
-                              options={workspaces}
-                              onChange={() => console.log("changed workspace!")}
-                            />
-                          </Menu.Item> */}
                           <div className="w-full border-t border-base-200"></div>
                           <Menu.Item>
                             {({ active }) => (

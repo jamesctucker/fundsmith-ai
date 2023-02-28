@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -12,31 +12,41 @@ datasource db {
 }
 
 model User {
-  userId    String     @id @unique
-  firstName String
-  lastName  String
-  email     String     @unique
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @default(now())
-  documents Document[]
+  userId        String             @id @unique
+  firstName     String
+  lastName      String
+  email         String             @unique
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @default(now())
+  documents     Document[]
+  organizations OrganizationUser[]
 }
 
-// model Organization {
-//   id        Int      @id @default(autoincrement())
-//   name      String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @default(now())
-//   ownerId   String
-//   isDefault Boolean  @default(false)
-// }
+model Organization {
+  id         Int                @id @default(autoincrement())
+  name       String
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @default(now())
+  ownerId    String
+  tokenUsage Int                @default(0)
+  tokenLimit Int                @default(0)
+  users      OrganizationUser[]
+}
 
-model Workspaces {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  ownerId   String
-  isDefault Boolean  @default(false)
+model OrganizationUser {
+  id             Int          @id @default(autoincrement())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now())
+  userId         String
+  organizationId Int
+  user           User         @relation(fields: [userId], references: [userId])
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  role           Role         @default(MEMBER)
+}
+
+enum Role {
+  ADMIN
+  MEMBER
 }
 
 // fine-tuned AI models
@@ -50,7 +60,7 @@ model ContentModel {
   active      Boolean     @default(true)
   parameters  Parameter[]
   createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @default(now()) 
+  updatedAt   DateTime    @default(now())
   documents   Document[]
 }
 
@@ -76,7 +86,6 @@ enum DisplayType {
   RADIO
   CHECKBOX
 }
-
 
 model Document {
   id             Int          @id @default(autoincrement())

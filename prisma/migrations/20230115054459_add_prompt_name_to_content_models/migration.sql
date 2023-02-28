@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "ContentModel" ADD COLUMN     "promptName" TEXT NOT NULL;
+ALTER TABLE "ContentModel" ADD COLUMN     "promptName" TEXT;
